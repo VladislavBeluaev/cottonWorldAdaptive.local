@@ -1,0 +1,42 @@
+@import "_variables.less";
+@import "_mixins.less";
+@import (css) url(https://fonts.googleapis.com/css?family=Roboto+Slab|PT+Sans+Caption&subset=latin,cyrillic);
+@import (css) url('https://fonts.googleapis.com/css?family=Anton');
+*{
+  box-sizing: border-box;
+
+  &:before, &:after{
+    box-sizing: border-box;
+  }
+
+}
+html, body{
+  height: 100%
+}
+body{
+  font-size: @defaultFontSize;
+  min-width: 320px;
+  position: relative;
+  line-height: @defaultFontLineHeight;
+  font-family: @defaultFontFamily;
+  overflow-x: hidden;
+  opacity: 1;
+}
+div,h1, .h1,h2, .h2,h3, .h3, h4, .h4, h5, .h5, h6, .h6,ul,p,a{
+  .no-margin;
+  .no-padding;
+  .defaultFont;
+}
+ul{
+  list-style-type: none;
+}
+input{
+  .number-input;
+  .placeholder({
+    text-align: center;
+  font-weight: @defaultFontWeight;
+  font-family: @defaultFontFamily;
+  color:@defaultFontColor;
+  });
+}
+@import "_media";

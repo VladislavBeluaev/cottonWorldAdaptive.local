@@ -1,0 +1,3 @@
+INSERT INTO gender(`en_description`,`rus_description`,`url_prefix`,`created_at`,`updated_at`) values('male','мужские','men',now(),now());
+INSERT INTO gender(`en_description`,`rus_description`,`url_prefix`,`created_at`,`updated_at`) values('female','женские','women',now(),now());
+INSERT INTO gender(`en_description`,`rus_description`,`url_prefix`,`created_at`,`updated_at`) values('children','детские','children',now(),now());

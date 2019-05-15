@@ -1,0 +1,134 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab|PT+Sans+Caption&subset=latin,cyrillic);@import url(https://fonts.googleapis.com/css?family=Anton);.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+.no-margin {
+  margin: 0;
+}
+.no-padding {
+  padding: 0;
+}
+.no-border {
+  border: 0;
+}
+.number-input {
+  -moz-appearance: textfield;
+}
+.number-input::-webkit-inner-spin-button,
+.number-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.defaultFont {
+  font-family: "PT Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.65;
+  text-transform: uppercase;
+  color: #000;
+}
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  font-size: 14px;
+  min-width: 320px;
+  position: relative;
+  line-height: 1.65;
+  font-family: "PT Sans", sans-serif;
+  overflow-x: hidden;
+  opacity: 1;
+}
+div,
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6,
+ul,
+p,
+a {
+  margin: 0;
+  padding: 0;
+  font-family: "PT Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.65;
+  text-transform: uppercase;
+  color: #000;
+}
+ul {
+  list-style-type: none;
+}
+input {
+  -moz-appearance: textfield;
+}
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input::-webkit-input-placeholder {
+  text-align: center;
+  font-weight: 600;
+  font-family: "PT Sans", sans-serif;
+  color: #000;
+}
+input:-moz-placeholder {
+  text-align: center;
+  font-weight: 600;
+  font-family: "PT Sans", sans-serif;
+  color: #000;
+}
+input::-moz-placeholder {
+  text-align: center;
+  font-weight: 600;
+  font-family: "PT Sans", sans-serif;
+  color: #000;
+}
+input:-ms-input-placeholder {
+  text-align: center;
+  font-weight: 600;
+  font-family: "PT Sans", sans-serif;
+  color: #000;
+}
+/*==========  Desktop First  ==========*/
+/* Large Devices, Wide Screens */
+/**/
+/* Medium Devices, Desktops */
+/**/
+/* Small Devices, Tablets */
+/**/
+/* Extra Small Devices, Phones */
+/**/
+/* Custom, iPhone Retina */
+/**/
+/*==========  Mobile First  ==========*/
+/* Custom, iPhone Retina */
+/**/
+/* Extra Small Devices, Phones */
+/**/
+/* Small Devices, Tablets */
+/**/
+/* Medium Devices, Desktops */
+/**/
+/* Large Devices, Wide Screens */
+/**/
