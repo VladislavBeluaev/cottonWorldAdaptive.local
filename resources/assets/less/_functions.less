@@ -1,0 +1,35 @@
+@import "_variables";
+.flex(@horizontalAlign;@verticalAlign){
+  display:flex;
+  justify-content:@horizontalAlign;
+  align-items:@verticalAlign;
+}
+.borderSettings(@arguments;@radius:.25rem){
+  border:@arguments;
+  border-radius: @radius;
+}
+.fontSettings(@family;@size;@weight;@lineHeight;@transform){
+  font-family:@family;
+  font-size: @size;
+  font-weight: @defaultFontWeight;
+  line-height: @lineHeight;
+  text-transform: @transform;
+}
+.alignTo(@align){
+  text-align: @align;
+}
+.placeholder(@rules) {
+
+  &::-webkit-input-placeholder {
+    @rules();
+  }
+  &:-moz-placeholder {
+    @rules();
+  }
+  &::-moz-placeholder {
+    @rules();
+  }
+  &:-ms-input-placeholder {
+    @rules();
+  }
+}
