@@ -146,20 +146,87 @@ ul {
           align-items: center;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr;
+  /*a:hover{
+        color:@menuitemHoverColor;
+        border-bottom: 2px solid @menuitemHoverColor;
+      }*/
+}
+.main-header > nav ul[role="menubar"] li[role="menuitem"]:first-child > a {
+  display: inline-block;
+  cursor: pointer;
+}
+.main-header > nav ul[role="menubar"] li[role="menuitem"]:first-child > a:after {
+  display: block;
+  content: "";
+  height: 2px;
+  width: 0;
+  background-color: #39B54A;
+  -webkit-transition: width 0.2s ease-in-out;
+  transition: width 0.2s ease-in-out;
+}
+.main-header > nav ul[role="menubar"] li[role="menuitem"]:first-child > a:hover,
+.main-header > nav ul[role="menubar"] li[role="menuitem"]:first-child > a:hover:after,
+.main-header > nav ul[role="menubar"] li[role="menuitem"]:first-child > a:focus:after {
+  color: #39B54A;
+  width: 55%;
+  text-shadow: 1px 1px 1px #ebebeb;
+}
+.main-header > nav ul[role="menubar"] li[role="menuitem"]:nth-child(2) > a {
+  display: inline-block;
+  cursor: pointer;
+}
+.main-header > nav ul[role="menubar"] li[role="menuitem"]:nth-child(2) > a:after {
+  display: block;
+  content: "";
+  height: 2px;
+  width: 0;
+  background-color: #39B54A;
+  -webkit-transition: width 0.2s ease-in-out;
+  transition: width 0.2s ease-in-out;
+}
+.main-header > nav ul[role="menubar"] li[role="menuitem"]:nth-child(2) > a:hover,
+.main-header > nav ul[role="menubar"] li[role="menuitem"]:nth-child(2) > a:hover:after,
+.main-header > nav ul[role="menubar"] li[role="menuitem"]:nth-child(2) > a:focus:after {
+  color: #39B54A;
+  width: 72%;
+  text-shadow: 1px 1px 1px #ebebeb;
 }
 .main-header > nav ul[role="menubar"] li[role="menuitem"]:last-child {
-  border: 1px solid #eaeaea;
-  border-radius: 20px;
-  padding: 2px 10px;
-  background-color: #fff;
+  justify-self: right;
 }
 .main-header > nav ul[role="menubar"] a {
   color: #999;
   text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
 }
-.main-header > nav ul[role="menubar"] a:hover {
-  color: #d65b5a;
-  border-bottom: 2px solid #d65b5a;
+.main-header > nav ul[role="menubar"] a:after {
+  display: block;
+  content: "";
+  height: 2px;
+  width: 0;
+  background-color: #39B54A;
+  -webkit-transition: width 0.2s ease-in-out;
+  transition: width 0.2s ease-in-out;
+}
+.main-header > nav ul[role="menubar"] a:hover,
+.main-header > nav ul[role="menubar"] a:hover:after,
+.main-header > nav ul[role="menubar"] a:focus:after {
+  color: #39B54A;
+  width: 100%;
+  text-shadow: 1px 1px 1px #ebebeb;
+}
+.main-header .banner__nav-bar {
+  background: url(/images/main_background.png) center;
+  background-size: cover;
+  height: 25vh;
+  padding-top: 5vh;
+}
+.main-header .banner__nav-bar .nav-bar__content {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  grid-template-columns: repeat(3, 1fr);
 }
 /*==========  Desktop First  ==========*/
 /* Large Devices, Wide Screens */

@@ -33,3 +33,22 @@
     @rules();
   }
 }
+.underscore-animate(@widthUnderscore:100%){
+  display: inline-block;
+  cursor: pointer;
+  &:after {
+    display: block;
+    content: "";
+    height: 2px;
+    width: 0;
+    background-color: @menuitemHoverColor;
+    transition: width .2s ease-in-out;
+  }
+  &:hover,
+  &:hover:after,
+  &:focus:after {
+    color:@menuitemHoverColor;
+    width: @widthUnderscore;
+    text-shadow: 1px 1px 1px #ebebeb;
+  }
+}
