@@ -32,7 +32,10 @@ values($k,$v,now(),now());\r\n",FILE_APPEND);
             }
         }*/
         $callProcedureStr = sprintf("call %s",Config::get('constants.options.procedures.cardSlider'));
-        return view('user.user_dashboard',['t_shirts'=>DB::select($callProcedureStr)]);
+        return view('user.main_dashboard',['t_shirts'=>DB::select($callProcedureStr)]);
+    }
+    function contacts(){
+        return view('user.contacts_dashboard');
     }
     function allTShirts(){
         //dd($this->repository->all());
@@ -41,6 +44,7 @@ values($k,$v,now(),now());\r\n",FILE_APPEND);
     function getTShirt(Model $model){
         return view($this->bladePathDir.".product_article",["t_shirt"=>$this->repository->find($model)]);
     }
+
     protected $repository;
     protected $bladePathDir;
 }

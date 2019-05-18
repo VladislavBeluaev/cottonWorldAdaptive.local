@@ -1,0 +1,181 @@
+.cardsSlider {
+  position: relative;
+  overflow: hidden;
+
+  .cardsSlider__content {
+    position: relative;
+  }
+}
+
+.slider_next, .slider_prev {
+  border: 2px solid #E2E2E2;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  display: table;
+  background-color: white;
+  z-index: 2;
+}
+
+.slider_next:hover, .slider_prev:hover {
+  cursor: pointer;
+}
+
+div.slider_next {
+  position: absolute;
+  top: 94px;
+  right: 4px;
+}
+
+div.slider_prev {
+  position: absolute;
+  top: 94px;
+  left: 4px;
+}
+
+.slider_next span, .slider_prev span {
+  -webkit-text-stroke: 1px white;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.active {
+  color: black;
+}
+
+.nonActive {
+  color: #E2E2E2;
+}
+
+.nonActive > span:hover {
+  color: #E2E2E2 !important;
+}
+
+.card img {
+  padding-top: 24px;
+  width: auto;
+  height: 200px;
+}
+
+.rating__stars > span:nth-child(-n+4) {
+  color: #fcc123;
+}
+
+.reviews__count {
+  height: 24px;
+  vertical-align: middle;
+  font-family: Graphik_LC, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.18;
+  letter-spacing: normal;
+  color: #9d9d9d;
+  display: table;
+}
+
+.reviews__count > span {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.customerChoice__productDescription {
+  min-height: 32px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.35;
+  letter-spacing: normal;
+  color: #262626;
+  overflow: hidden;
+}
+
+.customerChoice__productDescription {
+  height: 42px;
+  margin-bottom: 8px;
+
+  > a {
+    font-family: 'Roboto Slab', serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.customerChoice__productDescription > a:hover {
+  color: #ff7070;
+}
+
+.productOfDay__currentPrice {
+  /*div:first-child {
+    background-image: url("../../../public/images/priceDecor.png");
+  }*/
+
+  span {
+    font-family: 'Roboto Slab', serif;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 4px 16px;
+    color: #fff;
+    background-color: #232F3E;
+  }
+}
+
+.cardsSlider__content > .card {
+  min-width: 24.25%;
+  margin-right: 1%;
+}
+
+.card:not(:last-child) {
+  margin-right: 1%;
+}
+
+.next_btn, .prev_btn {
+  position: absolute;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: #C3C3C3;
+  text-decoration: none;
+  opacity: .5;
+  display: table;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.prev_btn {
+  top: 107px;
+  left: 1px;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.prev_btn span {
+  padding-left: 5px;
+  text-align: left;
+}
+
+.next_btn {
+  top: 107px;
+  right: 1px;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+
+.next_btn span {
+  padding-right: 5px;
+  text-align: right;
+}
+
+.next_btn span, .prev_btn span {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.next_btn span:hover, .prev_btn span:hover {
+  color: red;
+}

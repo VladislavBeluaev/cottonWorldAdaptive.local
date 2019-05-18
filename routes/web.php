@@ -21,4 +21,5 @@ Route::group(['namespace'=>'User',],function(){
         Route::get('t-shirts/{model}','DashboardController@getTShirt')->name('user.woman_getTShirt');
     });
     Route::get('/','DashboardController@index')->name('user.index');
+    Route::get('/contacts','DashboardController@contacts')->name('user.contacts');
 });

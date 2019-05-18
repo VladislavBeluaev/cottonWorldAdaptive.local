@@ -2,6 +2,7 @@ import {ProductsCard} from './components/classes/productsCard.class.js';
 import {Menu} from './components/classes/Menu.class.js';
 import {Slider} from './components/classes/Slider.class.js';
 import {Gallery} from './components/classes/Gallery.class.js';
+import {GoogleMap} from './components/classes/GoogleMap.class.js';
 (function ($, undefined) {
     $(function () {
         let pathInfo = window.location.pathname.substr(1);
@@ -46,6 +47,10 @@ import {Gallery} from './components/classes/Gallery.class.js';
                         }
                     }
                 }).start());
+                break;
+            case "contacts":
+                console.log("here");
+                (new GoogleMap('contacts__map')).load();
                 break;
             case "men/t-shirts":
                 (new ProductsCard(

@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="{{asset('css/user/app.css')}}">
     <script src="{{asset('js/jquery-3.4.0.min.js')}}"></script>
     <script src="{{asset('js/user/app_user.js')}}" type="module"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdqxH6So1ojp7RZSbZ2cqFJrDe1yPDZPk&callback=initMap">
+    </script>
 </head>
 <body>
 @include('user.layouts.new_header')
