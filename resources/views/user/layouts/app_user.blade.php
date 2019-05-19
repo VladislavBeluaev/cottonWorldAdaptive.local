@@ -8,13 +8,10 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
           integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-   {{--<link rel="stylesheet" href="{{asset('css/user/main.css')}}">--}}
     <link rel="stylesheet" href="{{asset('css/user/app.css')}}">
     <script src="{{asset('js/jquery-3.4.0.min.js')}}"></script>
+    <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
     <script src="{{asset('js/user/app_user.js')}}" type="module"></script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdqxH6So1ojp7RZSbZ2cqFJrDe1yPDZPk&callback=initMap">
-    </script>
 </head>
 <body>
 @include('user.layouts.new_header')

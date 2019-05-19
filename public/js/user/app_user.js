@@ -68,7 +68,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
-module.exports = __webpack_require__(6);
+module.exports = __webpack_require__(7);
 
 
 /***/ }),
@@ -77,11 +77,11 @@ module.exports = __webpack_require__(6);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_classes_productsCard_class_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_classes_ModalWindows_class_js__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_classes_Menu_class_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_classes_Slider_class_js__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_classes_Gallery_class_js__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_classes_GoogleMap_class_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_classes_YandexMap_class_js__ = __webpack_require__(6);
 
 
 
@@ -128,13 +128,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }).start();
                 break;
             case "contacts":
-                console.log("here");
-                new __WEBPACK_IMPORTED_MODULE_4__components_classes_GoogleMap_class_js__["a" /* GoogleMap */]('contacts__map').load();
+                new __WEBPACK_IMPORTED_MODULE_4__components_classes_YandexMap_class_js__["a" /* YandexMap */]('contacts__map').load();
                 break;
             case "men/t-shirts":
-                new __WEBPACK_IMPORTED_MODULE_0__components_classes_productsCard_class_js__["a" /* ProductsCard */]({
-                    "productCard": "products_card",
-                    "productName": "product_name"
+                new __WEBPACK_IMPORTED_MODULE_0__components_classes_ModalWindows_class_js__["a" /* ModalWindows */]({
+                    "bodyWrapper": "modal-wrapper",
+                    "modalCallContainer": "cards__item-description",
+                    "modalWindows": ['', '']
                 }).run();
                 break;
         }
@@ -142,55 +142,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 })(jQuery);
 
 /***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProductsCard; });
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * Created by Dragon on 27.04.2019.
- */
-var ProductsCard = function () {
-    function ProductsCard(productsComponents) {
-        _classCallCheck(this, ProductsCard);
-
-        this._productCard = productsComponents.productCard;
-        this._productName$ = $('.' + productsComponents.productName);
-        this._minHeight = 24;
-    }
-
-    _createClass(ProductsCard, [{
-        key: 'run',
-        value: function run() {
-            $(window).on('resize.productsCard', $.proxy(this._resizeProductNameHandler, this));
-        }
-    }, {
-        key: '_resizeProductNameHandler',
-        value: function _resizeProductNameHandler() {
-            var _this = this;
-
-            var productNameCollectionWithBigHeight = this._productName$.filter(function (_, item) {
-                return $(item).height() >= _this._minHeight;
-            });
-            var startMarginBottom = this._productName$.css('marginBottom');
-            console.log(startMarginBottom);
-            /*if(currentProductNameHeight<=24){
-              }
-            else{
-              }*/
-        }
-    }]);
-
-    return ProductsCard;
-}();
-
-
-
-/***/ }),
+/* 2 */,
 /* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -521,20 +473,10 @@ var Gallery = function () {
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoogleMap; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return YandexMap; });
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -542,28 +484,132 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /**
  * Created by Dragon on 19.05.2019.
  */
-var GoogleMap = function () {
-    function GoogleMap(mapContainer) {
-        _classCallCheck(this, GoogleMap);
+var YandexMap = function () {
+    function YandexMap(mapContainer) {
+        _classCallCheck(this, YandexMap);
 
         this._mapContainer = mapContainer;
     }
 
-    _createClass(GoogleMap, [{
-        key: "load",
+    _createClass(YandexMap, [{
+        key: 'load',
         value: function load() {
-            function initMap() {}
-            $(function () {
-                initMap = function initMap() {
-                    var uluru = { lat: -25.344, lng: 131.036 };
-                    var map = new google.maps.Map(document.getElementById(this._mapContainer), { zoom: 4, center: uluru });
-                    var marker = new google.maps.Marker({ position: uluru, map: map });
-                };
-            });
+            ymaps.ready(init);
+            function init() {
+                var map = new ymaps.Map('contacts__map', {
+                    center: [53.849663840704956, 27.66238955487824],
+                    zoom: 18,
+                    controls: ['routeButtonControl', 'zoomControl', 'fullscreenControl']
+                });
+                var MyIconContentLayout = ymaps.templateLayoutFactory.createClass('<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'),
+                    myPlacemark = new ymaps.Placemark(map.getCenter(), {
+                    hintContent: 'UZBOLKA.BY',
+                    balloonContent: 'Это красивая метка'
+                }, {
+                    // Опции.
+                    // Необходимо указать данный тип макета.
+                    iconLayout: 'default#image',
+                    // Своё изображение иконки метки.
+                    iconImageHref: 'images/markerYandex.PNG',
+                    // Размеры метки.
+                    iconImageSize: [36, 62],
+                    // Смещение левого верхнего угла иконки относительно
+                    // её "ножки" (точки привязки).
+                    iconImageOffset: [-10, -50]
+                });
+
+                map.geoObjects.add(myPlacemark);
+
+                /*let myPlacemark = new ymaps.Placemark([53.849698731852826, 27.662174978157054], {}, {
+                 preset: 'islands#redIcon'
+                 });
+                 /!*let myPlacemark = new ymaps.GeoObject({
+                 geometry: {
+                 type: "Point",
+                 coordinates: [53.849698731852826, 27.662174978157054]
+                 }
+                 });*!/
+                 map.geoObjects.add(myPlacemark);*/
+            }
         }
     }]);
 
-    return GoogleMap;
+    return YandexMap;
+}();
+
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalWindows; });
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Created by Dragon on 19.05.2019.
+ */
+var ModalWindows = function () {
+    function ModalWindows(settings) {
+        _classCallCheck(this, ModalWindows);
+
+        this._bodyWrapper = settings.bodyWrapper;
+        this._modalCallContainer = '.' + settings.modalCallContainer;
+        this._modalWindows = settings.modalWindows;
+    }
+
+    _createClass(ModalWindows, [{
+        key: 'run',
+        value: function run() {
+            $(this._modalCallContainer).on('click.ModalWindows', $.proxy(this._callModalWindow, this));
+        }
+    }, {
+        key: '_callModalWindow',
+        value: function _callModalWindow(event) {
+            switch (this._modalCallContainer) {
+                case ".cards__item-description":
+                    this._cardsCallBack.call(this, event);
+                    //$.proxy(this._cardsCallBack,this,event);
+                    break;
+            }
+        }
+    }, {
+        key: '_cardsCallBack',
+        value: function _cardsCallBack(event) {
+            var target = event.target;
+            if (target.closest(this._modalCallContainer) === null) return false;
+
+            this._toggleBodyWrapper.call(this);
+        }
+    }, {
+        key: '_toggleBodyWrapper',
+        value: function _toggleBodyWrapper() {
+            var wraper = $('.' + this._bodyWrapper);
+            if (wraper.length) {
+                wraper.remove();
+            } else {
+                var div = document.createElement('div');
+                div.className = this._bodyWrapper;
+                $(div).wrap($(document.body).children());
+                document.body.prepend(div);
+            }
+        }
+    }]);
+
+    return ModalWindows;
 }();
 
 

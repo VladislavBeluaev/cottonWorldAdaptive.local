@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto+Slab|PT+Sans+Caption&subset=latin,cyrillic);@import url(https://fonts.googleapis.com/css?family=Anton);@import url(//db.onlinewebfonts.com/c/dd94ddf99b6082e709d2d5e47508fd56?family=SAASeriesW01-EMD);.no-margin {
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab|PT+Sans+Caption&subset=latin,cyrillic);@import url(https://fonts.googleapis.com/css?family=Anton);@import url(//db.onlinewebfonts.com/c/dd94ddf99b6082e709d2d5e47508fd56?family=SAASeriesW01-EMD);@import url(https://fonts.googleapis.com/css?family=Montserrat&display=swap);.no-margin {
   margin: 0;
 }
 .no-padding {
@@ -43,6 +43,14 @@
 .box-shadow-bottom {
   -webkit-box-shadow: -2px 9px 9px 0 rgba(0, 0, 0, 0.66);
   box-shadow: -2px 9px 9px 0px rgba(0, 0, 0, 0.66);
+}
+.box-shadow-products-header {
+  -webkit-box-shadow: 0 8px 40px -6px rgba(105, 104, 178, 0.18);
+  box-shadow: 0 8px 40px -6px rgba(105, 104, 178, 0.18);
+}
+.box-shadow-products {
+  -webkit-box-shadow: 1px 3px 4px rgba(117, 117, 117, 0.22);
+  box-shadow: 1px 3px 4px rgba(117, 117, 117, 0.22);
 }
 .cardsSlider {
   position: relative;
@@ -295,6 +303,15 @@ ul {
 .grid {
   display: grid;
 }
+.modal-wrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000 !important;
+}
 .main-header {
   height: 30vh;
   position: relative;
@@ -323,6 +340,7 @@ ul {
 .main-header > nav ul[role="menubar"] li[role="menuitem"]:first-child > a {
   display: inline-block;
   cursor: pointer;
+  position: relative;
 }
 .main-header > nav ul[role="menubar"] li[role="menuitem"]:first-child > a:after {
   display: block;
@@ -343,6 +361,7 @@ ul {
 .main-header > nav ul[role="menubar"] li[role="menuitem"]:nth-child(2) > a {
   display: inline-block;
   cursor: pointer;
+  position: relative;
 }
 .main-header > nav ul[role="menubar"] li[role="menuitem"]:nth-child(2) > a:after {
   display: block;
@@ -368,6 +387,7 @@ ul {
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
+  position: relative;
 }
 .main-header > nav ul[role="menubar"] a:after {
   display: block;
@@ -536,14 +556,46 @@ footer .footer__content p:last-child span {
 .contacts {
   margin-top: 120px;
 }
+.contacts .contacts__information {
+  margin-top: 24px;
+}
+.contacts .contacts__information h2 {
+  font-family: 'Roboto Slab', serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+  text-transform: none;
+  margin-bottom: 12px;
+}
+.contacts .contacts__information .information__phone p,
+.contacts .contacts__information .information__email p,
+.contacts .contacts__information .information__map p {
+  font-family: 'Roboto Slab', serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 32px;
+  text-transform: none;
+}
+.contacts .contacts__information .information__phone p:last-child,
+.contacts .contacts__information .information__email p:last-child,
+.contacts .contacts__information .information__map p:last-child {
+  color: #39B54A;
+}
+.contacts .contacts__information .information__phone p:last-child a,
+.contacts .contacts__information .information__email p:last-child a,
+.contacts .contacts__information .information__map p:last-child a {
+  color: #39B54A;
+}
+.contacts .contacts__information .information__email {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
 .contacts #contacts__map {
   width: 100%;
   height: 50vh;
   margin-top: 12px;
-  -webkit-box-shadow: -2px 9px 9px 0 rgba(0, 0, 0, 0.66);
-  box-shadow: -2px 9px 9px 0px rgba(0, 0, 0, 0.66);
-  border: 2px solid transparent;
-  border-radius: 0.4em;
+  -webkit-box-shadow: -1px 2px 9px 0px rgba(0, 0, 0, 0.66);
+  box-shadow: -1px 2px 9px 0px rgba(0, 0, 0, 0.66);
 }
 .breadcrumbs {
   grid-template-columns: repeat(3, 1fr);
@@ -572,6 +624,30 @@ footer .footer__content p:last-child span {
 }
 .breadcrumbs .breadcrumbs__content p a {
   color: inherit;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+}
+.breadcrumbs .breadcrumbs__content p a::after {
+  background-color: #4f4f4f;
+  display: block;
+  content: "";
+  height: 2px;
+  width: 0;
+  left: 50%;
+  position: absolute;
+  -webkit-transition: width 0.3s ease-in-out;
+  -moz--transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.breadcrumbs .breadcrumbs__content p a:hover,
+.breadcrumbs .breadcrumbs__content p a:hover:after,
+.breadcrumbs .breadcrumbs__content p a:focus:after {
+  color: #4f4f4f;
+  width: 100%;
+  text-shadow: 1px 1px 1px #ebebeb;
 }
 .breadcrumbs .breadcrumbs__content p:nth-child(2) {
   margin-left: 4px;
@@ -579,6 +655,137 @@ footer .footer__content p:last-child span {
 }
 .breadcrumbs .breadcrumbs__content p:last-child {
   color: #a7a7a7;
+}
+.t_shirts {
+  margin-top: 120px;
+}
+.t_shirts .product_article__content {
+  margin-top: 24px;
+}
+.t_shirts .product_article__content .content__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 6.66666667vh;
+  -webkit-box-shadow: 0 8px 40px -6px rgba(105, 104, 178, 0.18);
+  box-shadow: 0 8px 40px -6px rgba(105, 104, 178, 0.18);
+  padding-left: 24px;
+}
+.t_shirts .product_article__content .content__header h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  text-transform: uppercase;
+}
+.t_shirts .product_article__content .content__cards {
+  margin-top: 24px;
+  grid-template-columns: repeat(3, 1fr);
+  -webkit-column-gap: 24px;
+     -moz-column-gap: 24px;
+          column-gap: 24px;
+}
+.t_shirts .product_article__content .content__cards .cards__item {
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background-color: #fff;
+  -webkit-box-shadow: 1px 3px 4px rgba(117, 117, 117, 0.22);
+  box-shadow: 1px 3px 4px rgba(117, 117, 117, 0.22);
+  margin-top: 24px;
+}
+.t_shirts .product_article__content .content__cards .cards__item:nth-child(1),
+.t_shirts .product_article__content .content__cards .cards__item:nth-child(2),
+.t_shirts .product_article__content .content__cards .cards__item:nth-child(3) {
+  margin-top: 0;
+}
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-img p {
+  text-align: center;
+}
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-img p img {
+  width: 45%;
+  height: auto;
+}
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-name {
+  padding-left: 24px;
+}
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-name p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+  text-transform: none;
+}
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-price {
+  padding-left: 24px;
+}
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-price p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+  text-transform: none;
+  color: #39B54A;
+}
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-description {
+  margin-top: 12px;
+  padding-left: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-description div:hover {
+  cursor: pointer;
+}
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-description div p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 32px;
+  text-transform: none;
+}
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-description div p:first-child {
+  width: 40px;
+}
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-description div p:hover {
+  color: #39B54A;
+}
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-description div p img {
+  width: 65%;
+  height: auto;
+}
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-order {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  padding-left: 24px;
+}
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-order button {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 32px;
+  text-transform: none;
+  width: 50%;
+  background-color: #39B54A;
+}
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-order button:active,
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-order button:focus {
+  outline: none !important;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 /*==========  Desktop First  ==========*/
 /* Large Devices, Wide Screens */
