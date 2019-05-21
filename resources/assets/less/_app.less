@@ -48,6 +48,14 @@ input {
   .placeholder({ text-align: center; font-weight: @defaultFontWeight; font-family: @defaultFontFamily; color: @menuitemColor; });
 }
 
+button {
+  border-color: transparent !important;
+  &:active, &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
 ul {
   list-style-type: none;
   background-color: @defaultBgColor;
@@ -56,15 +64,7 @@ ul {
 .grid {
   display: grid;
 }
-.modal-wrapper{
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(0,0,0,.6);
-  z-index: 1000 !important;
-}
+
 .main-header {
   height: @defaultHeight;
   position: relative;
@@ -310,7 +310,7 @@ footer {
       column-gap: @defaultGutter;
       .cards__item {
         .borderSettings(2px solid transparent; 5px);
-        background-color: #fff;
+        background-color: @cardsBackgroundColor;
         .box-shadow-products;
         margin-top: @defaultGutter;
         &:nth-child(1), &:nth-child(2), &:nth-child(3) {
@@ -350,13 +350,13 @@ footer {
             p {
               .fontSettings(@productsCardFont, 14px, normal, 32px, none);
               &:first-child {
-                width:40px;
+                width: 40px;
               }
               &:hover {
                 color: @menuitemHoverColor;
               }
-              img{
-                .size(65%,auto);
+              img {
+                .size(65%, auto);
               }
             }
           }
@@ -366,19 +366,130 @@ footer {
           margin-bottom: @defaultGutter/2;
           padding-left: @defaultGutter;
           button {
-            .fontSettings(@productsCardFont, 16px, normal, 32px, none);
-            width: 50%;
-            background-color: @menuitemHoverColor;
-            &:active, &:focus {
-              outline: none !important;
-              box-shadow: none;
-            }
+            .button(50%, @menuitemHoverColor);
           }
         }
       }
     }
   }
-
 }
+
+.modal-wrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .6);
+  z-index: @defaultZIndex;
+}
+
+.modal-clothes-size {
+  background-color: @cardsBackgroundColor;
+  position: fixed;
+  top: 20%;
+  left: 20%;
+  height: 60vh;
+  z-index: @defaultZIndex+1;
+  .box-shadow-bottom;
+  .borderSettings(2px solid transparent; 5px);
+  .clothes-size__content {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 10fr 2.5fr;
+    justify-items: right;
+    padding-right: @defaultGutter/4;
+    padding-top: @defaultGutter/8;
+    .content__close-window {
+      span:hover {
+        color: @menuitemHoverColor;
+        cursor: pointer;
+      }
+    }
+    .content__table {
+      width: 100%;
+      justify-self: left;
+      padding-left: @defaultGutter*2;
+      padding-right: @defaultGutter*2;
+      tbody {
+        tr {
+          th, td {
+            .fontSettings(@productsCardFont, 14px, normal, 32px, none);
+            text-align: center;
+            &:first-child {
+              background-color: @menuitemColor;
+              &:not(.choosen-item):hover {
+                color: @cardsBackgroundColor;
+                cursor: pointer;
+              }
+            }
+          }
+          &:first-child {
+            th {
+              .fontSettings(@footerFont, 16px, bold, 32px, uppercase);
+              &:first-child {
+                cursor: default;
+                color: @defaultFontColor !important;
+              }
+              &:last-child {
+                vertical-align: middle;
+              }
+            }
+          }
+        }
+      }
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .content__order {
+      align-self: center;
+      justify-self: left;
+      padding-left: @defaultGutter*2;
+      .order__confirm {
+        flex-wrap: wrap;
+        div:first-child {
+          margin-bottom: @defaultGutter/2;
+          p {
+            .fontSettings(@productsCardFont, 18px, bold, 32px, none);
+            &:first-child {
+            }
+            &:nth-child(2) {
+              padding-left: @defaultGutter/2;
+              text-align: left;
+              input {
+                width: 30%;
+                .borderSettings(2px solid @breadcrumbsDisableItemColor; .4em);
+                padding-left: @defaultGutter/8;
+              }
+            }
+            &:last-child {
+              span {
+                .fontSettings(@footerFont, 24px, bold, 32px, none);
+              }
+            }
+          }
+        }
+        button {
+          .button(25%, @menuitemHoverColor);
+        }
+      }
+      .order__checkout {
+        button {
+          .button(auto, @buttonCheckoutColor);
+        }
+        .order-info {
+          .fontSettings(@footerFont, 14px, bold, 32px, none);
+          color: red;
+        }
+      }
+    }
+  }
+}
+
+/*outline: 5px solid #555;
+box-shadow: 0 0 4px rgba(10,10,10,0.5);
+choosen-item
+*/
 
 @import "_media";

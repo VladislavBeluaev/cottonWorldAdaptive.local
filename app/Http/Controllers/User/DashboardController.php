@@ -43,6 +43,7 @@ values($k,$v,now(),now());\r\n",FILE_APPEND);
         return view($this->bladePathDir.".t-shirts",["t_shirt"=>$this->repository->all()]);
     }
     function getTShirt(Model $model){
+        dd($this->repository->find($model));
         return view($this->bladePathDir.".product_article",["t_shirt"=>$this->repository->find($model)]);
     }
 

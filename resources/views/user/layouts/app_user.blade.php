@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
     <title>@yield('pageTitle')</title>
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
           integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('css/user/app.css')}}">
     <script src="{{asset('js/jquery-3.4.0.min.js')}}"></script>
@@ -14,6 +15,7 @@
     <script src="{{asset('js/user/app_user.js')}}" type="module"></script>
 </head>
 <body>
+<div class="modal-wrapper"></div>
 @include('user.layouts.new_header')
 @yield('content')
 @include('user.layouts.new_footer')

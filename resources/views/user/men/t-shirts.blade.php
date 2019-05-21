@@ -14,6 +14,7 @@
                 <div class="content__header">
                     <h1>мужские футболки</h1>
                 </div>
+                @include('user.layouts.modalWindows.clothes_table_size')
                 <div class="content__cards grid">
                     @foreach($t_shirt['relation'] as $color=>$img)
                     <div class="cards__item">
