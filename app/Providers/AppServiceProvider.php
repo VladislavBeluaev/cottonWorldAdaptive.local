@@ -31,16 +31,21 @@ class AppServiceProvider extends ServiceProvider
             $breadcrumbLink = '';
             switch (getRoutePrefix()) {
                 case "men":
-                    $breadcrumbLink = "'Мужские майки'";
+                    $breadcrumbLink = "'Мужские футболки'";
                     break;
                 case "women":
-                    $breadcrumbLink = "'Женские майки'";
+                    $breadcrumbLink = "'Женские футболки'";
                     break;
                 case "children":
-                    $breadcrumbLink = "'Детские майки'";
+                    $breadcrumbLink = "'Детские футболки'";
                     break;
             }
             return "<?php echo $breadcrumbLink ?>";
+        });
+        Blade::directive('t_shirtName', function ($expression) {
+            list($t_shirtName, $color) = explode(',', $expression);
+            $callString = "sprintf('%s(%s)', $t_shirtName, $color)";
+            return "<?php echo $callString ?>";
         });
     }
 

@@ -8,6 +8,7 @@ use App\T_shirt;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class DashboardController extends Controller
 {
@@ -39,7 +40,7 @@ values($k,$v,now(),now());\r\n",FILE_APPEND);
     }
     function allTShirts(){
         //dd($this->repository->all());
-        return view($this->bladePathDir.".t-shirts",["t_shirts"=>$this->repository->all()]);
+        return view($this->bladePathDir.".t-shirts",["t_shirt"=>$this->repository->all()]);
     }
     function getTShirt(Model $model){
         return view($this->bladePathDir.".product_article",["t_shirt"=>$this->repository->find($model)]);

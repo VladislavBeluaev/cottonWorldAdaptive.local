@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnURLPrefixToGenderTable extends Migration
+class AddColumnIsEnableToTShirtColorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnURLPrefixToGenderTable extends Migration
      */
     public function up()
     {
-        Schema::table('gender', function (Blueprint $table) {
-            $table->string('url_prefix')->after('rus_description');
+        Schema::table('t_shirt_color', function (Blueprint $table) {
+            $table->boolean('is_enable')->after('color_id')->default(false);
         });
     }
 
@@ -25,8 +25,8 @@ class AddColumnURLPrefixToGenderTable extends Migration
      */
     public function down()
     {
-        Schema::table('gender', function (Blueprint $table) {
-            $table->dropColumn('url_prefix');
+        Schema::table('t_shirt_color', function (Blueprint $table) {
+            $table->dropColumn('is_enable');
         });
     }
 }

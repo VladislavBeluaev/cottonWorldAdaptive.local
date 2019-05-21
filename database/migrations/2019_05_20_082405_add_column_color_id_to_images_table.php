@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TShirtsColorsTable extends Migration
+class AddColumnColorIdToImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class TShirtsColorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('t_shirt_color', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('t_shirt_id')->unsigned();
-            $table->foreign('t_shirt_id')->references('id')->on('t_shirts')->onDelete('cascade');
-            $table->integer('color_id')->unsigned();
+        Schema::table('images', function (Blueprint $table) {
+            $table->integer('color_id')->after('img_alt')->unsigned()->default(0);
             $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 
@@ -30,6 +26,8 @@ class TShirtsColorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('t_shirt_color');
+        Schema::table('images', function (Blueprint $table) {
+           $table->dropColumn('color_id');
+        });
     }
 }

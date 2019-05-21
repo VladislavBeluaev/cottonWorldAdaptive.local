@@ -20,8 +20,14 @@ class T_shirt extends Model
        return "routeKeyName";
     }
 
-    public function getPriceAttribute($value)
+    public function getPriceAttribute()
     {
-        return sprintf('%s р.',$value);
+        return "6,50 руб.";
+        //return sprintf('%s руб.',$value);
+    }
+    public function getDensityAttribute()
+    {
+        return "160 г/м2";
+        //return sprintf('%s руб.',$value);
     }
 }

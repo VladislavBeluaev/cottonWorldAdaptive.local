@@ -11,9 +11,11 @@ let mix = require('laravel-mix');
  |
  */
 
-/*mix.less('resources/assets/less/_app.less', 'public/css/user/app.css').
-js('resources/assets/js/app.js','public/js/user/app_user.js').browserSync('cottonworldadaptive.local:90');*/
+mix.less('resources/assets/less/_app.less', 'public/css/user/app.css').
+js('resources/assets/js/app.js','public/js/user/app_user.js').browserSync('cottonworldadaptive.local:90');
+/*
 mix.less('resources/assets/less/_app.less', 'public/css/user/app.css').
 js('resources/assets/js/app.js','public/js/user/app_user.js').browserSync('cottonworldadaptive.local');
+*/
 
 

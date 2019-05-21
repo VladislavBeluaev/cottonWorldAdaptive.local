@@ -6,6 +6,7 @@ use App\Interfaces\Repository;
 use Illuminate\Database\Eloquent\Model;
 use App\Gender;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class CategoryRepository implements Repository
 {
@@ -19,7 +20,25 @@ class CategoryRepository implements Repository
     public function all()
     {
         $eloquentRelation = $this->eloquentRelation;
-        return $this->gender->getModelByUrlPrefix(getRoutePrefix())->$eloquentRelation->load('colors')->load('images');
+        /*return $this->gender->getModelByUrlPrefix(getRoutePrefix())->$eloquentRelation->load('colors')->load('images');*/
+        $t_shirt = $this->gender->getModelByUrlPrefix(getRoutePrefix())->$eloquentRelation
+            ->load(['colors'=>function($query){
+            $query->where('is_enable',1)->orderBy('id');
+        }])->first();
+        $images = $t_shirt->images()->orderBy('color_id')->get();
+        $colors = $t_shirt->colors;
+        $t_shirtArr = ['relation'=>[]];
+        foreach (array_filter(Schema::getColumnListing($eloquentRelation),function($modelColumn){
+            return in_array($modelColumn,['name','description','material','composition','price','density']);
+        }) as $modalProperties){
+            $t_shirtArr[$modalProperties] =$t_shirt->$modalProperties;
+        }
+        while($images->count()){
+            $t_shirtArr['relation'][$colors->first()->rus_name] = $images->first()->img_src;
+            $images->shift();
+            $colors->shift();
+        }
+        return $t_shirtArr;
     }
 
     public function find(Model $model)

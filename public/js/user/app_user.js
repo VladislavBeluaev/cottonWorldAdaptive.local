@@ -77,7 +77,7 @@ module.exports = __webpack_require__(7);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_classes_ModalWindows_class_js__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_classes_ModalWindows_class_js__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_classes_Menu_class_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_classes_Slider_class_js__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_classes_Gallery_class_js__ = __webpack_require__(5);
@@ -142,7 +142,71 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 })(jQuery);
 
 /***/ }),
-/* 2 */,
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalWindows; });
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Created by Dragon on 19.05.2019.
+ */
+var ModalWindows = function () {
+    function ModalWindows(settings) {
+        _classCallCheck(this, ModalWindows);
+
+        this._bodyWrapper = settings.bodyWrapper;
+        this._modalCallContainer = '.' + settings.modalCallContainer;
+        this._modalWindows = settings.modalWindows;
+    }
+
+    _createClass(ModalWindows, [{
+        key: 'run',
+        value: function run() {
+            $(this._modalCallContainer).on('click.ModalWindows', $.proxy(this._callModalWindow, this));
+        }
+    }, {
+        key: '_callModalWindow',
+        value: function _callModalWindow(event) {
+            switch (this._modalCallContainer) {
+                case ".cards__item-description":
+                    this._cardsCallBack.call(this, event);
+                    //$.proxy(this._cardsCallBack,this,event);
+                    break;
+            }
+        }
+    }, {
+        key: '_cardsCallBack',
+        value: function _cardsCallBack(event) {
+            var target = event.target;
+            if (target.closest(this._modalCallContainer) === null) return false;
+
+            this._toggleBodyWrapper.call(this);
+        }
+    }, {
+        key: '_toggleBodyWrapper',
+        value: function _toggleBodyWrapper() {
+            var wraper = $('.' + this._bodyWrapper);
+            if (wraper.length) {
+                wraper.remove();
+            } else {
+                var div = document.createElement('div');
+                div.className = this._bodyWrapper;
+                $(div).wrap($(document.body).children());
+                document.body.prepend(div);
+            }
+        }
+    }]);
+
+    return ModalWindows;
+}();
+
+
+
+/***/ }),
 /* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -544,75 +608,6 @@ var YandexMap = function () {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalWindows; });
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * Created by Dragon on 19.05.2019.
- */
-var ModalWindows = function () {
-    function ModalWindows(settings) {
-        _classCallCheck(this, ModalWindows);
-
-        this._bodyWrapper = settings.bodyWrapper;
-        this._modalCallContainer = '.' + settings.modalCallContainer;
-        this._modalWindows = settings.modalWindows;
-    }
-
-    _createClass(ModalWindows, [{
-        key: 'run',
-        value: function run() {
-            $(this._modalCallContainer).on('click.ModalWindows', $.proxy(this._callModalWindow, this));
-        }
-    }, {
-        key: '_callModalWindow',
-        value: function _callModalWindow(event) {
-            switch (this._modalCallContainer) {
-                case ".cards__item-description":
-                    this._cardsCallBack.call(this, event);
-                    //$.proxy(this._cardsCallBack,this,event);
-                    break;
-            }
-        }
-    }, {
-        key: '_cardsCallBack',
-        value: function _cardsCallBack(event) {
-            var target = event.target;
-            if (target.closest(this._modalCallContainer) === null) return false;
-
-            this._toggleBodyWrapper.call(this);
-        }
-    }, {
-        key: '_toggleBodyWrapper',
-        value: function _toggleBodyWrapper() {
-            var wraper = $('.' + this._bodyWrapper);
-            if (wraper.length) {
-                wraper.remove();
-            } else {
-                var div = document.createElement('div');
-                div.className = this._bodyWrapper;
-                $(div).wrap($(document.body).children());
-                document.body.prepend(div);
-            }
-        }
-    }]);
-
-    return ModalWindows;
-}();
-
-
 
 /***/ })
 /******/ ]);
