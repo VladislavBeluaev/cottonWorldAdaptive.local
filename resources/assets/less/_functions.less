@@ -42,13 +42,13 @@
     content: "";
     height: 2px;
     width: 0;
-    background-color: @menuitemHoverColor;
+    background-color: @menuItemHoverColor;
     transition: width .2s ease-in-out;
   }
   &:hover,
   &:hover:after,
   &:focus:after {
-    color:@menuitemHoverColor;
+    color:@menuItemHoverColor;
     width: @widthUnderscore;
     text-shadow: 1px 1px 1px #ebebeb;
   }
@@ -90,7 +90,13 @@
   background-color:@color;
   .fontSettings(@productsCardFont, 16px, normal, 32px, none);
   &:hover{
-    background-image: linear-gradient(100deg,@menuitemHoverColor 0,#49d15b);
+    background-image: linear-gradient(100deg,@menuItemHoverColor 0,#49d15b);
+    box-shadow :0 8px 50px -6px rgba(84,84,120,.26);
+  }
+}
+.button-hover(@baseColor,@gradientColor){
+  &:hover{
+    background-image: linear-gradient(100deg,@baseColor 0,@gradientColor);
     box-shadow :0 8px 50px -6px rgba(84,84,120,.26);
   }
 }

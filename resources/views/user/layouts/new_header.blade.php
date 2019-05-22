@@ -23,7 +23,7 @@
         <div class="container">
             <div class="contacts-bar__content grid">
                 <div class="content__logo">
-                    <p><img src="{{asset('images/logo_etalon.PNG')}}" alt="main_logo" class="w-50"></p>
+                    <p><a href="{{route('user.index')}}"><img src="{{asset('images/logo_etalon.PNG')}}" alt="main_logo" class="w-50"></a></p>
                 </div>
                 <div class="content__social grid">
                     <p><a href="#"><span class="fab fa-instagram fa-2x"></span></a></p>

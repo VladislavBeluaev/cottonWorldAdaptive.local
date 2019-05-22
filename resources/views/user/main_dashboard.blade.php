@@ -37,7 +37,7 @@
                                                                 </a>
                                                 </div>
                                                 <div class="productOfDay__currentPrice d-flex align-items-center justify-content-between">
-                                                    <div><span>{{$t_shirt->price}} руб.</span></div>
+                                                    <div><span>6,50 руб.</span></div>
                                                     {{--<div><span class="fas fa-cart-plus fa-lg"></span></div>--}}
                                                 </div>
                                             </div>

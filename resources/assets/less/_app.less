@@ -45,7 +45,8 @@ input {
   .number-input;
   .no-focus-style;
   .no-border;
-  .placeholder({ text-align: center; font-weight: @defaultFontWeight; font-family: @defaultFontFamily; color: @menuitemColor; });
+  text-align: center;
+  .placeholder({ text-align: center; font-weight: @defaultFontWeight; font-family: @defaultFontFamily; color: @menuItemColor; });
 }
 
 button {
@@ -93,14 +94,14 @@ ul {
         justify-self: right;
       }
       a {
-        color: @menuitemColor;
+        color: @menuItemColor;
         text-decoration: none;
         .underscore-animate();
       }
 
       /*a:hover{
-        color:@menuitemHoverColor;
-        border-bottom: 2px solid @menuitemHoverColor;
+        color:@menuItemHoverColor;
+        border-bottom: 2px solid @menuItemHoverColor;
       }*/
     }
   }
@@ -125,7 +126,7 @@ ul {
             font-weight: normal;
           }
           a:hover {
-            color: @menuitemHoverColor;
+            color: @menuItemHoverColor;
           }
         }
       }
@@ -144,7 +145,7 @@ ul {
           }
         }
         a:hover {
-          color: @menuitemHoverColor;
+          color: @menuItemHoverColor;
         }
       }
     }
@@ -175,7 +176,7 @@ ul {
           }
           a:hover {
             span {
-              color: @menuitemHoverColor;
+              color: @menuItemHoverColor;
             }
 
           }
@@ -206,7 +207,7 @@ footer {
       &:last-child {
         span {
           .fontSettings(@footerFont, 18px, bold, 32px, none);
-          color: @menuitemHoverColor;
+          color: @menuItemHoverColor;
         }
       }
     }
@@ -243,9 +244,9 @@ footer {
       p {
         .fontSettings(@footerFont, 18px, bold, 32px, none);
         &:last-child {
-          color: @menuitemHoverColor;
+          color: @menuItemHoverColor;
           a {
-            color: @menuitemHoverColor;
+            color: @menuItemHoverColor;
           }
 
         }
@@ -335,7 +336,7 @@ footer {
           padding-left: @defaultGutter;
           p {
             .fontSettings(@productsCardFont, 20px, normal, 32px, none);
-            color: @menuitemHoverColor;
+            color: @menuItemHoverColor;
           }
         }
         .cards__item-description {
@@ -353,7 +354,7 @@ footer {
                 width: 40px;
               }
               &:hover {
-                color: @menuitemHoverColor;
+                color: @menuItemHoverColor;
               }
               img {
                 .size(65%, auto);
@@ -366,7 +367,8 @@ footer {
           margin-bottom: @defaultGutter/2;
           padding-left: @defaultGutter;
           button {
-            .button(50%, @menuitemHoverColor);
+            .button(50%, @buttonCheckoutColor);
+            .button-hover(@buttonCheckoutColor, @buttonCheckoutColorGradientColor);
           }
         }
       }
@@ -385,13 +387,9 @@ footer {
 }
 
 .modal-clothes-size {
-  background-color: @cardsBackgroundColor;
-  position: fixed;
+  .modal-default-settings;
   top: 20%;
   left: 20%;
-  z-index: @defaultZIndex+1;
-  .box-shadow-bottom;
-  .borderSettings(2px solid transparent; 5px);
   .clothes-size__content {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 10fr 2.5fr;
@@ -400,7 +398,7 @@ footer {
     padding-top: @defaultGutter/8;
     .content__close-window {
       span:hover {
-        color: @menuitemHoverColor;
+        color: @menuItemHoverColor;
         cursor: pointer;
       }
     }
@@ -415,8 +413,8 @@ footer {
             .fontSettings(@productsCardFont, 14px, normal, 32px, none);
             text-align: center;
             &:first-child {
-              background-color: @menuitemColor;
-              &:not(.choosen-item):hover {
+              background-color: @menuItemColor;
+              &:not(.selected-size):hover {
                 color: @cardsBackgroundColor;
                 cursor: pointer;
               }
@@ -458,9 +456,9 @@ footer {
               text-align: left;
               input {
                 width: 30%;
-                height:30%;
-                .borderSettings(2px solid @breadcrumbsDisableItemColor; .4em);
-                padding-left: @defaultGutter/8;
+                //height:40%;
+                .borderSettings(2px solid @breadcrumbsDisableItemColor; 500px);
+                //padding-left: @defaultGutter/8;
               }
             }
             &:last-child {
@@ -471,12 +469,15 @@ footer {
           }
         }
         button {
-          .button(25%, @menuitemHoverColor);
+          .button(25%, @menuItemHoverColor);
+          .button-hover(@menuItemHoverColor, @menuItemHoverGradientColor);
         }
       }
       .order__checkout {
+        height: @defaultHeight/4;
         button {
           .button(auto, @buttonCheckoutColor);
+          .button-hover(@buttonCheckoutColor, @buttonCheckoutColorGradientColor);
         }
         .order-info {
           .fontSettings(@footerFont, 14px, bold, 32px, none);
@@ -487,9 +488,166 @@ footer {
   }
 }
 
-/*outline: 5px solid #555;
-box-shadow: 0 0 4px rgba(10,10,10,0.5);
-choosen-item
-*/
+.modal-product_description {
+  .modal-default-settings;
+  width: 50%;
+  top: 10%;
+  left: 20%;
+  .product_description__content {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 10fr 1fr;
+    justify-items: right;
+    .content__close-window {
+      padding-right: @defaultGutter/4;
+      padding-top: @defaultGutter/8;
+      span:hover {
+        color: @menuItemHoverColor;
+        cursor: pointer;
+      }
+    }
+    .content__description {
+      justify-self: left;
+      padding-left: @defaultGutter*2;
+      padding-right: @defaultGutter*2;
+      h2 {
+        .fontSettings(@defaultFontFamily, 24px, bold, 32px, uppercase);
+        margin-bottom: @defaultGutter;
+      }
+      ul {
+        background-color: @cardsBackgroundColor;
+        margin-bottom: @defaultGutter/2;
+        li {
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: 1fr;
+          &:not(:last-child) {
+            margin-bottom: @defaultGutter/4;
+          }
+          span {
+            .fontSettings(@footerFont, 20px, bold, 32px, none);
+            &:first-child {
+              .fontSettings(@productsCardFont, 18px, bold, 32px, none);
+            }
+            &:last-child {
+              text-align: right;
+            }
+          }
+          &:nth-child(2n) {
+            background-color: @modalProductDescriptionBgColor;
+          }
+        }
+      }
+      div {
+        margin-bottom: @defaultGutter;
+        p {
+          .fontSettings(@productsCardFont, 18px, bold, 32px, none);
+          text-align: justify;
+        }
+      }
+      button {
+        .button(auto, @buttonCheckoutColor);
+        .button-hover(@buttonCheckoutColor, @buttonCheckoutColorGradientColor);
+      }
+    }
+  }
+}
+
+.modal-product_order {
+  .modal-default-settings;
+  top: 20%;
+  left: 30%;
+  .product_order__content {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 10fr 1fr;
+    justify-items: right;
+    .content__close-window {
+      padding-right: @defaultGutter/4;
+      padding-top: @defaultGutter/8;
+      span:hover {
+        color: @menuItemHoverColor;
+        cursor: pointer;
+      }
+    }
+    .content__description {
+      justify-self: left;
+      padding-left: @defaultGutter*2;
+      padding-right: @defaultGutter*2;
+      h2 {
+        .fontSettings(@defaultFontFamily, 24px, bold, 32px, uppercase);
+        margin-bottom: @defaultGutter;
+      }
+      ul {
+        background-color: @cardsBackgroundColor;
+        margin-bottom: @defaultGutter;
+        li {
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: 1fr;
+          &:not(:last-child) {
+            margin-bottom: @defaultGutter/4;
+          }
+          span {
+            .fontSettings(@footerFont, 20px, bold, 32px, none);
+            &:first-child {
+              .fontSettings(@productsCardFont, 18px, bold, 32px, none);
+            }
+            &:last-child {
+              text-align: right;
+            }
+          }
+          &:nth-child(2n) {
+            background-color: @modalProductDescriptionBgColor;
+          }
+          &.description__order-size {
+            ul{
+              grid-template-columns: repeat(10, 1fr);
+              grid-template-rows: 1fr;
+              column-gap: @defaultGutter/4;
+              align-items: center;
+              li{
+                padding-left: @defaultGutter/2;
+                padding-right:@defaultGutter/2;
+                .fontSettings(@footerFont, 20px, bold, 32px, none);
+                text-align: center;
+                .borderSettings(1px solid @breadcrumbsActiveItemColor);
+                background-color: @cardsBackgroundColor;
+                margin-bottom: 0;
+                /*&:first-child{
+                  outline: 5px solid #555;
+                  box-shadow: 0 0 4px rgba(10, 10, 10, 0.5);
+                  border: none;
+                }*/
+                &:hover{
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+          &.description__order-qty{
+            ul{
+              padding-top: @defaultGutter/6;
+              li{
+                border:none;
+                input{
+                  .borderSettings(1px solid @breadcrumbsActiveItemColor);
+                  height:50px;
+                  width: 60px;
+                }
+              }
+            }
+
+          }
+        }
+      }
+      button {
+        .button(25%, @menuItemHoverColor);
+        .button-hover(@menuItemHoverColor, @menuItemHoverGradientColor);
+      }
+    }
+  }
+}
+.selected-size {
+  outline: 5px solid #555;
+  box-shadow: 0 0 4px rgba(10, 10, 10, 0.5);
+  border: none!important;
+}
 
 @import "_media";

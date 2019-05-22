@@ -15,6 +15,8 @@
                     <h1>мужские футболки</h1>
                 </div>
                 @include('user.layouts.modalWindows.clothes_table_size')
+                @include('user.layouts.modalWindows.product_description')
+                @include('user.layouts.modalWindows.order')
                 <div class="content__cards grid">
                     @foreach($t_shirt['relation'] as $color=>$img)
                     <div class="cards__item">
@@ -39,7 +41,7 @@
                             </div>
                         </div>
                         <div class="cards__item-order">
-                            <button type="button" class="btn btn-success btn-sm">Заказать</button>
+                            <button type="button" class="btn btn-success btn-sm">Оформить заказ</button>
                         </div>
                     </div>
                         @endforeach

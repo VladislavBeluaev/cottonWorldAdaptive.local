@@ -1,4 +1,4 @@
-<div class="modal-clothes-size">
+<div class="modal-clothes-size d-none">
 <div class="clothes-size__content grid">
     <div class="content__close-window">
         <p><span class="fas fa-times-circle fa-2x"></span></p>
@@ -59,7 +59,7 @@
         </table>
     </div>
     <div class="content__order">
-        <div class="order__confirm">
+        <div class="order__confirm d-none">
            <div class="d-flex justify-content-start align-items-center">
                <p class="confirm__product-name">Футболка мужская(красная)</p>
                <p class="confirm__product-qty"><input type="number" placeholder="кол-во"></p>
@@ -67,9 +67,9 @@
            </div>
             <button type="button" class="btn btn-success btn-sm">Заказать</button>
         </div>
-        <div class="order__checkout d-none">
+        <div class="order__checkout">
             <button type="button" class="btn btn-info btn-sm">Оформить заказ</button>
-            <p class="order-info">Для оформления заказа, выберите размер</p>
+            <p class="order-info d-none">Для оформления заказа, выберите размер</p>
         </div>
 
     </div>
