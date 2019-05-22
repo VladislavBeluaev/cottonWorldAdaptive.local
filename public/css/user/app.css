@@ -781,6 +781,11 @@ footer .footer__content p:last-child span {
   line-height: 32px;
   text-transform: none;
 }
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-order button:hover {
+  background-image: linear-gradient(100deg, #39B54A 0, #49d15b);
+  -webkit-box-shadow: 0 8px 50px -6px rgba(84, 84, 120, 0.26);
+          box-shadow: 0 8px 50px -6px rgba(84, 84, 120, 0.26);
+}
 .modal-wrapper {
   width: 100%;
   height: 100%;
@@ -795,7 +800,6 @@ footer .footer__content p:last-child span {
   position: fixed;
   top: 20%;
   left: 20%;
-  height: 60vh;
   z-index: 2;
   -webkit-box-shadow: -2px 9px 9px 0 rgba(0, 0, 0, 0.66);
   box-shadow: -2px 9px 9px 0px rgba(0, 0, 0, 0.66);
@@ -881,6 +885,7 @@ footer .footer__content p:last-child span {
 }
 .modal-clothes-size .clothes-size__content .content__order .order__confirm div:first-child p:nth-child(2) input {
   width: 30%;
+  height: 30%;
   border: 2px solid #a7a7a7;
   border-radius: 0.4em;
   padding-left: 3px;
@@ -901,6 +906,11 @@ footer .footer__content p:last-child span {
   line-height: 32px;
   text-transform: none;
 }
+.modal-clothes-size .clothes-size__content .content__order .order__confirm button:hover {
+  background-image: linear-gradient(100deg, #39B54A 0, #49d15b);
+  -webkit-box-shadow: 0 8px 50px -6px rgba(84, 84, 120, 0.26);
+          box-shadow: 0 8px 50px -6px rgba(84, 84, 120, 0.26);
+}
 .modal-clothes-size .clothes-size__content .content__order .order__checkout button {
   width: auto;
   background-color: #6d8896;
@@ -909,6 +919,11 @@ footer .footer__content p:last-child span {
   font-weight: 600;
   line-height: 32px;
   text-transform: none;
+}
+.modal-clothes-size .clothes-size__content .content__order .order__checkout button:hover {
+  background-image: linear-gradient(100deg, #39B54A 0, #49d15b);
+  -webkit-box-shadow: 0 8px 50px -6px rgba(84, 84, 120, 0.26);
+          box-shadow: 0 8px 50px -6px rgba(84, 84, 120, 0.26);
 }
 .modal-clothes-size .clothes-size__content .content__order .order__checkout .order-info {
   font-family: 'Roboto Slab', serif;
