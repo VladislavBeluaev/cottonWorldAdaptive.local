@@ -55,8 +55,11 @@ import {YandexMap} from './components/classes/YandexMap.class.js';
                 (new ModalWindows(
                     {
                         "bodyWrapper": "modal-wrapper",
-                        "modalCallContainer": "cards__item-description",
-                        "modalWindows":['','']
+                        "containerCallingMW": "cards__item",
+                        "modalWindowsOptions":{
+                            classes:['modal-clothes-size','modal-product_description','modal-product_order'],
+                            closeButton:'content__close-window'
+                        }
                     }
                 )).run();
                 break;

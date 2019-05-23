@@ -133,8 +133,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             case "men/t-shirts":
                 new __WEBPACK_IMPORTED_MODULE_0__components_classes_ModalWindows_class_js__["a" /* ModalWindows */]({
                     "bodyWrapper": "modal-wrapper",
-                    "modalCallContainer": "cards__item-description",
-                    "modalWindows": ['', '']
+                    "containerCallingMW": "cards__item",
+                    "modalWindowsOptions": {
+                        classes: ['modal-clothes-size', 'modal-product_description', 'modal-product_order'],
+                        closeButton: 'content__close-window'
+                    }
                 }).run();
                 break;
         }
@@ -159,32 +162,70 @@ var ModalWindows = function () {
         _classCallCheck(this, ModalWindows);
 
         this._bodyWrapper = settings.bodyWrapper;
-        this._modalCallContainer = '.' + settings.modalCallContainer;
-        this._modalWindows = settings.modalWindows;
+        this._containerCallingMW = '.' + settings.containerCallingMW;
+        this._modalWindowsOptions = settings.modalWindowsOptions;
     }
 
     _createClass(ModalWindows, [{
         key: 'run',
         value: function run() {
-            $(this._modalCallContainer).on('click.ModalWindows', $.proxy(this._callModalWindow, this));
+            $(this._containerCallingMW).on('click.ModalWindow-open', $.proxy(this._openHandler, this));
+            $('.' + this._modalWindowsOptions.closeButton).on('click.ModalWindow-close', $.proxy(this._closeHandler, this));
+            $(document.body).on('click.ModalWindow-close', '.' + this._bodyWrapper, $.proxy(this._closeHandler, this));
+            $(window).on({
+                'keydown.ModalWindow-close': $.proxy(this._keyDownCloseHandler, this),
+                'resize.ModalWindow': $.proxy(this._resizeHandler, this)
+            });
         }
     }, {
-        key: '_callModalWindow',
-        value: function _callModalWindow(event) {
-            switch (this._modalCallContainer) {
-                case ".cards__item-description":
-                    this._cardsCallBack.call(this, event);
-                    //$.proxy(this._cardsCallBack,this,event);
-                    break;
+        key: '_openHandler',
+        value: function _openHandler(event) {
+            try {
+                this._openMW.call(this, event);
+            } catch (e) {
+                console.log(e.message);
             }
         }
     }, {
-        key: '_cardsCallBack',
-        value: function _cardsCallBack(event) {
-            var target = event.target;
-            if (target.closest(this._modalCallContainer) === null) return false;
-
+        key: '_closeHandler',
+        value: function _closeHandler() {
             this._toggleBodyWrapper.call(this);
+            this._closeMW.call(this);
+        }
+    }, {
+        key: '_keyDownCloseHandler',
+        value: function _keyDownCloseHandler(event) {
+            if (event.key === 'Escape' && $('.' + this._bodyWrapper).length) this._closeHandler();
+        }
+    }, {
+        key: '_resizeHandler',
+        value: function _resizeHandler() {
+            ModalWindows._centerMW(this._getCurrentOpenMW());
+        }
+    }, {
+        key: '_openMW',
+        value: function _openMW(event) {
+            var target = event.target;
+            if (target.closest(this._containerCallingMW) === null) return false;
+            var openMW$ = $('.' + $(target).closest("[data-modal-open]").data('modal-open'));
+            if (!openMW$.length) throw new Error('No modal window found');
+            this._toggleBodyWrapper.call(this);
+            if (openMW$.hasClass('d-none') === false) throw new Error('Modal window is already open. Check that windows closing works properly.');
+            openMW$.removeClass('d-none').fadeOut(0, function () {
+
+                ModalWindows._centerMW($(this)).fadeIn("normal");
+            });
+        }
+    }, {
+        key: '_closeMW',
+        value: function _closeMW() {
+            var modalWindowsCollection = this._modalWindowsOptions.classes;
+            modalWindowsCollection.forEach(function (className) {
+                var modalWindow$ = $('.' + className);
+                if (modalWindow$.hasClass('d-none') === false) modalWindow$.fadeOut("900", function () {
+                    ModalWindows._removeStyleAttrMW(modalWindow$).addClass('d-none');
+                });
+            });
         }
     }, {
         key: '_toggleBodyWrapper',
@@ -198,6 +239,39 @@ var ModalWindows = function () {
                 $(div).wrap($(document.body).children());
                 document.body.prepend(div);
             }
+        }
+    }, {
+        key: '_getCurrentOpenMW',
+        value: function _getCurrentOpenMW() {
+            var currentOpenMW = this._modalWindowsOptions.classes.find(function (className) {
+                var modalWindow$ = $('.' + className);
+                if (modalWindow$.hasClass('d-none') === false) {
+                    return true;
+                }
+            });
+            return $('.' + currentOpenMW);
+        }
+    }], [{
+        key: '_centerMW',
+        value: function _centerMW(modalWindow$) {
+            var mwSize = {
+                width: modalWindow$.width(),
+                height: modalWindow$.height()
+            };
+            var windowSize = {
+                width: $(window).width(),
+                height: $(window).height()
+            };
+            modalWindow$.css({
+                top: (windowSize.height - mwSize.height) / 2 + 'px',
+                left: (windowSize.width - mwSize.width) / 2 + 'px'
+            });
+            return modalWindow$;
+        }
+    }, {
+        key: '_removeStyleAttrMW',
+        value: function _removeStyleAttrMW(modalWindow$) {
+            return modalWindow$.removeAttr('style');
         }
     }]);
 

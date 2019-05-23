@@ -770,7 +770,7 @@ footer .footer__content p:last-child span {
 .t_shirts .product_article__content .content__cards .cards__item .cards__item-description div p:first-child {
   width: 40px;
 }
-.t_shirts .product_article__content .content__cards .cards__item .cards__item-description div p:hover {
+.t_shirts .product_article__content .content__cards .cards__item .cards__item-description div p:last-child:hover {
   color: #39B54A;
 }
 .t_shirts .product_article__content .content__cards .cards__item .cards__item-description div p img {

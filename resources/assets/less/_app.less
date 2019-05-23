@@ -353,8 +353,10 @@ footer {
               &:first-child {
                 width: 40px;
               }
-              &:hover {
-                color: @menuItemHoverColor;
+              &:last-child{
+                &:hover {
+                  color: @menuItemHoverColor;
+                }
               }
               img {
                 .size(65%, auto);

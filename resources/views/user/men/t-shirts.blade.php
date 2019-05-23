@@ -31,16 +31,16 @@
                             <p>{{$t_shirt['price']}}</p>
                         </div>
                         <div class="cards__item-description">
-                            <div class="d-flex justify-content-start align-items-center">
+                            <div class="d-flex justify-content-start align-items-center" data-modal-open="modal-product_description">
                                 <p><span class="fa fa-info-circle fa-lg"></span></p>
                                 <p>Описание товара</p>
                             </div>
-                            <div class="d-flex justify-content-start align-items-center">
+                            <div class="d-flex justify-content-start align-items-center" data-modal-open="modal-clothes-size">
                                 <p><img src="{{asset('images/t_shirts_size_icon.PNG')}}" alt="t_shirts_size"></p>
                                 <p>Таблица размеров</p>
                             </div>
                         </div>
-                        <div class="cards__item-order">
+                        <div class="cards__item-order" data-modal-open="modal-product_order">
                             <button type="button" class="btn btn-success btn-sm">Оформить заказ</button>
                         </div>
                     </div>
