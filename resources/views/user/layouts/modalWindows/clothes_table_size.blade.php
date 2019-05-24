@@ -68,7 +68,7 @@
             <button type="button" class="btn btn-success btn-sm">Заказать</button>
         </div>
         <div class="order__checkout">
-            <button type="button" class="btn btn-info btn-sm">Оформить заказ</button>
+            <button type="button" class="btn btn-info btn-sm" data-button-order="order__confirm">Оформить заказ</button>
             <p class="order-info d-none">Для оформления заказа, выберите размер</p>
         </div>
 

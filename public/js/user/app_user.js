@@ -136,7 +136,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     "containerCallingMW": "cards__item",
                     "modalWindowsOptions": {
                         classes: ['modal-clothes-size', 'modal-product_description', 'modal-product_order'],
-                        closeButton: 'content__close-window'
+                        closeButton: 'content__close-window',
+                        modalClothesSizeWindow: {
+                            sizeTable: {
+                                container: "content__table",
+                                sizeHint: {
+                                    selector: "",
+                                    bgColor: ""
+                                }
+                            },
+                            orderCheckoutContainer: 'order__checkout',
+                            orderConfirmContainer: 'order__confirm'
+                        }
                     }
                 }).run();
                 break;

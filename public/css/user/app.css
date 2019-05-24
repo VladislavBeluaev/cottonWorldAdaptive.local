@@ -846,15 +846,13 @@ footer .footer__content p:last-child span {
   line-height: 32px;
   text-transform: none;
   text-align: center;
-}
-.modal-clothes-size .clothes-size__content .content__table tbody tr th:first-child,
-.modal-clothes-size .clothes-size__content .content__table tbody tr td:first-child {
-  background-color: #999;
-}
-.modal-clothes-size .clothes-size__content .content__table tbody tr th:first-child:not(.selected-size):hover,
-.modal-clothes-size .clothes-size__content .content__table tbody tr td:first-child:not(.selected-size):hover {
-  color: #fff;
-  cursor: pointer;
+  /*&:first-child {
+              background-color: @menuItemColor;
+              &:not(.selected-size):hover {
+                color: @cardsBackgroundColor;
+                cursor: pointer;
+              }
+            }*/
 }
 .modal-clothes-size .clothes-size__content .content__table tbody tr:first-child th {
   font-family: 'Roboto Slab', serif;
