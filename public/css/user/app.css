@@ -823,7 +823,7 @@ footer .footer__content p:last-child span {
 }
 .modal-clothes-size .clothes-size__content {
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 10fr 2.5fr;
+  grid-template-rows: 1fr 10fr 2fr;
   justify-items: right;
   padding-right: 6px;
   padding-top: 3px;
@@ -873,44 +873,43 @@ footer .footer__content p:last-child span {
   height: auto;
 }
 .modal-clothes-size .clothes-size__content .content__order {
-  -ms-flex-item-align: center;
-      align-self: center;
   justify-self: left;
+  padding-top: 12px;
   padding-left: 48px;
 }
 .modal-clothes-size .clothes-size__content .content__order .order__confirm {
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-}
-.modal-clothes-size .clothes-size__content .content__order .order__confirm div:first-child {
-  margin-bottom: 12px;
-}
-.modal-clothes-size .clothes-size__content .content__order .order__confirm div:first-child p {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 32px;
-  text-transform: none;
-}
-.modal-clothes-size .clothes-size__content .content__order .order__confirm div:first-child p:nth-child(2) {
-  padding-left: 12px;
-  text-align: left;
-}
-.modal-clothes-size .clothes-size__content .content__order .order__confirm div:first-child p:nth-child(2) input {
-  width: 30%;
-  border: 2px solid #a7a7a7;
-  border-radius: 500px;
-}
-.modal-clothes-size .clothes-size__content .content__order .order__confirm div:first-child p:last-child span {
-  font-family: 'Roboto Slab', serif;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 32px;
-  text-transform: none;
+  /*flex-wrap: wrap;
+        div:first-child {
+          margin-bottom: @defaultGutter/2;
+          p {
+            .fontSettings(@productsCardFont, 18px, bold, 32px, none);
+            &:first-child {
+            }
+            &:nth-child(2) {
+              padding-left: @defaultGutter/2;
+              text-align: left;
+              input {
+                width: 30%;
+                //height:40%;
+                .borderSettings(2px solid @breadcrumbsDisableItemColor; 500px);
+                //padding-left: @defaultGutter/8;
+              }
+            }
+            &:last-child {
+              span {
+                .fontSettings(@footerFont, 24px, bold, 32px, none);
+              }
+            }
+          }
+        }*/
+  /*button {
+          .button(25%, @menuItemHoverColor);
+          .button-hover(@menuItemHoverColor, @menuItemHoverGradientColor);
+        }*/
 }
 .modal-clothes-size .clothes-size__content .content__order .order__confirm button {
-  width: 25%;
-  background-color: #39B54A;
+  width: auto;
+  background-color: #6d8896;
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -923,12 +922,9 @@ footer .footer__content p:last-child span {
           box-shadow: 0 8px 50px -6px rgba(84, 84, 120, 0.26);
 }
 .modal-clothes-size .clothes-size__content .content__order .order__confirm button:hover {
-  background-image: linear-gradient(100deg, #39B54A 0, #49d15b);
+  background-image: linear-gradient(100deg, #6d8896 0, #2f3f47);
   -webkit-box-shadow: 0 8px 50px -6px rgba(84, 84, 120, 0.26);
           box-shadow: 0 8px 50px -6px rgba(84, 84, 120, 0.26);
-}
-.modal-clothes-size .clothes-size__content .content__order .order__checkout {
-  height: 7.5vh;
 }
 .modal-clothes-size .clothes-size__content .content__order .order__checkout button {
   width: auto;
@@ -949,7 +945,7 @@ footer .footer__content p:last-child span {
   -webkit-box-shadow: 0 8px 50px -6px rgba(84, 84, 120, 0.26);
           box-shadow: 0 8px 50px -6px rgba(84, 84, 120, 0.26);
 }
-.modal-clothes-size .clothes-size__content .content__order .order__checkout .order-info {
+.modal-clothes-size .clothes-size__content .content__order .order__checkout .checkout__info {
   font-family: 'Roboto Slab', serif;
   font-size: 14px;
   font-weight: 600;

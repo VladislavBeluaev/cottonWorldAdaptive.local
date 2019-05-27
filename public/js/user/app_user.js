@@ -133,23 +133,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             case "men/t-shirts":
                 new __WEBPACK_IMPORTED_MODULE_0__components_classes_ModalWindows_class_js__["a" /* ModalWindows */]({
                     "bodyWrapper": "modal-wrapper",
-                    "containerCallingMW": "cards__item",
-                    "modalWindowsOptions": {
+                    "callingMW": {
+                        container: "cards__item",
+                        itemNameSelector: '.cards__item-name>p'
+                    },
+                    modalWindowsOptions: {
                         classes: ['modal-clothes-size', 'modal-product_description', 'modal-product_order'],
                         closeButton: 'content__close-window',
                         modalClothesSizeWindow: {
                             sizeTable: {
-                                container: "content__table",
+                                context: "content__table",
                                 sizeHint: {
-                                    selector: "",
-                                    bgColor: ""
+                                    selector: "th[data-size],td:first-child",
+                                    style: {
+                                        bgColor: {
+                                            'background-color': "#999"
+                                        },
+                                        over: {
+                                            color: "#fff",
+                                            cursor: "pointer"
+                                        },
+                                        out: {
+                                            color: "#000"
+                                        },
+                                        selectedItem: 'selected-size'
+                                    }
                                 }
                             },
-                            orderCheckoutContainer: 'order__checkout',
-                            orderConfirmContainer: 'order__confirm'
+                            orderCheckout: {
+                                container: 'order__checkout'
+                                /*checkoutInfo:'checkout__info',*/
+                            },
+                            orderConfirm: {
+                                container: 'order__confirm'
+                            }
                         }
                     }
-                }).run();
+                }).initWindows().run();
                 break;
         }
     });
@@ -173,20 +193,30 @@ var ModalWindows = function () {
         _classCallCheck(this, ModalWindows);
 
         this._bodyWrapper = settings.bodyWrapper;
-        this._containerCallingMW = '.' + settings.containerCallingMW;
+        this._containerCallingMW = '.' + settings.callingMW.container;
+        this._itemNameSelector = settings.callingMW.itemNameSelector;
         this._modalWindowsOptions = settings.modalWindowsOptions;
+        this._modalClothesSizeWindow = this._modalWindowsOptions.modalClothesSizeWindow;
     }
 
     _createClass(ModalWindows, [{
+        key: 'initWindows',
+        value: function initWindows() {
+            $(this._containerCallingMW).on('click.ModalWindows-open', 'p,button', $.proxy(this._openHandler, this));
+            $('.' + this._modalWindowsOptions.closeButton).on('click.ModalWindow-close', $.proxy(this._closeHandler, this));
+            $(document.body).on('click.ModalWindows-close', '.' + this._bodyWrapper, $.proxy(this._closeHandler, this));
+            $(window).on({
+                'keydown.ModalWindows-close': $.proxy(this._keyDownCloseHandler, this),
+                'resize.ModalWindows': $.proxy(this._resizeHandler, this)
+            });
+            return this;
+        }
+    }, {
         key: 'run',
         value: function run() {
-            $(this._containerCallingMW).on('click.ModalWindow-open', $.proxy(this._openHandler, this));
-            $('.' + this._modalWindowsOptions.closeButton).on('click.ModalWindow-close', $.proxy(this._closeHandler, this));
-            $(document.body).on('click.ModalWindow-close', '.' + this._bodyWrapper, $.proxy(this._closeHandler, this));
-            $(window).on({
-                'keydown.ModalWindow-close': $.proxy(this._keyDownCloseHandler, this),
-                'resize.ModalWindow': $.proxy(this._resizeHandler, this)
-            });
+
+            $('.' + this._modalClothesSizeWindow.orderCheckout.container).on('click.ModalWindow-checkout', $.proxy(this._checkoutBtnHandler, this));
+            $('.' + this._modalClothesSizeWindow.orderConfirm.container).on('click.ModalWindow-confirm', $.proxy(this._confirmBtnHandler, this));
         }
     }, {
         key: '_openHandler',
@@ -214,10 +244,29 @@ var ModalWindows = function () {
             ModalWindows._centerMW(this._getCurrentOpenMW());
         }
     }, {
+        key: '_checkoutBtnHandler',
+        value: function _checkoutBtnHandler() {
+            try {
+                this._checkoutBtn.call(this, event);
+            } catch (e) {
+                console.log(e.message);
+            }
+        }
+    }, {
+        key: '_confirmBtnHandler',
+        value: function _confirmBtnHandler() {
+            try {
+                this._confirmBtn.call(this, event);
+            } catch (e) {
+                console.log(e.message);
+            }
+        }
+    }, {
         key: '_openMW',
         value: function _openMW(event) {
             var target = event.target;
             if (target.closest(this._containerCallingMW) === null) return false;
+            console.log(this._getItemColor(target));
             var openMW$ = $('.' + $(target).closest("[data-modal-open]").data('modal-open'));
             if (!openMW$.length) throw new Error('No modal window found');
             this._toggleBodyWrapper.call(this);
@@ -262,6 +311,65 @@ var ModalWindows = function () {
             });
             return $('.' + currentOpenMW);
         }
+    }, {
+        key: '_checkoutBtn',
+        value: function _checkoutBtn(event) {
+            var button = event.target;
+            if (button.tagName !== 'BUTTON') return false;
+            if ($(button).data('button-order') === undefined) throw new Error('Data button-order attribute is not set');
+            /*let checkOutInfo$ = this._getCheckoutInfo();
+            if (checkOutInfo$.hasClass('d-none') === false) throw new Error('This notification should have been hidden before ' +
+                'the previous closing of the window.Check the window reset to default settings.');
+            checkOutInfo$.removeClass('d-none');*/
+            var sizeTable = this._modalClothesSizeWindow.sizeTable;
+            var clickUserHint = sizeTable.sizeHint;
+            var clothesSizeCollection$ = $('' + clickUserHint.selector, '.' + sizeTable.context);
+            var self = this;
+            clothesSizeCollection$.on({
+                'mouseover.ModalWindow-select-size': function mouseoverModalWindowSelectSize() {
+                    $(this).not('.' + clickUserHint.style.selectedItem).css(clickUserHint.style.over);
+                },
+                'mouseout.ModalWindow-select-size': function mouseoutModalWindowSelectSize() {
+                    $(this).css(clickUserHint.style.out);
+                },
+                'click.ModalWindow-select-size': function clickModalWindowSelectSize(event) {
+                    try {
+                        ModalWindows._selectedSizeHandler(event, button, clickUserHint.style.selectedItem);
+                    } catch (e) {
+                        console.log(e.message);
+                    }
+                }
+            }).css(clickUserHint.style.bgColor);
+        }
+    }, {
+        key: '_confirmBtn',
+        value: function _confirmBtn(event) {
+            var button = event.target;
+            if (button.tagName !== 'BUTTON') return false;
+            if ($(button).data('open-modal') === undefined) throw new Error('Data button-order attribute is not set');
+            var orderModal$ = $('.' + $(button).data('open-modal'));
+            orderModal$.data('selected-size', this._getSelectedSize());
+            $('.' + this._modalWindowsOptions.closeButton).trigger('click.ModalWindow-close');
+            //console.log($("[data-modal-open='modal-product_order']").closest(`${this._containerCallingMW}`));
+        }
+    }, {
+        key: '_getItemColor',
+        value: function _getItemColor(target) {
+            var fullItemName = $(target).closest('' + this._containerCallingMW).find(this._itemNameSelector).text();
+            var matches = fullItemName.match(/\((.*?)\)/);
+            return matches[1];
+        }
+    }, {
+        key: '_getSelectedSize',
+        value: function _getSelectedSize() {
+            var selectedItem = $('.' + this._modalClothesSizeWindow.sizeTable.sizeHint.style.selectedItem);
+            if (selectedItem.data('size') === undefined) throw new Error('Data size attribute is not set');
+            return selectedItem.data('size');
+        }
+        /*_getCheckoutInfo() {
+            return $(`.${this._modalClothesSizeWindow.orderCheckout.checkoutInfo}`);
+        }*/
+
     }], [{
         key: '_centerMW',
         value: function _centerMW(modalWindow$) {
@@ -283,6 +391,30 @@ var ModalWindows = function () {
         key: '_removeStyleAttrMW',
         value: function _removeStyleAttrMW(modalWindow$) {
             return modalWindow$.removeAttr('style');
+        }
+    }, {
+        key: '_selectedSizeHandler',
+        value: function _selectedSizeHandler() {
+            for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+                args[_key] = arguments[_key];
+            }
+
+            var event = args[0],
+                button = args[1],
+                selectedSizeClass = args[2];
+
+            var target$ = $(event.target);
+            if ($(target$).parent('.table__header').length) return false;
+            if (target$.hasClass('active') === false) {
+                $('.active.' + selectedSizeClass).removeAttr('class');
+            }
+            target$.addClass('active ' + selectedSizeClass);
+            /*if(originalObject._getCheckoutInfo().hasClass('d-none')===false)
+            originalObject._getCheckoutInfo().addClass('d-none');*/
+            var confirmContainer$ = $('.' + $(button).data('button-order'));
+            if (!confirmContainer$.length) throw new Error('Button order does not exists.Check your html code');
+            $(button).parent().addClass('d-none');
+            confirmContainer$.removeClass('d-none');
         }
     }]);
 

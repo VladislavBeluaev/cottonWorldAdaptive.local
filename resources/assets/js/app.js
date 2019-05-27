@@ -55,24 +55,44 @@ import {YandexMap} from './components/classes/YandexMap.class.js';
                 (new ModalWindows(
                     {
                         "bodyWrapper": "modal-wrapper",
-                        "containerCallingMW": "cards__item",
-                        "modalWindowsOptions":{
+                        "callingMW": {
+                            container:"cards__item",
+                            itemNameSelector:'.cards__item-name>p'
+                        },
+                        modalWindowsOptions:{
                             classes:['modal-clothes-size','modal-product_description','modal-product_order'],
                             closeButton:'content__close-window',
                             modalClothesSizeWindow:{
                                 sizeTable:{
-                                    container:"content__table",
+                                    context:"content__table",
                                     sizeHint:{
-                                        selector:"",
-                                        bgColor:""
+                                        selector:"th[data-size],td:first-child",
+                                        style:{
+                                            bgColor:{
+                                                'background-color':"#999"
+                                            },
+                                            over:{
+                                                color:"#fff",
+                                                cursor:"pointer"
+                                            },
+                                            out:{
+                                                color:"#000",
+                                            },
+                                            selectedItem:'selected-size'
+                                        }
                                     }
                                 },
-                                orderCheckoutContainer:'order__checkout',
-                                orderConfirmContainer:'order__confirm',
+                                orderCheckout:{
+                                    container:'order__checkout',
+                                    /*checkoutInfo:'checkout__info',*/
+                                },
+                                orderConfirm:{
+                                    container:'order__confirm',
+                                }
                             }
                         }
                     }
-                )).run();
+                )).initWindows().run();
                 break;
         }
     });

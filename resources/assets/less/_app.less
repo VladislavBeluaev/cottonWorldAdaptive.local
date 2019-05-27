@@ -394,7 +394,7 @@ footer {
   left: 20%;
   .clothes-size__content {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 10fr 2.5fr;
+    grid-template-rows: 1fr 10fr 2fr;
     justify-items: right;
     padding-right: @defaultGutter/4;
     padding-top: @defaultGutter/8;
@@ -442,11 +442,17 @@ footer {
       }
     }
     .content__order {
-      align-self: center;
+      //align-self: center;
       justify-self: left;
+      padding-top: @defaultGutter/2;
       padding-left: @defaultGutter*2;
       .order__confirm {
-        flex-wrap: wrap;
+        //height: @defaultHeight/4;
+        button {
+          .button(auto, @buttonCheckoutColor);
+          .button-hover(@buttonCheckoutColor, @buttonCheckoutColorGradientColor);
+        }
+        /*flex-wrap: wrap;
         div:first-child {
           margin-bottom: @defaultGutter/2;
           p {
@@ -469,19 +475,19 @@ footer {
               }
             }
           }
-        }
-        button {
+        }*/
+        /*button {
           .button(25%, @menuItemHoverColor);
           .button-hover(@menuItemHoverColor, @menuItemHoverGradientColor);
-        }
+        }*/
       }
       .order__checkout {
-        height: @defaultHeight/4;
+        //height: @defaultHeight/4;
         button {
           .button(auto, @buttonCheckoutColor);
           .button-hover(@buttonCheckoutColor, @buttonCheckoutColorGradientColor);
         }
-        .order-info {
+        .checkout__info {
           .fontSettings(@footerFont, 14px, bold, 32px, none);
           color: red;
         }
