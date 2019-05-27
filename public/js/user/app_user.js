@@ -194,6 +194,7 @@ var ModalWindows = function () {
 
         this._bodyWrapper = settings.bodyWrapper;
         this._containerCallingMW = '.' + settings.callingMW.container;
+        this._currentProductCard$ = null;
         this._itemNameSelector = settings.callingMW.itemNameSelector;
         this._modalWindowsOptions = settings.modalWindowsOptions;
         this._modalClothesSizeWindow = this._modalWindowsOptions.modalClothesSizeWindow;
@@ -266,6 +267,7 @@ var ModalWindows = function () {
         value: function _openMW(event) {
             var target = event.target;
             if (target.closest(this._containerCallingMW) === null) return false;
+            this._currentInitModalOpen$ = this._getCurrentProductCard(target);
             console.log(this._getItemColor(target));
             var openMW$ = $('.' + $(target).closest("[data-modal-open]").data('modal-open'));
             if (!openMW$.length) throw new Error('No modal window found');
@@ -318,9 +320,9 @@ var ModalWindows = function () {
             if (button.tagName !== 'BUTTON') return false;
             if ($(button).data('button-order') === undefined) throw new Error('Data button-order attribute is not set');
             /*let checkOutInfo$ = this._getCheckoutInfo();
-            if (checkOutInfo$.hasClass('d-none') === false) throw new Error('This notification should have been hidden before ' +
-                'the previous closing of the window.Check the window reset to default settings.');
-            checkOutInfo$.removeClass('d-none');*/
+             if (checkOutInfo$.hasClass('d-none') === false) throw new Error('This notification should have been hidden before ' +
+             'the previous closing of the window.Check the window reset to default settings.');
+             checkOutInfo$.removeClass('d-none');*/
             var sizeTable = this._modalClothesSizeWindow.sizeTable;
             var clickUserHint = sizeTable.sizeHint;
             var clothesSizeCollection$ = $('' + clickUserHint.selector, '.' + sizeTable.context);
@@ -350,12 +352,17 @@ var ModalWindows = function () {
             var orderModal$ = $('.' + $(button).data('open-modal'));
             orderModal$.data('selected-size', this._getSelectedSize());
             $('.' + this._modalWindowsOptions.closeButton).trigger('click.ModalWindow-close');
-            //console.log($("[data-modal-open='modal-product_order']").closest(`${this._containerCallingMW}`));
+            this._currentInitModalOpen$.find("[data-modal-open='modal-product_order']>button").trigger('click.ModalWindows-open');
+        }
+    }, {
+        key: '_getCurrentProductCard',
+        value: function _getCurrentProductCard(target) {
+            return $(target).closest('' + this._containerCallingMW);
         }
     }, {
         key: '_getItemColor',
         value: function _getItemColor(target) {
-            var fullItemName = $(target).closest('' + this._containerCallingMW).find(this._itemNameSelector).text();
+            var fullItemName = this._getCurrentProductCard(target).find(this._itemNameSelector).text();
             var matches = fullItemName.match(/\((.*?)\)/);
             return matches[1];
         }
@@ -366,9 +373,10 @@ var ModalWindows = function () {
             if (selectedItem.data('size') === undefined) throw new Error('Data size attribute is not set');
             return selectedItem.data('size');
         }
+
         /*_getCheckoutInfo() {
-            return $(`.${this._modalClothesSizeWindow.orderCheckout.checkoutInfo}`);
-        }*/
+         return $(`.${this._modalClothesSizeWindow.orderCheckout.checkoutInfo}`);
+         }*/
 
     }], [{
         key: '_centerMW',
@@ -410,7 +418,7 @@ var ModalWindows = function () {
             }
             target$.addClass('active ' + selectedSizeClass);
             /*if(originalObject._getCheckoutInfo().hasClass('d-none')===false)
-            originalObject._getCheckoutInfo().addClass('d-none');*/
+             originalObject._getCheckoutInfo().addClass('d-none');*/
             var confirmContainer$ = $('.' + $(button).data('button-order'));
             if (!confirmContainer$.length) throw new Error('Button order does not exists.Check your html code');
             $(button).parent().addClass('d-none');

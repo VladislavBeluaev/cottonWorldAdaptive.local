@@ -5,13 +5,14 @@ class ModalWindows {
     constructor(settings) {
         this._bodyWrapper = settings.bodyWrapper;
         this._containerCallingMW = `.${settings.callingMW.container}`;
+        this._currentProductCard$ = null;
         this._itemNameSelector = settings.callingMW.itemNameSelector;
         this._modalWindowsOptions = settings.modalWindowsOptions;
         this._modalClothesSizeWindow = this._modalWindowsOptions.modalClothesSizeWindow;
     }
 
     initWindows() {
-        $(this._containerCallingMW).on('click.ModalWindows-open','p,button',$.proxy(this._openHandler, this));
+        $(this._containerCallingMW).on('click.ModalWindows-open', 'p,button', $.proxy(this._openHandler, this));
         $(`.${this._modalWindowsOptions.closeButton}`).on('click.ModalWindow-close', $.proxy(this._closeHandler, this));
         $(document.body).on('click.ModalWindows-close', `.${this._bodyWrapper}`, $.proxy(this._closeHandler, this));
         $(window).on({
@@ -58,7 +59,8 @@ class ModalWindows {
             console.log(e.message);
         }
     }
-    _confirmBtnHandler(){
+
+    _confirmBtnHandler() {
         try {
             this._confirmBtn.call(this, event);
         }
@@ -70,6 +72,7 @@ class ModalWindows {
     _openMW(event) {
         let target = event.target;
         if (target.closest(this._containerCallingMW) === null) return false;
+        this._currentInitModalOpen$ =this._getCurrentProductCard(target);
         console.log(this._getItemColor(target));
         let openMW$ = $(`.${$(target).closest("[data-modal-open]").data('modal-open')}`);
         if (!openMW$.length)
@@ -142,9 +145,9 @@ class ModalWindows {
         if (button.tagName !== 'BUTTON') return false;
         if ($(button).data('button-order') === undefined) throw new Error('Data button-order attribute is not set');
         /*let checkOutInfo$ = this._getCheckoutInfo();
-        if (checkOutInfo$.hasClass('d-none') === false) throw new Error('This notification should have been hidden before ' +
-            'the previous closing of the window.Check the window reset to default settings.');
-        checkOutInfo$.removeClass('d-none');*/
+         if (checkOutInfo$.hasClass('d-none') === false) throw new Error('This notification should have been hidden before ' +
+         'the previous closing of the window.Check the window reset to default settings.');
+         checkOutInfo$.removeClass('d-none');*/
         let sizeTable = this._modalClothesSizeWindow.sizeTable;
         let clickUserHint = sizeTable.sizeHint;
         let clothesSizeCollection$ = $(`${clickUserHint.selector}`, `.${sizeTable.context}`);
@@ -157,24 +160,25 @@ class ModalWindows {
                 $(this).css(clickUserHint.style.out);
             },
             'click.ModalWindow-select-size': function (event) {
-                try{
+                try {
                     ModalWindows._selectedSizeHandler(event, button, clickUserHint.style.selectedItem);
                 }
-                catch (e){
+                catch (e) {
                     console.log(e.message);
                 }
 
             }
         }).css(clickUserHint.style.bgColor);
     }
-    _confirmBtn(event){
+
+    _confirmBtn(event) {
         let button = event.target;
         if (button.tagName !== 'BUTTON') return false;
         if ($(button).data('open-modal') === undefined) throw new Error('Data button-order attribute is not set');
         let orderModal$ = $(`.${$(button).data('open-modal')}`);
-        orderModal$.data('selected-size',this._getSelectedSize());
+        orderModal$.data('selected-size', this._getSelectedSize());
         $(`.${this._modalWindowsOptions.closeButton}`).trigger('click.ModalWindow-close');
-        //console.log($("[data-modal-open='modal-product_order']").closest(`${this._containerCallingMW}`));
+        this._currentInitModalOpen$.find("[data-modal-open='modal-product_order']>button").trigger('click.ModalWindows-open');
     }
 
     static _selectedSizeHandler(...args) {
@@ -186,27 +190,34 @@ class ModalWindows {
         }
         target$.addClass(`active ${selectedSizeClass}`);
         /*if(originalObject._getCheckoutInfo().hasClass('d-none')===false)
-        originalObject._getCheckoutInfo().addClass('d-none');*/
+         originalObject._getCheckoutInfo().addClass('d-none');*/
         let confirmContainer$ = $(`.${$(button).data('button-order')}`);
-        if(!confirmContainer$.length)
+        if (!confirmContainer$.length)
             throw new Error('Button order does not exists.Check your html code');
         $(button).parent().addClass('d-none');
         confirmContainer$.removeClass('d-none');
 
     }
-        _getItemColor(target){
-            let fullItemName = $(target).closest(`${this._containerCallingMW}`).find(this._itemNameSelector).text();
-            let matches = fullItemName.match(/\((.*?)\)/);
-            return matches[1];
-        }
-        _getSelectedSize(){
-            let selectedItem = $(`.${this._modalClothesSizeWindow.sizeTable.sizeHint.style.selectedItem}`);
-            if(selectedItem.data('size')===undefined)
-                throw new Error('Data size attribute is not set');
-            return selectedItem.data('size');
-        }
+
+    _getCurrentProductCard(target) {
+        return $(target).closest(`${this._containerCallingMW}`);
+    }
+
+    _getItemColor(target) {
+        let fullItemName = this._getCurrentProductCard(target).find(this._itemNameSelector).text();
+        let matches = fullItemName.match(/\((.*?)\)/);
+        return matches[1];
+    }
+
+    _getSelectedSize() {
+        let selectedItem = $(`.${this._modalClothesSizeWindow.sizeTable.sizeHint.style.selectedItem}`);
+        if (selectedItem.data('size') === undefined)
+            throw new Error('Data size attribute is not set');
+        return selectedItem.data('size');
+    }
+
     /*_getCheckoutInfo() {
-        return $(`.${this._modalClothesSizeWindow.orderCheckout.checkoutInfo}`);
-    }*/
+     return $(`.${this._modalClothesSizeWindow.orderCheckout.checkoutInfo}`);
+     }*/
 }
 export {ModalWindows}
