@@ -35,7 +35,7 @@
                                 <p><span class="fa fa-info-circle fa-lg"></span></p>
                                 <p>Описание товара</p>
                             </div>
-                            <div class="d-flex justify-content-start align-items-center" data-modal-open="modal-clothes-size">
+                            <div class="d-flex justify-content-start align-items-center" data-modal-open="modal-clothes_size">
                                 <p><img src="{{asset('images/t_shirts_size_icon.PNG')}}" alt="t_shirts_size"></p>
                                 <p>Таблица размеров</p>
                             </div>

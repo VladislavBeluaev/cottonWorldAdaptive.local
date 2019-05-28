@@ -388,7 +388,7 @@ footer {
   z-index: @defaultZIndex;
 }
 
-.modal-clothes-size {
+.modal-clothes_size {
   .modal-default-settings;
   top: 20%;
   left: 20%;
@@ -565,7 +565,7 @@ footer {
   left: 30%;
   .product_order__content {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 10fr 1fr;
+    grid-template-rows: 0.5fr 10fr 0.5fr;
     justify-items: right;
     .content__close-window {
       padding-right: @defaultGutter/4;
@@ -642,6 +642,23 @@ footer {
               }
             }
 
+          }
+          &:nth-child(5),&:nth-child(6),&:nth-child(7){
+            ul{
+              padding-top: @defaultGutter/6;
+              li{
+                border:none;
+                input{
+                  text-align: left;
+                  .fontSettings(@footerFont, 20px, bold, @defaultFontSize*1.2, none);
+                  border-bottom:1px solid @breadcrumbsActiveItemColor;
+                  .placeholder({ text-align: left; font-weight: @defaultFontWeight; font-family: @defaultFontFamily;
+                    color: @menuItemColor;font-size:@defaultFontSize*1.2 });
+                  height:24px;
+                  width: 70%;
+                }
+              }
+            }
           }
         }
       }

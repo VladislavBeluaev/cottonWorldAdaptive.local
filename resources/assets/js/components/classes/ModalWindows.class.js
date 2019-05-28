@@ -5,10 +5,12 @@ class ModalWindows {
     constructor(settings) {
         this._bodyWrapper = settings.bodyWrapper;
         this._containerCallingMW = `.${settings.callingMW.container}`;
-        this._currentProductCard$ = null;
+        this._cardOpenedMW$ = null;
         this._itemNameSelector = settings.callingMW.itemNameSelector;
         this._modalWindowsOptions = settings.modalWindowsOptions;
         this._modalClothesSizeWindow = this._modalWindowsOptions.modalClothesSizeWindow;
+        this._modalProductDescription = this._modalWindowsOptions.modalProductDescription;
+        this._modalProductOrder = this._modalWindowsOptions.modalProductOrder;
     }
 
     initWindows() {
@@ -25,7 +27,10 @@ class ModalWindows {
     run() {
 
         $(`.${this._modalClothesSizeWindow.orderCheckout.container}`).on('click.ModalWindow-checkout', $.proxy(this._checkoutBtnHandler, this));
-        $(`.${this._modalClothesSizeWindow.orderConfirm.container}`).on('click.ModalWindow-confirm', $.proxy(this._confirmBtnHandler, this));
+        $(`.${this._modalClothesSizeWindow.orderConfirm.container},.${this._modalProductDescription.container}`)
+            .on('click.ModalWindow-confirm', $.proxy(this._confirmBtnHandler, this));
+        $(`.${this._modalProductOrder.ajaxSendData.orderSize}`).on('click.ModalWindow-order-size',
+            {style:this._modalProductOrder.ajaxSendData.selectedItem},ModalWindows._orderSelectSizeHandler);
     }
 
     _openHandler(event) {
@@ -72,8 +77,8 @@ class ModalWindows {
     _openMW(event) {
         let target = event.target;
         if (target.closest(this._containerCallingMW) === null) return false;
-        this._currentInitModalOpen$ =this._getCurrentProductCard(target);
-        console.log(this._getItemColor(target));
+        this._cardOpenedMW$ = this._getCurrentProductCard(target);
+        this._setSelectedProductData(this._getItemColor(target));
         let openMW$ = $(`.${$(target).closest("[data-modal-open]").data('modal-open')}`);
         if (!openMW$.length)
             throw new Error(`No modal window found`);
@@ -89,11 +94,17 @@ class ModalWindows {
     _closeMW() {
         let modalWindowsCollection = this._modalWindowsOptions.classes;
         modalWindowsCollection.forEach(className => {
+            let resetFunctionName = `_reset${className.substr(6).charAt(0).toUpperCase()}${className.substr(6).substr(1)}`;
             let modalWindow$ = $(`.${className}`);
-            if (modalWindow$.hasClass('d-none') === false)
+            if (modalWindow$.hasClass('d-none') === false) {
                 modalWindow$.fadeOut("900", function () {
                     ModalWindows._removeStyleAttrMW(modalWindow$).addClass('d-none');
                 });
+            }
+            if (this[resetFunctionName] === undefined)
+                throw new Error(`Function ${resetFunctionName} does not exists. Check class methods`);
+            this[resetFunctionName]();
+
         });
     }
 
@@ -150,8 +161,8 @@ class ModalWindows {
          checkOutInfo$.removeClass('d-none');*/
         let sizeTable = this._modalClothesSizeWindow.sizeTable;
         let clickUserHint = sizeTable.sizeHint;
-        let clothesSizeCollection$ = $(`${clickUserHint.selector}`, `.${sizeTable.context}`);
-        let self = this;
+        let clothesSizeCollection$ = this._getClotheSizeCollection();
+        //let self = this;
         clothesSizeCollection$.on({
             'mouseover.ModalWindow-select-size': function () {
                 $(this).not(`.${clickUserHint.style.selectedItem}`).css(clickUserHint.style.over);
@@ -174,11 +185,13 @@ class ModalWindows {
     _confirmBtn(event) {
         let button = event.target;
         if (button.tagName !== 'BUTTON') return false;
-        if ($(button).data('open-modal') === undefined) throw new Error('Data button-order attribute is not set');
-        let orderModal$ = $(`.${$(button).data('open-modal')}`);
-        orderModal$.data('selected-size', this._getSelectedSize());
+        if ($(button).data('open-modal') === undefined) throw new Error('Data open-modal attribute is not set');
+        if ($(button).data('open-modal').includes('withoutSetSize') === false) {
+            let orderModal$ = $(`.${$(button).data('open-modal')}`);
+            orderModal$.data('order-size', this._getSelectedSize());
+        }
         $(`.${this._modalWindowsOptions.closeButton}`).trigger('click.ModalWindow-close');
-        this._currentInitModalOpen$.find("[data-modal-open='modal-product_order']>button").trigger('click.ModalWindows-open');
+        this._cardOpenedMW$.find("[data-modal-open='modal-product_order']>button").trigger('click.ModalWindows-open');
     }
 
     static _selectedSizeHandler(...args) {
@@ -194,9 +207,39 @@ class ModalWindows {
         let confirmContainer$ = $(`.${$(button).data('button-order')}`);
         if (!confirmContainer$.length)
             throw new Error('Button order does not exists.Check your html code');
-        $(button).parent().addClass('d-none');
-        confirmContainer$.removeClass('d-none');
+        ModalWindows.replaceMWNavButtons($(button).parent(), confirmContainer$);
+    }
+    static _orderSelectSizeHandler(event){
+        let target$ = $(event.target);
+        console.log(target$);
+        if(!target$.closest('ul.grid').length || target$.tagName==='UL') return false;
+        if (target$.hasClass('active') === false) {
+            $(`.active.${event.data.style}`).removeAttr('class');
+        }
+        target$.addClass(`active ${event.data.style}`);
+    }
 
+    _resetClothes_size() {
+        this._getClotheSizeCollection().removeAttr('style')
+            .off('mouseover.ModalWindow-select-size mouseout.ModalWindow-select-size click.ModalWindow-select-size');
+        let search$ = $(`.${this._modalWindowsOptions.classes[0]}`).find('button').parent();
+        let replace$ = search$.next();
+        $('.active').removeAttr('class');
+        ModalWindows.replaceMWNavButtons(search$, replace$);
+
+    }
+
+    _resetProduct_description() {
+
+    }
+
+    _resetProduct_order() {
+
+    }
+
+    static replaceMWNavButtons(search$, replace$, className = 'd-none') {
+        search$.addClass(className);
+        replace$.removeClass(className);
     }
 
     _getCurrentProductCard(target) {
@@ -207,6 +250,22 @@ class ModalWindows {
         let fullItemName = this._getCurrentProductCard(target).find(this._itemNameSelector).text();
         let matches = fullItemName.match(/\((.*?)\)/);
         return matches[1];
+    }
+    _setSelectedProductData(color){
+        this._modalProductOrder.productColorElement.text(color);
+        let selectedSize = $(`.${this._modalProductOrder.container}`).data('order-size');
+        if(selectedSize!==undefined){
+            let orderSizeCollectionArr = $(`.${this._modalProductOrder.ajaxSendData.orderSize}`).find('li').toArray();
+            orderSizeCollectionArr.find(li=>{
+                if(li.textContent===selectedSize) return true;
+            }).classList.add("active",this._modalProductOrder.ajaxSendData.selectedItem);
+        }
+
+
+    }
+
+    _getClotheSizeCollection() {
+        return $(this._modalClothesSizeWindow.sizeTable.sizeHint.selector, `.${this._modalClothesSizeWindow.sizeTable.context}`);
     }
 
     _getSelectedSize() {

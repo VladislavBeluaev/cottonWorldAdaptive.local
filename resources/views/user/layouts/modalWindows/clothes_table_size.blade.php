@@ -1,4 +1,4 @@
-<div class="modal-clothes-size d-none">
+<div class="modal-clothes_size d-none">
 <div class="clothes-size__content grid">
     <div class="content__close-window">
         <p><span class="fas fa-times-circle fa-2x"></span></p>

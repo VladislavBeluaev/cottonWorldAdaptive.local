@@ -14,7 +14,7 @@
             <div>
                 <p>{{$t_shirt['description']}}</p>
             </div>
-            <button class="btn btn-info btn-sm">Перейти к оформлению заказа</button>
+            <button class="btn btn-info btn-sm" data-open-modal="modal-product_order-withoutSetSize">Перейти к оформлению заказа</button>
         </div>
     </div>
 </div>

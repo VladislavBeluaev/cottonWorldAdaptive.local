@@ -5,7 +5,7 @@
         </div>
         <div class="content__description">
             <h2>Оформление заказа</h2>
-            <ul>
+            <ul class="order-ajax-send">
                 <li class="grid"><span>Название</span><span>{{$t_shirt['name']}}</span></li>
                 <li class="grid"><span>Цвет</span><span>красный</span></li>
                 <li class="description__order-size"><span> Выберите размер</span>
@@ -25,6 +25,21 @@
                 <li class="description__order-qty"><span>Укажите количество</span>
                     <ul>
                         <li><input type="number" placeholder="1"></li>
+                    </ul>
+                </li>
+                <li><span>Введите ваше имя</span>
+                    <ul>
+                        <li><input type="text" name="customer_name" placeholder="имя" required></li>
+                    </ul>
+                </li>
+                <li><span>Введите ваш контактный телефон</span>
+                    <ul>
+                        <li><input type="tel" name="customer_phone" placeholder="телефон" required></li>
+                    </ul>
+                </li>
+                <li><span>Введите ваш email</span>
+                    <ul>
+                        <li><input type="email" name="customer_email" placeholder="email" required></li>
                     </ul>
                 </li>
             </ul>

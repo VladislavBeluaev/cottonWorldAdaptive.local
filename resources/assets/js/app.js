@@ -13,9 +13,9 @@ import {YandexMap} from './components/classes/YandexMap.class.js';
                     "menubarContacts__container": "menubar-contacts__container",
                     "menuBarDefaultContainer": "container",
                 },
-                mouseOverOutControl:{
+                mouseOverOutControl: {
                     "menubarCatalog__container": "menubar-catalog__wrapper",
-                    "menubarCatalog_item":"menubar-catalog_item a",
+                    "menubarCatalog_item": "menubar-catalog_item a",
                 }
 
 
@@ -56,41 +56,54 @@ import {YandexMap} from './components/classes/YandexMap.class.js';
                     {
                         "bodyWrapper": "modal-wrapper",
                         "callingMW": {
-                            container:"cards__item",
-                            itemNameSelector:'.cards__item-name>p'
+                            container: "cards__item",
+                            itemNameSelector: '.cards__item-name>p'
                         },
-                        modalWindowsOptions:{
-                            classes:['modal-clothes-size','modal-product_description','modal-product_order'],
-                            closeButton:'content__close-window',
-                            modalClothesSizeWindow:{
-                                sizeTable:{
-                                    context:"content__table",
-                                    sizeHint:{
-                                        selector:"th[data-size],td:first-child",
-                                        style:{
-                                            bgColor:{
-                                                'background-color':"#999"
+                        modalWindowsOptions: {
+                            classes: ['modal-clothes_size', 'modal-product_description', 'modal-product_order'],
+                            closeButton: 'content__close-window',
+                            modalClothesSizeWindow: {
+                                sizeTable: {
+                                    context: "content__table",
+                                    sizeHint: {
+                                        selector: "th:first-child,td:first-child",
+                                        style: {
+                                            bgColor: {
+                                                'background-color': "#999"
                                             },
-                                            over:{
-                                                color:"#fff",
-                                                cursor:"pointer"
+                                            over: {
+                                                color: "#fff",
+                                                cursor: "pointer"
                                             },
-                                            out:{
-                                                color:"#000",
+                                            out: {
+                                                color: "#000",
                                             },
-                                            selectedItem:'selected-size'
+                                            selectedItem: 'selected-size'
                                         }
                                     }
                                 },
-                                orderCheckout:{
-                                    container:'order__checkout',
+                                orderCheckout: {
+                                    container: 'order__checkout',
                                     /*checkoutInfo:'checkout__info',*/
                                 },
-                                orderConfirm:{
-                                    container:'order__confirm',
+                                orderConfirm: {
+                                    container: 'order__confirm',
+                                }
+                            },
+                            modalProductDescription: {
+                                container: "product_description__content"
+                            },
+                            modalProductOrder: {
+                                container: "modal-product_order",
+                                productColorElement:$('.order-ajax-send').find('li:nth-child(2)>span:last-child'),
+                                ajaxSendData:{
+                                    container:"order-ajax-send",
+                                    orderSize:'description__order-size',
+                                    selectedItem:'selected-size'
                                 }
                             }
                         }
+
                     }
                 )).initWindows().run();
                 break;

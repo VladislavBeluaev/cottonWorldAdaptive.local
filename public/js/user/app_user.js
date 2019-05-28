@@ -138,13 +138,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         itemNameSelector: '.cards__item-name>p'
                     },
                     modalWindowsOptions: {
-                        classes: ['modal-clothes-size', 'modal-product_description', 'modal-product_order'],
+                        classes: ['modal-clothes_size', 'modal-product_description', 'modal-product_order'],
                         closeButton: 'content__close-window',
                         modalClothesSizeWindow: {
                             sizeTable: {
                                 context: "content__table",
                                 sizeHint: {
-                                    selector: "th[data-size],td:first-child",
+                                    selector: "th:first-child,td:first-child",
                                     style: {
                                         bgColor: {
                                             'background-color': "#999"
@@ -167,8 +167,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             orderConfirm: {
                                 container: 'order__confirm'
                             }
+                        },
+                        modalProductDescription: {
+                            container: "product_description__content"
+                        },
+                        modalProductOrder: {
+                            container: "modal-product_order",
+                            productColorElement: $('.order-ajax-send').find('li:nth-child(2)>span:last-child'),
+                            ajaxSendData: {
+                                container: "order-ajax-send",
+                                orderSize: 'description__order-size',
+                                selectedItem: 'selected-size'
+                            }
                         }
                     }
+
                 }).initWindows().run();
                 break;
         }
@@ -194,10 +207,12 @@ var ModalWindows = function () {
 
         this._bodyWrapper = settings.bodyWrapper;
         this._containerCallingMW = '.' + settings.callingMW.container;
-        this._currentProductCard$ = null;
+        this._cardOpenedMW$ = null;
         this._itemNameSelector = settings.callingMW.itemNameSelector;
         this._modalWindowsOptions = settings.modalWindowsOptions;
         this._modalClothesSizeWindow = this._modalWindowsOptions.modalClothesSizeWindow;
+        this._modalProductDescription = this._modalWindowsOptions.modalProductDescription;
+        this._modalProductOrder = this._modalWindowsOptions.modalProductOrder;
     }
 
     _createClass(ModalWindows, [{
@@ -217,7 +232,8 @@ var ModalWindows = function () {
         value: function run() {
 
             $('.' + this._modalClothesSizeWindow.orderCheckout.container).on('click.ModalWindow-checkout', $.proxy(this._checkoutBtnHandler, this));
-            $('.' + this._modalClothesSizeWindow.orderConfirm.container).on('click.ModalWindow-confirm', $.proxy(this._confirmBtnHandler, this));
+            $('.' + this._modalClothesSizeWindow.orderConfirm.container + ',.' + this._modalProductDescription.container).on('click.ModalWindow-confirm', $.proxy(this._confirmBtnHandler, this));
+            $('.' + this._modalProductOrder.ajaxSendData.orderSize).on('click.ModalWindow-order-size', { style: this._modalProductOrder.ajaxSendData.selectedItem }, ModalWindows._orderSelectSizeHandler);
         }
     }, {
         key: '_openHandler',
@@ -267,8 +283,8 @@ var ModalWindows = function () {
         value: function _openMW(event) {
             var target = event.target;
             if (target.closest(this._containerCallingMW) === null) return false;
-            this._currentInitModalOpen$ = this._getCurrentProductCard(target);
-            console.log(this._getItemColor(target));
+            this._cardOpenedMW$ = this._getCurrentProductCard(target);
+            this._setSelectedProductData(this._getItemColor(target));
             var openMW$ = $('.' + $(target).closest("[data-modal-open]").data('modal-open'));
             if (!openMW$.length) throw new Error('No modal window found');
             this._toggleBodyWrapper.call(this);
@@ -281,12 +297,19 @@ var ModalWindows = function () {
     }, {
         key: '_closeMW',
         value: function _closeMW() {
+            var _this = this;
+
             var modalWindowsCollection = this._modalWindowsOptions.classes;
             modalWindowsCollection.forEach(function (className) {
+                var resetFunctionName = '_reset' + className.substr(6).charAt(0).toUpperCase() + className.substr(6).substr(1);
                 var modalWindow$ = $('.' + className);
-                if (modalWindow$.hasClass('d-none') === false) modalWindow$.fadeOut("900", function () {
-                    ModalWindows._removeStyleAttrMW(modalWindow$).addClass('d-none');
-                });
+                if (modalWindow$.hasClass('d-none') === false) {
+                    modalWindow$.fadeOut("900", function () {
+                        ModalWindows._removeStyleAttrMW(modalWindow$).addClass('d-none');
+                    });
+                }
+                if (_this[resetFunctionName] === undefined) throw new Error('Function ' + resetFunctionName + ' does not exists. Check class methods');
+                _this[resetFunctionName]();
             });
         }
     }, {
@@ -325,8 +348,8 @@ var ModalWindows = function () {
              checkOutInfo$.removeClass('d-none');*/
             var sizeTable = this._modalClothesSizeWindow.sizeTable;
             var clickUserHint = sizeTable.sizeHint;
-            var clothesSizeCollection$ = $('' + clickUserHint.selector, '.' + sizeTable.context);
-            var self = this;
+            var clothesSizeCollection$ = this._getClotheSizeCollection();
+            //let self = this;
             clothesSizeCollection$.on({
                 'mouseover.ModalWindow-select-size': function mouseoverModalWindowSelectSize() {
                     $(this).not('.' + clickUserHint.style.selectedItem).css(clickUserHint.style.over);
@@ -348,12 +371,29 @@ var ModalWindows = function () {
         value: function _confirmBtn(event) {
             var button = event.target;
             if (button.tagName !== 'BUTTON') return false;
-            if ($(button).data('open-modal') === undefined) throw new Error('Data button-order attribute is not set');
-            var orderModal$ = $('.' + $(button).data('open-modal'));
-            orderModal$.data('selected-size', this._getSelectedSize());
+            if ($(button).data('open-modal') === undefined) throw new Error('Data open-modal attribute is not set');
+            if ($(button).data('open-modal').includes('withoutSetSize') === false) {
+                var orderModal$ = $('.' + $(button).data('open-modal'));
+                orderModal$.data('order-size', this._getSelectedSize());
+            }
             $('.' + this._modalWindowsOptions.closeButton).trigger('click.ModalWindow-close');
-            this._currentInitModalOpen$.find("[data-modal-open='modal-product_order']>button").trigger('click.ModalWindows-open');
+            this._cardOpenedMW$.find("[data-modal-open='modal-product_order']>button").trigger('click.ModalWindows-open');
         }
+    }, {
+        key: '_resetClothes_size',
+        value: function _resetClothes_size() {
+            this._getClotheSizeCollection().removeAttr('style').off('mouseover.ModalWindow-select-size mouseout.ModalWindow-select-size click.ModalWindow-select-size');
+            var search$ = $('.' + this._modalWindowsOptions.classes[0]).find('button').parent();
+            var replace$ = search$.next();
+            $('.active').removeAttr('class');
+            ModalWindows.replaceMWNavButtons(search$, replace$);
+        }
+    }, {
+        key: '_resetProduct_description',
+        value: function _resetProduct_description() {}
+    }, {
+        key: '_resetProduct_order',
+        value: function _resetProduct_order() {}
     }, {
         key: '_getCurrentProductCard',
         value: function _getCurrentProductCard(target) {
@@ -365,6 +405,23 @@ var ModalWindows = function () {
             var fullItemName = this._getCurrentProductCard(target).find(this._itemNameSelector).text();
             var matches = fullItemName.match(/\((.*?)\)/);
             return matches[1];
+        }
+    }, {
+        key: '_setSelectedProductData',
+        value: function _setSelectedProductData(color) {
+            this._modalProductOrder.productColorElement.text(color);
+            var selectedSize = $('.' + this._modalProductOrder.container).data('order-size');
+            if (selectedSize !== undefined) {
+                var orderSizeCollectionArr = $('.' + this._modalProductOrder.ajaxSendData.orderSize).find('li').toArray();
+                orderSizeCollectionArr.find(function (li) {
+                    if (li.textContent === selectedSize) return true;
+                }).classList.add("active", this._modalProductOrder.ajaxSendData.selectedItem);
+            }
+        }
+    }, {
+        key: '_getClotheSizeCollection',
+        value: function _getClotheSizeCollection() {
+            return $(this._modalClothesSizeWindow.sizeTable.sizeHint.selector, '.' + this._modalClothesSizeWindow.sizeTable.context);
         }
     }, {
         key: '_getSelectedSize',
@@ -421,8 +478,26 @@ var ModalWindows = function () {
              originalObject._getCheckoutInfo().addClass('d-none');*/
             var confirmContainer$ = $('.' + $(button).data('button-order'));
             if (!confirmContainer$.length) throw new Error('Button order does not exists.Check your html code');
-            $(button).parent().addClass('d-none');
-            confirmContainer$.removeClass('d-none');
+            ModalWindows.replaceMWNavButtons($(button).parent(), confirmContainer$);
+        }
+    }, {
+        key: '_orderSelectSizeHandler',
+        value: function _orderSelectSizeHandler(event) {
+            var target$ = $(event.target);
+            console.log(target$);
+            if (!target$.closest('ul.grid').length || target$.tagName === 'UL') return false;
+            if (target$.hasClass('active') === false) {
+                $('.active.' + event.data.style).removeAttr('class');
+            }
+            target$.addClass('active ' + event.data.style);
+        }
+    }, {
+        key: 'replaceMWNavButtons',
+        value: function replaceMWNavButtons(search$, replace$) {
+            var className = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'd-none';
+
+            search$.addClass(className);
+            replace$.removeClass(className);
         }
     }]);
 
