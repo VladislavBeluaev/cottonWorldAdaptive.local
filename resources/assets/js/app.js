@@ -1,8 +1,9 @@
-import {ModalWindows} from './components/classes/ModalWindows.class.js';
 import {Menu} from './components/classes/Menu.class.js';
 import {Slider} from './components/classes/Slider.class.js';
 import {Gallery} from './components/classes/Gallery.class.js';
 import {YandexMap} from './components/classes/YandexMap.class.js';
+import {ModalWindows} from './components/classes/ModalWindows.class.js';
+import {Order} from './components/classes/Order.class.js';
 (function ($, undefined) {
     $(function () {
         let pathInfo = window.location.pathname.substr(1);
@@ -99,6 +100,7 @@ import {YandexMap} from './components/classes/YandexMap.class.js';
                                 ajaxSendData:{
                                     container:"order-ajax-send",
                                     orderSize:'description__order-size',
+                                    orderPrice:'description__order-price',
                                     selectedItem:'selected-size'
                                 }
                             }
@@ -106,6 +108,16 @@ import {YandexMap} from './components/classes/YandexMap.class.js';
 
                     }
                 )).initWindows().run();
+                (new Order({
+                    validate:{
+                        container:'modal-product_order',
+                        elements:'input'
+                    },
+                    ajax:{
+
+                    }
+
+                })).inputValidate().send();
                 break;
         }
     });

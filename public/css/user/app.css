@@ -1121,6 +1121,7 @@ footer .footer__content p:last-child span {
   background-color: #f9fafe;
 }
 .modal-product_order .product_order__content .content__description ul li.description__order-size ul {
+  width: 610px;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: 1fr;
   -webkit-column-gap: 6px;
@@ -1161,22 +1162,61 @@ footer .footer__content p:last-child span {
 .modal-product_order .product_order__content .content__description ul li.description__order-qty ul li input {
   border: 1px solid #4f4f4f;
   border-radius: 0.25rem;
+  font-family: 'Roboto Slab', serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 16.8px;
+  text-transform: none;
   height: 50px;
   width: 60px;
 }
-.modal-product_order .product_order__content .content__description ul li:nth-child(5) ul,
-.modal-product_order .product_order__content .content__description ul li:nth-child(6) ul,
-.modal-product_order .product_order__content .content__description ul li:nth-child(7) ul {
+.modal-product_order .product_order__content .content__description ul li.description__order-qty ul li input::-webkit-input-placeholder {
+  font-weight: bold;
+  font-family: "PT Sans", sans-serif;
+}
+.modal-product_order .product_order__content .content__description ul li.description__order-qty ul li input:-moz-placeholder {
+  font-weight: bold;
+  font-family: "PT Sans", sans-serif;
+}
+.modal-product_order .product_order__content .content__description ul li.description__order-qty ul li input::-moz-placeholder {
+  font-weight: bold;
+  font-family: "PT Sans", sans-serif;
+}
+.modal-product_order .product_order__content .content__description ul li.description__order-qty ul li input:-ms-input-placeholder {
+  font-weight: bold;
+  font-family: "PT Sans", sans-serif;
+}
+.modal-product_order .product_order__content .content__description ul li.description__order-price span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+  text-transform: none;
+}
+.modal-product_order .product_order__content .content__description ul li.description__order-price ul {
   padding-top: 4px;
 }
-.modal-product_order .product_order__content .content__description ul li:nth-child(5) ul li,
+.modal-product_order .product_order__content .content__description ul li.description__order-price ul li {
+  border: none;
+  font-family: 'Roboto Slab', serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  text-transform: none;
+}
+.modal-product_order .product_order__content .content__description ul li:nth-child(6) ul,
+.modal-product_order .product_order__content .content__description ul li:nth-child(7) ul,
+.modal-product_order .product_order__content .content__description ul li:nth-child(8) ul {
+  padding-top: 4px;
+}
 .modal-product_order .product_order__content .content__description ul li:nth-child(6) ul li,
-.modal-product_order .product_order__content .content__description ul li:nth-child(7) ul li {
+.modal-product_order .product_order__content .content__description ul li:nth-child(7) ul li,
+.modal-product_order .product_order__content .content__description ul li:nth-child(8) ul li {
   border: none;
 }
-.modal-product_order .product_order__content .content__description ul li:nth-child(5) ul li input,
 .modal-product_order .product_order__content .content__description ul li:nth-child(6) ul li input,
-.modal-product_order .product_order__content .content__description ul li:nth-child(7) ul li input {
+.modal-product_order .product_order__content .content__description ul li:nth-child(7) ul li input,
+.modal-product_order .product_order__content .content__description ul li:nth-child(8) ul li input {
   text-align: left;
   font-family: 'Roboto Slab', serif;
   font-size: 20px;
@@ -1187,38 +1227,38 @@ footer .footer__content p:last-child span {
   height: 24px;
   width: 70%;
 }
-.modal-product_order .product_order__content .content__description ul li:nth-child(5) ul li input::-webkit-input-placeholder,
 .modal-product_order .product_order__content .content__description ul li:nth-child(6) ul li input::-webkit-input-placeholder,
-.modal-product_order .product_order__content .content__description ul li:nth-child(7) ul li input::-webkit-input-placeholder {
+.modal-product_order .product_order__content .content__description ul li:nth-child(7) ul li input::-webkit-input-placeholder,
+.modal-product_order .product_order__content .content__description ul li:nth-child(8) ul li input::-webkit-input-placeholder {
   text-align: left;
-  font-weight: 600;
+  font-weight: bold;
   font-family: "PT Sans", sans-serif;
   color: #999;
   font-size: 16.8px;
 }
-.modal-product_order .product_order__content .content__description ul li:nth-child(5) ul li input:-moz-placeholder,
 .modal-product_order .product_order__content .content__description ul li:nth-child(6) ul li input:-moz-placeholder,
-.modal-product_order .product_order__content .content__description ul li:nth-child(7) ul li input:-moz-placeholder {
+.modal-product_order .product_order__content .content__description ul li:nth-child(7) ul li input:-moz-placeholder,
+.modal-product_order .product_order__content .content__description ul li:nth-child(8) ul li input:-moz-placeholder {
   text-align: left;
-  font-weight: 600;
+  font-weight: bold;
   font-family: "PT Sans", sans-serif;
   color: #999;
   font-size: 16.8px;
 }
-.modal-product_order .product_order__content .content__description ul li:nth-child(5) ul li input::-moz-placeholder,
 .modal-product_order .product_order__content .content__description ul li:nth-child(6) ul li input::-moz-placeholder,
-.modal-product_order .product_order__content .content__description ul li:nth-child(7) ul li input::-moz-placeholder {
+.modal-product_order .product_order__content .content__description ul li:nth-child(7) ul li input::-moz-placeholder,
+.modal-product_order .product_order__content .content__description ul li:nth-child(8) ul li input::-moz-placeholder {
   text-align: left;
-  font-weight: 600;
+  font-weight: bold;
   font-family: "PT Sans", sans-serif;
   color: #999;
   font-size: 16.8px;
 }
-.modal-product_order .product_order__content .content__description ul li:nth-child(5) ul li input:-ms-input-placeholder,
 .modal-product_order .product_order__content .content__description ul li:nth-child(6) ul li input:-ms-input-placeholder,
-.modal-product_order .product_order__content .content__description ul li:nth-child(7) ul li input:-ms-input-placeholder {
+.modal-product_order .product_order__content .content__description ul li:nth-child(7) ul li input:-ms-input-placeholder,
+.modal-product_order .product_order__content .content__description ul li:nth-child(8) ul li input:-ms-input-placeholder {
   text-align: left;
-  font-weight: 600;
+  font-weight: bold;
   font-family: "PT Sans", sans-serif;
   color: #999;
   font-size: 16.8px;
@@ -1243,6 +1283,8 @@ footer .footer__content p:last-child span {
           box-shadow: 0 8px 50px -6px rgba(84, 84, 120, 0.26);
 }
 .selected-size {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   outline: 5px solid #555;
   -webkit-box-shadow: 0 0 4px rgba(10, 10, 10, 0.5);
           box-shadow: 0 0 4px rgba(10, 10, 10, 0.5);

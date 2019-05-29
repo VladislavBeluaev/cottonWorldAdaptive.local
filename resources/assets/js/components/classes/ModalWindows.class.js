@@ -189,6 +189,7 @@ class ModalWindows {
         if ($(button).data('open-modal').includes('withoutSetSize') === false) {
             let orderModal$ = $(`.${$(button).data('open-modal')}`);
             orderModal$.data('order-size', this._getSelectedSize());
+
         }
         $(`.${this._modalWindowsOptions.closeButton}`).trigger('click.ModalWindow-close');
         this._cardOpenedMW$.find("[data-modal-open='modal-product_order']>button").trigger('click.ModalWindows-open');
@@ -211,8 +212,7 @@ class ModalWindows {
     }
     static _orderSelectSizeHandler(event){
         let target$ = $(event.target);
-        console.log(target$);
-        if(!target$.closest('ul.grid').length || target$.tagName==='UL') return false;
+        if(!target$.closest('ul.grid').length || target$.get(0).tagName==='UL') return false;
         if (target$.hasClass('active') === false) {
             $(`.active.${event.data.style}`).removeAttr('class');
         }
@@ -234,6 +234,11 @@ class ModalWindows {
     }
 
     _resetProduct_order() {
+        let inputCollection$ = $('input',$(`.${this._modalProductOrder.container}`));
+        inputCollection$.each((_,item)=>{
+            $(item).val('');
+        });
+        $(`.${this._modalProductOrder.ajaxSendData.orderPrice} li`).text('0 руб.');
 
     }
 
@@ -253,15 +258,15 @@ class ModalWindows {
     }
     _setSelectedProductData(color){
         this._modalProductOrder.productColorElement.text(color);
-        let selectedSize = $(`.${this._modalProductOrder.container}`).data('order-size');
+        let productOrderMWContainer$ = $(`.${this._modalProductOrder.container}`);
+        let selectedSize = productOrderMWContainer$.data('order-size');
         if(selectedSize!==undefined){
             let orderSizeCollectionArr = $(`.${this._modalProductOrder.ajaxSendData.orderSize}`).find('li').toArray();
             orderSizeCollectionArr.find(li=>{
                 if(li.textContent===selectedSize) return true;
             }).classList.add("active",this._modalProductOrder.ajaxSendData.selectedItem);
         }
-
-
+        productOrderMWContainer$.removeData('order-size');
     }
 
     _getClotheSizeCollection() {

@@ -77,11 +77,13 @@ module.exports = __webpack_require__(7);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_classes_ModalWindows_class_js__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_classes_Menu_class_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_classes_Slider_class_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_classes_Gallery_class_js__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_classes_YandexMap_class_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_classes_Menu_class_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_classes_Slider_class_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_classes_Gallery_class_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_classes_YandexMap_class_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_classes_ModalWindows_class_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_classes_Order_class_js__ = __webpack_require__(12);
+
 
 
 
@@ -90,7 +92,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 (function ($, undefined) {
     $(function () {
         var pathInfo = window.location.pathname.substr(1);
-        new __WEBPACK_IMPORTED_MODULE_1__components_classes_Menu_class_js__["a" /* Menu */]({
+        new __WEBPACK_IMPORTED_MODULE_0__components_classes_Menu_class_js__["a" /* Menu */]({
             resizeControl: {
                 "menuBarFixed__container": "menubar-fixed ul",
                 "menubarContacts__container": "menubar-contacts__container",
@@ -102,7 +104,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
         }).run();
-        new __WEBPACK_IMPORTED_MODULE_3__components_classes_Gallery_class_js__["a" /* Gallery */]({
+        new __WEBPACK_IMPORTED_MODULE_2__components_classes_Gallery_class_js__["a" /* Gallery */]({
             "galleryContainer": "article__container__image",
             "thumbnailContainer": "gallery-image-wrapper",
             "fullSizeContainer": "gallery-image-full_size",
@@ -110,7 +112,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).run();
         switch (pathInfo) {
             case "":
-                new __WEBPACK_IMPORTED_MODULE_2__components_classes_Slider_class_js__["a" /* Slider */]({
+                new __WEBPACK_IMPORTED_MODULE_1__components_classes_Slider_class_js__["a" /* Slider */]({
                     slider: $('.cardsSlider'),
                     duration: 500,
                     countScroll: 1,
@@ -128,10 +130,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }).start();
                 break;
             case "contacts":
-                new __WEBPACK_IMPORTED_MODULE_4__components_classes_YandexMap_class_js__["a" /* YandexMap */]('contacts__map').load();
+                new __WEBPACK_IMPORTED_MODULE_3__components_classes_YandexMap_class_js__["a" /* YandexMap */]('contacts__map').load();
                 break;
             case "men/t-shirts":
-                new __WEBPACK_IMPORTED_MODULE_0__components_classes_ModalWindows_class_js__["a" /* ModalWindows */]({
+                new __WEBPACK_IMPORTED_MODULE_4__components_classes_ModalWindows_class_js__["a" /* ModalWindows */]({
                     "bodyWrapper": "modal-wrapper",
                     "callingMW": {
                         container: "cards__item",
@@ -177,12 +179,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             ajaxSendData: {
                                 container: "order-ajax-send",
                                 orderSize: 'description__order-size',
+                                orderPrice: 'description__order-price',
                                 selectedItem: 'selected-size'
                             }
                         }
                     }
 
                 }).initWindows().run();
+                new __WEBPACK_IMPORTED_MODULE_5__components_classes_Order_class_js__["a" /* Order */]({
+                    validate: {
+                        container: 'modal-product_order',
+                        elements: 'input'
+                    },
+                    ajax: {}
+
+                }).inputValidate().send();
                 break;
         }
     });
@@ -393,7 +404,13 @@ var ModalWindows = function () {
         value: function _resetProduct_description() {}
     }, {
         key: '_resetProduct_order',
-        value: function _resetProduct_order() {}
+        value: function _resetProduct_order() {
+            var inputCollection$ = $('input', $('.' + this._modalProductOrder.container));
+            inputCollection$.each(function (_, item) {
+                $(item).val('');
+            });
+            $('.' + this._modalProductOrder.ajaxSendData.orderPrice + ' li').text('0 руб.');
+        }
     }, {
         key: '_getCurrentProductCard',
         value: function _getCurrentProductCard(target) {
@@ -410,13 +427,15 @@ var ModalWindows = function () {
         key: '_setSelectedProductData',
         value: function _setSelectedProductData(color) {
             this._modalProductOrder.productColorElement.text(color);
-            var selectedSize = $('.' + this._modalProductOrder.container).data('order-size');
+            var productOrderMWContainer$ = $('.' + this._modalProductOrder.container);
+            var selectedSize = productOrderMWContainer$.data('order-size');
             if (selectedSize !== undefined) {
                 var orderSizeCollectionArr = $('.' + this._modalProductOrder.ajaxSendData.orderSize).find('li').toArray();
                 orderSizeCollectionArr.find(function (li) {
                     if (li.textContent === selectedSize) return true;
                 }).classList.add("active", this._modalProductOrder.ajaxSendData.selectedItem);
             }
+            productOrderMWContainer$.removeData('order-size');
         }
     }, {
         key: '_getClotheSizeCollection',
@@ -484,8 +503,7 @@ var ModalWindows = function () {
         key: '_orderSelectSizeHandler',
         value: function _orderSelectSizeHandler(event) {
             var target$ = $(event.target);
-            console.log(target$);
-            if (!target$.closest('ul.grid').length || target$.tagName === 'UL') return false;
+            if (!target$.closest('ul.grid').length || target$.get(0).tagName === 'UL') return false;
             if (target$.hasClass('active') === false) {
                 $('.active.' + event.data.style).removeAttr('class');
             }
@@ -908,6 +926,121 @@ var YandexMap = function () {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Order; });
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Created by isida on 29.05.2019.
+ */
+var Order = function () {
+    function Order(settings) {
+        _classCallCheck(this, Order);
+
+        this._validateCollection$ = $('' + settings.validate.elements, '.' + settings.validate.container);
+        this._inputNumberPrevValue = '';
+        this._inputTelPrevValue = '';
+    }
+
+    _createClass(Order, [{
+        key: 'inputValidate',
+        value: function inputValidate() {
+            var _this = this;
+
+            try {
+                this._validateCollection$.each(function (_, item) {
+                    var typeAttr = item.getAttribute('type');
+                    var inputHandler = '_' + typeAttr + 'Validate';
+                    var self = _this;
+                    switch (typeAttr) {
+                        case "number":
+                            $(item).on({
+                                'input.Order': function inputOrder() {
+                                    self[inputHandler](event);
+                                }
+                            });
+                            break;
+                        case "text":
+                            $(item).on('blur', _this[inputHandler]);
+                            break;
+                        case "tel":
+                            $(item).on('blur', _this[inputHandler]);
+                            break;
+                        case "email":
+                            $(item).on('blur', _this[inputHandler]);
+                            break;
+                        default:
+                            throw new Error('Input with type ' + typeAttr + ' does not not process ');
+
+                    }
+                    if (_this[inputHandler] === undefined) throw new Error('Input validate handler ' + inputHandler + ' does not exists.');
+                });
+            } catch (e) {
+                console.log(e.message);
+            }
+            return this;
+        }
+    }, {
+        key: 'send',
+        value: function send() {}
+    }, {
+        key: '_numberValidate',
+        value: function _numberValidate(event) {
+            var target = event.target;
+            var patternRes = $(target).val().match(/^\d+$/);
+            if (patternRes !== null) {
+                this._inputPrevValue = $(target).val();
+            }
+            $(target).val(this._inputNumberPrevValue);
+        }
+    }, {
+        key: '_textValidate',
+        value: function _textValidate() {}
+    }, {
+        key: '_telValidate',
+        value: function _telValidate() {
+            var target = event.target;
+            console.log($(target).val());
+            var patternRes = $(target).val().match(/^[0-9]{5}$/);
+            if (patternRes !== null) {
+                console.log('Not pattern');
+                this._inputTelPrevValue = $(target).val();
+                $(target).val('+375');
+            }
+            //$(target).val(this._inputTelPrevValue);
+        }
+    }, {
+        key: '_emailValidate',
+        value: function _emailValidate() {}
+        /*_pasteHandler(event){
+            let target = event.target;
+            switch (target.getAttribute('type')){
+                case "number":
+                    this._numberValidate(event);
+                    /!*let patternRes = $(target).val().match(/^\d+$/);
+                    if(patternRes===null)
+                        $(target).val('');*!/
+                    break;
+              }
+        }*/
+
+    }]);
+
+    return Order;
+}();
+
+
 
 /***/ })
 /******/ ]);

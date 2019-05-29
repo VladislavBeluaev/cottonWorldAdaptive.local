@@ -27,6 +27,11 @@
                         <li><input type="number" placeholder="1"></li>
                     </ul>
                 </li>
+                <li class="description__order-price"><span>Итоговая цена</span>
+                    <ul>
+                        <li>0 руб.</li>
+                    </ul>
+                </li>
                 <li><span>Введите ваше имя</span>
                     <ul>
                         <li><input type="text" name="customer_name" placeholder="имя" required></li>
@@ -43,7 +48,7 @@
                     </ul>
                 </li>
             </ul>
-            <button type="button" class="btn btn-success btn-sm">Заказать</button>
+            <button type="button" class="btn btn-success btn-sm disabled" >Заказать</button>
         </div>
     </div>
 </div>

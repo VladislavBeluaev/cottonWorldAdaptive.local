@@ -606,6 +606,7 @@ footer {
           }
           &.description__order-size {
             ul{
+              width:610px;
               grid-template-columns: repeat(10, 1fr);
               grid-template-rows: 1fr;
               column-gap: @defaultGutter/4;
@@ -636,14 +637,27 @@ footer {
                 border:none;
                 input{
                   .borderSettings(1px solid @breadcrumbsActiveItemColor);
+                  .fontSettings(@footerFont, 18px, bold, @defaultFontSize*1.2, none);
+                  .placeholder({font-weight: bold; font-family: @defaultFontFamily});
                   height:50px;
                   width: 60px;
                 }
               }
             }
-
           }
-          &:nth-child(5),&:nth-child(6),&:nth-child(7){
+          &.description__order-price{
+            span{
+              .fontSettings(@productsCardFont, 20px, bold, 32px, none);
+            }
+            ul{
+              padding-top: @defaultGutter/6;
+              li{
+                border:none;
+                .fontSettings(@footerFont, 24px, bold, 32px, none);
+              }
+            }
+          }
+          &:nth-child(6),&:nth-child(7),&:nth-child(8){
             ul{
               padding-top: @defaultGutter/6;
               li{
@@ -652,7 +666,7 @@ footer {
                   text-align: left;
                   .fontSettings(@footerFont, 20px, bold, @defaultFontSize*1.2, none);
                   border-bottom:1px solid @breadcrumbsActiveItemColor;
-                  .placeholder({ text-align: left; font-weight: @defaultFontWeight; font-family: @defaultFontFamily;
+                  .placeholder({ text-align: left; font-weight: bold; font-family: @defaultFontFamily;
                     color: @menuItemColor;font-size:@defaultFontSize*1.2 });
                   height:24px;
                   width: 70%;
@@ -670,6 +684,7 @@ footer {
   }
 }
 .selected-size {
+  box-sizing: border-box;
   outline: 5px solid #555;
   box-shadow: 0 0 4px rgba(10, 10, 10, 0.5);
   border: none!important;
