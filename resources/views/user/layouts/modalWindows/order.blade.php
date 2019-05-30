@@ -24,12 +24,12 @@
                 </li>
                 <li class="description__order-qty"><span>Укажите количество</span>
                     <ul>
-                        <li><input type="number" placeholder="1"></li>
+                        <li><input type="number" name="t_shirt_qty" placeholder="1"></li>
                     </ul>
                 </li>
                 <li class="description__order-price"><span>Итоговая цена</span>
                     <ul>
-                        <li>0 руб.</li>
+                        <li data-start-price="{{$t_shirt['price']}}">0 руб.</li>
                     </ul>
                 </li>
                 <li><span>Введите ваше имя</span>
@@ -39,7 +39,8 @@
                 </li>
                 <li><span>Введите ваш контактный телефон</span>
                     <ul>
-                        <li><input type="tel" name="customer_phone" placeholder="телефон" required></li>
+                        <li>
+                            <input type="tel" name="customer_phone" placeholder="телефон" value="+375" required></li>
                     </ul>
                 </li>
                 <li><span>Введите ваш email</span>
@@ -48,7 +49,7 @@
                     </ul>
                 </li>
             </ul>
-            <button type="button" class="btn btn-success btn-sm disabled" >Заказать</button>
+            <button type="button" class="btn btn-success btn-sm disabled send-request" >Заказать</button>
         </div>
     </div>
 </div>

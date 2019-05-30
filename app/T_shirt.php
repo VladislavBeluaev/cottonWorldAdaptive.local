@@ -22,7 +22,7 @@ class T_shirt extends Model
 
     public function getPriceAttribute()
     {
-        return "6,50 руб.";
+        return "6.50 руб.";
         //return sprintf('%s руб.',$value);
     }
     public function getDensityAttribute()

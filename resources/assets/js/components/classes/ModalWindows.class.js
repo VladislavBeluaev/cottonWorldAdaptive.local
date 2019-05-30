@@ -30,7 +30,7 @@ class ModalWindows {
         $(`.${this._modalClothesSizeWindow.orderConfirm.container},.${this._modalProductDescription.container}`)
             .on('click.ModalWindow-confirm', $.proxy(this._confirmBtnHandler, this));
         $(`.${this._modalProductOrder.ajaxSendData.orderSize}`).on('click.ModalWindow-order-size',
-            {style:this._modalProductOrder.ajaxSendData.selectedItem},ModalWindows._orderSelectSizeHandler);
+            {style: this._modalProductOrder.ajaxSendData.selectedItem}, ModalWindows._orderSelectSizeHandler);
     }
 
     _openHandler(event) {
@@ -210,9 +210,10 @@ class ModalWindows {
             throw new Error('Button order does not exists.Check your html code');
         ModalWindows.replaceMWNavButtons($(button).parent(), confirmContainer$);
     }
-    static _orderSelectSizeHandler(event){
+
+    static _orderSelectSizeHandler(event) {
         let target$ = $(event.target);
-        if(!target$.closest('ul.grid').length || target$.get(0).tagName==='UL') return false;
+        if (!target$.closest('ul.grid').length || target$.get(0).tagName === 'UL') return false;
         if (target$.hasClass('active') === false) {
             $(`.active.${event.data.style}`).removeAttr('class');
         }
@@ -234,11 +235,13 @@ class ModalWindows {
     }
 
     _resetProduct_order() {
-        let inputCollection$ = $('input',$(`.${this._modalProductOrder.container}`));
-        inputCollection$.each((_,item)=>{
-            $(item).val('');
+        let inputCollection$ = $('input', $(`.${this._modalProductOrder.container}`));
+        inputCollection$.each((_, item) => {
+            $(item).attr('type') === 'tel' ? $(item).val('+375') : $(item).val('');
+
         });
         $(`.${this._modalProductOrder.ajaxSendData.orderPrice} li`).text('0 руб.');
+        $(`.${this._modalProductOrder.ajaxSendData.button}`).addClass('disabled');
 
     }
 
@@ -256,15 +259,16 @@ class ModalWindows {
         let matches = fullItemName.match(/\((.*?)\)/);
         return matches[1];
     }
-    _setSelectedProductData(color){
+
+    _setSelectedProductData(color) {
         this._modalProductOrder.productColorElement.text(color);
         let productOrderMWContainer$ = $(`.${this._modalProductOrder.container}`);
         let selectedSize = productOrderMWContainer$.data('order-size');
-        if(selectedSize!==undefined){
+        if (selectedSize !== undefined) {
             let orderSizeCollectionArr = $(`.${this._modalProductOrder.ajaxSendData.orderSize}`).find('li').toArray();
-            orderSizeCollectionArr.find(li=>{
-                if(li.textContent===selectedSize) return true;
-            }).classList.add("active",this._modalProductOrder.ajaxSendData.selectedItem);
+            orderSizeCollectionArr.find(li => {
+                if (li.textContent === selectedSize) return true;
+            }).classList.add("active", this._modalProductOrder.ajaxSendData.selectedItem);
         }
         productOrderMWContainer$.removeData('order-size');
     }
