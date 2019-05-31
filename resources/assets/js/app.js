@@ -117,15 +117,13 @@ import {Order} from './components/classes/Order.class.js';
                             li:'.description__order-size'
                         }
                     },
-                    ajax:{
-                        't_shirt_name':$('li:first-child>span:last-child','.order-ajax-send').text(),
-                        't_shirt_color':$('li:nth-child(2)>span:last-child','.order-ajax-send').text(),
-                        't_shirt_qty':$("[name='t_shirt_qty']",'.order-ajax-send').val(),
-                        'customer_name':$("[name='customer_name']",'.order-ajax-send').val(),
-                        'customer_phone':$("[name='customer_phone']",'.order-ajax-send').val(),
-                        'customer_email':$("[name='customer_email']",'.order-ajax-send').val(),
-                        totalPriceElem:$("[data-start-price]"),
-                        send:$('button.send-request'),
+                    t_shirt:{
+                        name:$('li:first-child>span:last-child','.order-ajax-send').text(),
+                        color:$('li:nth-child(2)>span:last-child','.order-ajax-send').text(),
+                        price:$("[data-start-price]")
+                    },
+                    order:{
+                        send:$('button.send-request')
                     }
 
                 })).validate().send();

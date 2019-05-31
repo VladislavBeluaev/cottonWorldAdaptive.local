@@ -23,3 +23,7 @@ Route::group(['namespace'=>'User',],function(){
     Route::get('/','DashboardController@index')->name('user.index');
     Route::get('/contacts','DashboardController@contacts')->name('user.contacts');
 });
+Route::group(['namespace'=>'Ajax',],function(){
+    Route::post('/order','AjaxController@createOrder');
+});
+

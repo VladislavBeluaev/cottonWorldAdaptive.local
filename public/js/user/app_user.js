@@ -195,14 +195,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             li: '.description__order-size'
                         }
                     },
-                    ajax: {
-                        't_shirt_name': $('li:first-child>span:last-child', '.order-ajax-send').text(),
-                        't_shirt_color': $('li:nth-child(2)>span:last-child', '.order-ajax-send').text(),
-                        't_shirt_qty': $("[name='t_shirt_qty']", '.order-ajax-send').val(),
-                        'customer_name': $("[name='customer_name']", '.order-ajax-send').val(),
-                        'customer_phone': $("[name='customer_phone']", '.order-ajax-send').val(),
-                        'customer_email': $("[name='customer_email']", '.order-ajax-send').val(),
-                        totalPriceElem: $("[data-start-price]"),
+                    t_shirt: {
+                        name: $('li:first-child>span:last-child', '.order-ajax-send').text(),
+                        color: $('li:nth-child(2)>span:last-child', '.order-ajax-send').text(),
+                        price: $("[data-start-price]")
+                    },
+                    order: {
                         send: $('button.send-request')
                     }
 
@@ -952,17 +950,30 @@ var Order = function () {
     function Order(settings) {
         _classCallCheck(this, Order);
 
-        this._validateInputCollection$ = $('' + settings.validate.elements.inputs, '.' + settings.validate.container);
-        this._validateSizeOrderContainer$ = $('' + settings.validate.elements.li, '.' + settings.validate.container);
-        this._ajaxData = settings.ajax;
-        this._sendAjaxBtn$ = this._ajaxData.send;
-        this._totalPriceElem$ = this._ajaxData.totalPriceElem;
-        //this._orderSizeCollection = settings.ajax['order-size'];
+        this._validateInputCollection$ = $("" + settings.validate.elements.inputs, "." + settings.validate.container);
+        this._validateSizeOrderContainer$ = $("" + settings.validate.elements.li, "." + settings.validate.container);
+        //this._ajaxData = settings.ajax;
+        this._price$ = settings.t_shirt.price;
+        this._sendAjaxBtn$ = settings.order.send;
+        this._orderObj = {
+            t_shirt: {
+                name: settings.t_shirt.name,
+                color: settings.t_shirt.color,
+                size: "",
+                qty: 0,
+                totalPrice: 0
+            },
+            customer: {
+                name: "",
+                phone: "",
+                email: ""
+            }
+        };
         this._inputNumberPrevValue = '';
     }
 
     _createClass(Order, [{
-        key: 'validate',
+        key: "validate",
         value: function validate() {
             var _this = this;
 
@@ -971,11 +982,12 @@ var Order = function () {
                 this._validateSizeOrderContainer$.on('click.Order', 'li', function () {
                     setTimeout(function () {
                         self.isValid();
+                        self._orderObj.t_shirt.size = self._getOrderSize().text();
                     }, 0);
                 });
                 this._validateInputCollection$.each(function (_, item) {
                     var typeAttr = item.getAttribute('type');
-                    var inputHandler = '_' + typeAttr + 'Validate';
+                    var inputHandler = "_" + typeAttr + "Validate";
                     switch (typeAttr) {
                         case "number":
                             $(item).on({
@@ -997,10 +1009,10 @@ var Order = function () {
                             $(item).on('blur.Order', $.proxy(_this[inputHandler], _this));
                             break;
                         default:
-                            throw new Error('Input with type ' + typeAttr + ' does not not process ');
+                            throw new Error("Input with type " + typeAttr + " does not not process ");
 
                     }
-                    if (_this[inputHandler] === undefined) throw new Error('Input validate handler ' + inputHandler + ' does not exists.');
+                    if (_this[inputHandler] === undefined) throw new Error("Input validate handler " + inputHandler + " does not exists.");
                 });
             } catch (e) {
                 console.log(e.message);
@@ -1008,57 +1020,70 @@ var Order = function () {
             return this;
         }
     }, {
-        key: 'send',
+        key: "send",
         value: function send() {
             //console.log(this._ajaxSend());
-            this._sendAjaxBtn$.on('click.Order-send-ajax', $.proxy(this._ajaxSend));
+            this._sendAjaxBtn$.on('click.Order-send-ajax', $.proxy(this._ajaxSend, this));
         }
     }, {
-        key: '_numberValidate',
+        key: "_numberValidate",
         value: function _numberValidate(event) {
             var target$ = $(event.target);
             if (Order._regexpValidate(target$, /[0-9]*/) !== null) this._inputNumberPrevValue = target$.val();
             target$.val(this._inputNumberPrevValue);
             this._setTotalPrice(this._inputNumberPrevValue);
+            this._orderObj.t_shirt.qty = parseInt(this._inputNumberPrevValue);
+            this._orderObj.t_shirt.totalPrice = parseFloat(this._price$.text());
             this.isValid();
         }
     }, {
-        key: '_setTotalPrice',
+        key: "_setTotalPrice",
         value: function _setTotalPrice(productCount) {
             var _this2 = this;
 
-            this._totalPriceElem$.text(function () {
-                return (productCount * parseFloat(_this2._totalPriceElem$.data('start-price'))).toFixed(2) + ' \u0440\u0443\u0431.';
+            this._price$.text(function () {
+                return (productCount * parseFloat(_this2._price$.data('start-price'))).toFixed(2) + " \u0440\u0443\u0431.";
             });
         }
     }, {
-        key: '_textValidate',
-        value: function _textValidate() {
+        key: "_textValidate",
+        value: function _textValidate(event) {
+            this._orderObj.customer.name = $(event.target).val();
             this.isValid();
         }
     }, {
-        key: '_telValidate',
+        key: "_telValidate",
         value: function _telValidate(event) {
 
-            if (Order._regexpValidate($(event.target), /^\+375\d{9}/) === null) $(event.target).val('+375');
+            if (Order._regexpValidate($(event.target), /^\+375\d{9}$/) === null) {
+                $(event.target).val('+375');
+                this._orderObj.customer.phone = "";
+                return false;
+            }
+            this._orderObj.customer.phone = $(event.target).val();
             this.isValid();
         }
     }, {
-        key: '_emailValidate',
+        key: "_emailValidate",
         value: function _emailValidate(event) {
 
-            if (Order._regexpValidate($(event.target), /.+@.+\..+/i) === null) $(event.target).val('');
+            if (Order._regexpValidate($(event.target), /.+@.+\..+/i) === null) {
+                $(event.target).val('');
+                this._orderObj.customer.email = "";
+                return false;
+            }
+            this._orderObj.customer.email = $(event.target).val();
             this.isValid();
         }
     }, {
-        key: '_getOrderSize',
+        key: "_getOrderSize",
         value: function _getOrderSize() {
             return this._validateSizeOrderContainer$.find('li').filter(function (_, item) {
                 return $(item).hasClass('active');
             });
         }
     }, {
-        key: 'isValid',
+        key: "isValid",
         value: function isValid() {
             var valid = true;
             this._validateInputCollection$.each(function (_, item) {
@@ -1067,32 +1092,42 @@ var Order = function () {
                     return false;
                 }
             });
-            console.log(this._getOrderSize());
             if (!this._getOrderSize().length) valid = false;
-            valid === true ? this._sendAjaxBtn$.removeClass('disabled') : this._sendAjaxBtn$.addClass('disabled');
+            valid === true ? this._sendAjaxBtn$.removeClass('disable') : this._sendAjaxBtn$.addClass('disable');
         }
     }, {
-        key: '_ajaxSend',
+        key: "_ajaxSend",
         value: function _ajaxSend(event) {
+            this.isValid();
             var target = $(event.target);
-            if (target.hasClass('disabled')) return false;
-            console.log(JSON.stringify({
-                "t_shirt": {
-                    "name": this._ajaxData.t_shirt_name,
-                    "color": this._ajaxData.t_shirt_color,
-                    "size": this._getOrderSize(),
-                    "qty": this._ajaxData.t_shirt_qty,
-                    "totalPrice": this._totalPriceElem$.data('start-price')
+            if (target.hasClass('disable')) return false;
+            console.dir(JSON.stringify(this._orderObj).length);
+            this._settingAjax();
+        }
+    }, {
+        key: "_settingAjax",
+        value: function _settingAjax() {
+
+            $.ajax({
+                type: "POST",
+                url: '/order',
+                data: JSON.stringify(this._orderObj),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json',
+                    'charset': 'utf-8',
+                    'Accept': 'application/json'
                 },
-                "customer": {
-                    "name": this._ajaxData.customer_name,
-                    "phone": this._ajaxData.customer_phone,
-                    "email": this._ajaxData.customer_email
+                success: function success(data) {
+                    console.log(data);
+                },
+                error: function error(data, textStatus, errorThrown) {
+                    console.log(errorThrown);
                 }
-            }));
+            });
         }
     }], [{
-        key: '_regexpValidate',
+        key: "_regexpValidate",
         value: function _regexpValidate(target$, regex) {
             return target$.val().match(regex);
         }
