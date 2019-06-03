@@ -61,7 +61,7 @@ import {Order} from './components/classes/Order.class.js';
                             itemNameSelector: '.cards__item-name>p'
                         },
                         modalWindowsOptions: {
-                            classes: ['modal-clothes_size', 'modal-product_description', 'modal-product_order'],
+                            classes: ['modal-clothes_size', 'modal-product_description', 'modal-product_order','modal-confirm'],
                             closeButton: 'content__close-window',
                             modalClothesSizeWindow: {
                                 sizeTable: {

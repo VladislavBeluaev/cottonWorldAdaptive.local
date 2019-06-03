@@ -241,7 +241,7 @@ class ModalWindows {
 
         });
         $(`.${this._modalProductOrder.ajaxSendData.orderPrice} li`).text('0 руб.');
-        $(`.${this._modalProductOrder.ajaxSendData.button}`).addClass('disabled');
+        $(`.${this._modalProductOrder.ajaxSendData.button}`).addClass('disable');
 
     }
 

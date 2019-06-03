@@ -140,7 +140,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         itemNameSelector: '.cards__item-name>p'
                     },
                     modalWindowsOptions: {
-                        classes: ['modal-clothes_size', 'modal-product_description', 'modal-product_order'],
+                        classes: ['modal-clothes_size', 'modal-product_description', 'modal-product_order', 'modal-confirm'],
                         closeButton: 'content__close-window',
                         modalClothesSizeWindow: {
                             sizeTable: {
@@ -818,7 +818,7 @@ var ModalWindows = function () {
                 $(item).attr('type') === 'tel' ? $(item).val('+375') : $(item).val('');
             });
             $('.' + this._modalProductOrder.ajaxSendData.orderPrice + ' li').text('0 руб.');
-            $('.' + this._modalProductOrder.ajaxSendData.button).addClass('disabled');
+            $('.' + this._modalProductOrder.ajaxSendData.button).addClass('disable');
         }
     }, {
         key: '_getCurrentProductCard',
@@ -955,7 +955,7 @@ var Order = function () {
         //this._ajaxData = settings.ajax;
         this._price$ = settings.t_shirt.price;
         this._sendAjaxBtn$ = settings.order.send;
-        this._orderObj = {
+        /*this._orderObj = {
             t_shirt: {
                 name: settings.t_shirt.name,
                 color: settings.t_shirt.color,
@@ -968,6 +968,16 @@ var Order = function () {
                 phone: "",
                 email: ""
             }
+        };*/
+        this._orderObj = {
+            t_shirt_name: settings.t_shirt.name,
+            t_shirt_color: settings.t_shirt.color,
+            t_shirt_size: "",
+            t_shirt_qty: 0,
+            t_shirt_totalPrice: 0,
+            customer_name: "",
+            customer_phone: "",
+            customer_email: ""
         };
         this._inputNumberPrevValue = '';
     }
@@ -982,7 +992,7 @@ var Order = function () {
                 this._validateSizeOrderContainer$.on('click.Order', 'li', function () {
                     setTimeout(function () {
                         self.isValid();
-                        self._orderObj.t_shirt.size = self._getOrderSize().text();
+                        self._orderObj.t_shirt_size = self._getOrderSize().text();
                     }, 0);
                 });
                 this._validateInputCollection$.each(function (_, item) {
@@ -1032,8 +1042,8 @@ var Order = function () {
             if (Order._regexpValidate(target$, /[0-9]*/) !== null) this._inputNumberPrevValue = target$.val();
             target$.val(this._inputNumberPrevValue);
             this._setTotalPrice(this._inputNumberPrevValue);
-            this._orderObj.t_shirt.qty = parseInt(this._inputNumberPrevValue);
-            this._orderObj.t_shirt.totalPrice = parseFloat(this._price$.text());
+            this._orderObj.t_shirt_qty = parseInt(this._inputNumberPrevValue);
+            this._orderObj.t_shirt_totalPrice = parseFloat(this._price$.text());
             this.isValid();
         }
     }, {
@@ -1048,7 +1058,7 @@ var Order = function () {
     }, {
         key: "_textValidate",
         value: function _textValidate(event) {
-            this._orderObj.customer.name = $(event.target).val();
+            this._orderObj.customer_name = $(event.target).val();
             this.isValid();
         }
     }, {
@@ -1057,10 +1067,10 @@ var Order = function () {
 
             if (Order._regexpValidate($(event.target), /^\+375\d{9}$/) === null) {
                 $(event.target).val('+375');
-                this._orderObj.customer.phone = "";
+                this._orderObj.customer_phone = "";
                 return false;
             }
-            this._orderObj.customer.phone = $(event.target).val();
+            this._orderObj.customer_phone = $(event.target).val();
             this.isValid();
         }
     }, {
@@ -1069,10 +1079,10 @@ var Order = function () {
 
             if (Order._regexpValidate($(event.target), /.+@.+\..+/i) === null) {
                 $(event.target).val('');
-                this._orderObj.customer.email = "";
+                this._orderObj.customer_email = "";
                 return false;
             }
-            this._orderObj.customer.email = $(event.target).val();
+            this._orderObj.customer_email = $(event.target).val();
             this.isValid();
         }
     }, {
@@ -1102,11 +1112,15 @@ var Order = function () {
             var target = $(event.target);
             if (target.hasClass('disable')) return false;
             console.dir(JSON.stringify(this._orderObj).length);
-            this._settingAjax();
+            try {
+                this._settingAjax(target);
+            } catch (e) {
+                console.log(e.message);
+            }
         }
     }, {
         key: "_settingAjax",
-        value: function _settingAjax() {
+        value: function _settingAjax(target) {
 
             $.ajax({
                 type: "POST",
@@ -1118,8 +1132,12 @@ var Order = function () {
                     'charset': 'utf-8',
                     'Accept': 'application/json'
                 },
-                success: function success(data) {
-                    console.log(data);
+                success: function success(response) {
+                    if (response) {
+                        var confirmMW$ = $("." + $(target).data('open-modal'));
+                        if (!confirmMW$.length) throw new Error('Data open-modal attribute is not set');
+                        confirmMW$;
+                    }
                 },
                 error: function error(data, textStatus, errorThrown) {
                     console.log(errorThrown);

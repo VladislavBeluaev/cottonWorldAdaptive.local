@@ -17,6 +17,7 @@
                 @include('user.layouts.modalWindows.clothes_table_size')
                 @include('user.layouts.modalWindows.product_description')
                 @include('user.layouts.modalWindows.order')
+                @include('user.layouts.modalWindows.confirm')
                 <div class="content__cards grid">
                     @foreach($t_shirt['relation'] as $color=>$img)
                     <div class="cards__item">

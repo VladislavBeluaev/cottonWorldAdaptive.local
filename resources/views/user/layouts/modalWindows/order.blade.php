@@ -49,7 +49,7 @@
                     </ul>
                 </li>
             </ul>
-            <button type="button" class="btn btn-success btn-sm disable send-request" >Заказать</button>
+            <button type="button" class="btn btn-success btn-sm disable send-request" data-open-modal="modal-confirm">Заказать</button>
         </div>
     </div>
 </div>

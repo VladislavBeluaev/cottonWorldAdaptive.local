@@ -21,6 +21,21 @@ class DashboardController extends Controller
 
     function index()
     {
+        $arr = [
+            "t_shirt" => [
+        "name" => "Футболка мужская",
+    "color" => "красный",
+    "size" => "s",
+    "qty" => 2,
+    "totalPrice" => 13,
+  ],
+  "customer" => [
+        "name" => "sdsdsd",
+    "phone" => "+375333333333",
+    "email" => "a@a.ccom"
+  ]
+];
+
         /*$arr = [
           [1,2,8,12,13,14,15],
             [1,2,5,7,8,12,13,15],

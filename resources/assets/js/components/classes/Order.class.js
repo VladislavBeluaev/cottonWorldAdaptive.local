@@ -8,7 +8,7 @@ class Order {
         //this._ajaxData = settings.ajax;
         this._price$ = settings.t_shirt.price;
         this._sendAjaxBtn$ = settings.order.send;
-        this._orderObj = {
+        /*this._orderObj = {
             t_shirt: {
                 name: settings.t_shirt.name,
                 color: settings.t_shirt.color,
@@ -21,6 +21,16 @@ class Order {
                 phone: "",
                 email: ""
             }
+        };*/
+        this._orderObj = {
+            t_shirt_name: settings.t_shirt.name,
+            t_shirt_color: settings.t_shirt.color,
+            t_shirt_size: "",
+            t_shirt_qty: 0,
+            t_shirt_totalPrice: 0,
+            customer_name: "",
+            customer_phone: "",
+            customer_email: ""
         };
         this._inputNumberPrevValue = '';
     }
@@ -31,7 +41,7 @@ class Order {
             this._validateSizeOrderContainer$.on('click.Order', 'li', function () {
                 setTimeout(function () {
                     self.isValid();
-                    self._orderObj.t_shirt.size = self._getOrderSize().text();
+                    self._orderObj.t_shirt_size = self._getOrderSize().text();
                 }, 0);
             });
             this._validateInputCollection$.each((_, item) => {
@@ -82,8 +92,8 @@ class Order {
             this._inputNumberPrevValue = target$.val();
         target$.val(this._inputNumberPrevValue);
         this._setTotalPrice(this._inputNumberPrevValue);
-        this._orderObj.t_shirt.qty = parseInt(this._inputNumberPrevValue);
-        this._orderObj.t_shirt.totalPrice = parseFloat(this._price$.text());
+        this._orderObj.t_shirt_qty = parseInt(this._inputNumberPrevValue);
+        this._orderObj.t_shirt_totalPrice = parseFloat(this._price$.text());
         this.isValid();
     }
 
@@ -94,7 +104,7 @@ class Order {
     }
 
     _textValidate(event) {
-        this._orderObj.customer.name = $(event.target).val();
+        this._orderObj.customer_name = $(event.target).val();
         this.isValid();
     }
 
@@ -102,10 +112,10 @@ class Order {
 
         if (Order._regexpValidate($(event.target), /^\+375\d{9}$/) === null) {
             $(event.target).val('+375');
-            this._orderObj.customer.phone = "";
+            this._orderObj.customer_phone = "";
             return false;
         }
-        this._orderObj.customer.phone = $(event.target).val();
+        this._orderObj.customer_phone = $(event.target).val();
         this.isValid();
     }
 
@@ -113,10 +123,10 @@ class Order {
 
         if (Order._regexpValidate($(event.target), /.+@.+\..+/i) === null) {
             $(event.target).val('');
-            this._orderObj.customer.email = "";
+            this._orderObj.customer_email = "";
             return false;
         }
-        this._orderObj.customer.email = $(event.target).val();
+        this._orderObj.customer_email = $(event.target).val();
         this.isValid();
     }
 
@@ -147,10 +157,16 @@ class Order {
         let target = $(event.target);
         if (target.hasClass('disable')) return false;
         console.dir(JSON.stringify(this._orderObj).length);
-        this._settingAjax();
+        try {
+            this._settingAjax(target);
+        }
+        catch (e){
+            console.log(e.message);
+        }
+
     }
 
-    _settingAjax() {
+    _settingAjax(target) {
 
         $.ajax({
             type: "POST",
@@ -159,11 +175,17 @@ class Order {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 'Content-Type': 'application/json',
-                'charset':'utf-8',
+                'charset': 'utf-8',
                 'Accept': 'application/json'
             },
-            success: function (data) {
-                console.log(data);
+            success: function (response) {
+                if(response){
+                    let confirmMW$ = $(`.${$(target).data('open-modal')}`);
+                    if(!confirmMW$.length) throw new Error('Data open-modal attribute is not set');
+                    confirmMW$
+                }
+
+
             },
             error: function (data, textStatus, errorThrown) {
                 console.log(errorThrown);
