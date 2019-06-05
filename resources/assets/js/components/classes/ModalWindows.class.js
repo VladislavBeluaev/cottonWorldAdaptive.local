@@ -31,6 +31,7 @@ class ModalWindows {
             .on('click.ModalWindow-confirm', $.proxy(this._confirmBtnHandler, this));
         $(`.${this._modalProductOrder.ajaxSendData.orderSize}`).on('click.ModalWindow-order-size',
             {style: this._modalProductOrder.ajaxSendData.selectedItem}, ModalWindows._orderSelectSizeHandler);
+        $(`.${this._modalProductOrder.ajaxSendData.button}`).on('ajaxResult.ModalWindow',$.proxy(this._orderBtnHandler,this));
     }
 
     _openHandler(event) {
@@ -73,9 +74,17 @@ class ModalWindows {
             console.log(e.message);
         }
     }
-
+    _orderBtnHandler(event){
+        try {
+            this._orderBtn.call(this,event);
+        }
+        catch (e) {
+            console.log(e.message);
+        }
+    }
     _openMW(event) {
         let target = event.target;
+        console.log(target.closest(this._containerCallingMW));
         if (target.closest(this._containerCallingMW) === null) return false;
         this._cardOpenedMW$ = this._getCurrentProductCard(target);
         this._setSelectedProductData(this._getItemColor(target));
@@ -194,6 +203,15 @@ class ModalWindows {
         $(`.${this._modalWindowsOptions.closeButton}`).trigger('click.ModalWindow-close');
         this._cardOpenedMW$.find("[data-modal-open='modal-product_order']>button").trigger('click.ModalWindows-open');
     }
+    _orderBtn(event){
+        let target = event.target;
+        if(target.tagName!=='BUTTON') return false;
+        /*let confirmMW$ = $(`.${$(target).data('open-modal')}`);
+        if(!confirmMW$.length) throw new Error('Data open-modal attribute is not set');*/
+        this._getCurrentOpenMW().find(`.${this._modalWindowsOptions.closeButton}`).trigger('click.ModalWindow-close');
+        console.log(target);
+        $(target).trigger('click.ModalWindows-open');
+    }
 
     static _selectedSizeHandler(...args) {
         let [event, button, selectedSizeClass] = args;
@@ -242,6 +260,9 @@ class ModalWindows {
         });
         $(`.${this._modalProductOrder.ajaxSendData.orderPrice} li`).text('0 руб.');
         $(`.${this._modalProductOrder.ajaxSendData.button}`).addClass('disable');
+
+    }
+    _resetConfirm(){
 
     }
 

@@ -180,9 +180,11 @@ class Order {
             },
             success: function (response) {
                 if(response){
-                    let confirmMW$ = $(`.${$(target).data('open-modal')}`);
+                    //console.log(target);
+                    $(target).trigger('ajaxResult.ModalWindow');
+                    /*let confirmMW$ = $(`.${$(target).data('open-modal')}`);
                     if(!confirmMW$.length) throw new Error('Data open-modal attribute is not set');
-                    confirmMW$
+                    confirmMW$*/
                 }
 
 

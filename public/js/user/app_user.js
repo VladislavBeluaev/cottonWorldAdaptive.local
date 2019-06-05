@@ -653,6 +653,7 @@ var ModalWindows = function () {
             $('.' + this._modalClothesSizeWindow.orderCheckout.container).on('click.ModalWindow-checkout', $.proxy(this._checkoutBtnHandler, this));
             $('.' + this._modalClothesSizeWindow.orderConfirm.container + ',.' + this._modalProductDescription.container).on('click.ModalWindow-confirm', $.proxy(this._confirmBtnHandler, this));
             $('.' + this._modalProductOrder.ajaxSendData.orderSize).on('click.ModalWindow-order-size', { style: this._modalProductOrder.ajaxSendData.selectedItem }, ModalWindows._orderSelectSizeHandler);
+            $('.' + this._modalProductOrder.ajaxSendData.button).on('ajaxResult.ModalWindow', $.proxy(this._orderBtnHandler, this));
         }
     }, {
         key: '_openHandler',
@@ -698,9 +699,19 @@ var ModalWindows = function () {
             }
         }
     }, {
+        key: '_orderBtnHandler',
+        value: function _orderBtnHandler(event) {
+            try {
+                this._orderBtn.call(this, event);
+            } catch (e) {
+                console.log(e.message);
+            }
+        }
+    }, {
         key: '_openMW',
         value: function _openMW(event) {
             var target = event.target;
+            console.log(target.closest(this._containerCallingMW));
             if (target.closest(this._containerCallingMW) === null) return false;
             this._cardOpenedMW$ = this._getCurrentProductCard(target);
             this._setSelectedProductData(this._getItemColor(target));
@@ -799,6 +810,17 @@ var ModalWindows = function () {
             this._cardOpenedMW$.find("[data-modal-open='modal-product_order']>button").trigger('click.ModalWindows-open');
         }
     }, {
+        key: '_orderBtn',
+        value: function _orderBtn(event) {
+            var target = event.target;
+            if (target.tagName !== 'BUTTON') return false;
+            /*let confirmMW$ = $(`.${$(target).data('open-modal')}`);
+            if(!confirmMW$.length) throw new Error('Data open-modal attribute is not set');*/
+            this._getCurrentOpenMW().find('.' + this._modalWindowsOptions.closeButton).trigger('click.ModalWindow-close');
+            console.log(target);
+            $(target).trigger('click.ModalWindows-open');
+        }
+    }, {
         key: '_resetClothes_size',
         value: function _resetClothes_size() {
             this._getClotheSizeCollection().removeAttr('style').off('mouseover.ModalWindow-select-size mouseout.ModalWindow-select-size click.ModalWindow-select-size');
@@ -820,6 +842,9 @@ var ModalWindows = function () {
             $('.' + this._modalProductOrder.ajaxSendData.orderPrice + ' li').text('0 руб.');
             $('.' + this._modalProductOrder.ajaxSendData.button).addClass('disable');
         }
+    }, {
+        key: '_resetConfirm',
+        value: function _resetConfirm() {}
     }, {
         key: '_getCurrentProductCard',
         value: function _getCurrentProductCard(target) {
@@ -1134,9 +1159,11 @@ var Order = function () {
                 },
                 success: function success(response) {
                     if (response) {
-                        var confirmMW$ = $("." + $(target).data('open-modal'));
-                        if (!confirmMW$.length) throw new Error('Data open-modal attribute is not set');
-                        confirmMW$;
+                        //console.log(target);
+                        $(target).trigger('ajaxResult.ModalWindow');
+                        /*let confirmMW$ = $(`.${$(target).data('open-modal')}`);
+                        if(!confirmMW$.length) throw new Error('Data open-modal attribute is not set');
+                        confirmMW$*/
                     }
                 },
                 error: function error(data, textStatus, errorThrown) {
