@@ -533,7 +533,7 @@ footer .footer__content p:first-child {
 }
 footer .footer__content p:last-child span {
   font-family: 'Roboto Slab', serif;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 600;
   line-height: 32px;
   text-transform: none;
@@ -1290,13 +1290,15 @@ footer .footer__content p:last-child span {
   border-radius: 5px;
   -webkit-box-shadow: -2px 9px 9px 0 rgba(0, 0, 0, 0.66);
   box-shadow: -2px 9px 9px 0px rgba(0, 0, 0, 0.66);
+  -webkit-box-shadow: -1px 2px 9px 0px rgba(0, 0, 0, 0.66);
+  box-shadow: -1px 2px 9px 0px rgba(0, 0, 0, 0.66);
   top: 20%;
   left: 30%;
   width: 50%;
 }
 .modal-confirm .confirm_description__content {
   grid-template-columns: 1fr;
-  grid-template-rows: 0.5fr 1fr 0.2fr;
+  grid-template-rows: 0.5fr 1fr 0.5fr;
   justify-items: right;
 }
 .modal-confirm .confirm_description__content .content__close-window {
@@ -1348,6 +1350,9 @@ footer .footer__content p:last-child span {
   -webkit-box-shadow: 0 0 4px rgba(10, 10, 10, 0.5);
           box-shadow: 0 0 4px rgba(10, 10, 10, 0.5);
   border: none!important;
+}
+.error-input-field {
+  color: red;
 }
 /*==========  Desktop First  ==========*/
 /* Large Devices, Wide Screens */

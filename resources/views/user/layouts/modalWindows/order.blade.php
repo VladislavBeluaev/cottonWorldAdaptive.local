@@ -8,7 +8,7 @@
             <ul class="order-ajax-send">
                 <li class="grid"><span>Название</span><span>{{$t_shirt['name']}}</span></li>
                 <li class="grid"><span>Цвет</span><span>красный</span></li>
-                <li class="description__order-size"><span> Выберите размер</span>
+                <li class="description__order-size valid-hint"><span> Выберите размер</span>
                     <ul class="grid">
                         <li>xs</li>
                         <li>s</li>
@@ -22,7 +22,7 @@
                         <li>6xl</li>
                     </ul>
                 </li>
-                <li class="description__order-qty"><span>Укажите количество</span>
+                <li class="description__order-qty valid-hint"><span>Укажите количество</span>
                     <ul>
                         <li><input type="number" name="t_shirt_qty" placeholder="1"></li>
                     </ul>
@@ -32,24 +32,24 @@
                         <li data-start-price="{{$t_shirt['price']}}">0 руб.</li>
                     </ul>
                 </li>
-                <li><span>Введите ваше имя</span>
+                <li class="valid-hint"><span>Введите ваше имя</span>
                     <ul>
                         <li><input type="text" name="customer_name" placeholder="имя" required></li>
                     </ul>
                 </li>
-                <li><span>Введите ваш контактный телефон</span>
+                <li class="valid-hint"><span>Введите ваш контактный телефон</span>
                     <ul>
                         <li>
                             <input type="tel" name="customer_phone" placeholder="телефон" value="+375" required></li>
                     </ul>
                 </li>
-                <li><span>Введите ваш email</span>
+                <li class="valid-hint"><span>Введите ваш email</span>
                     <ul>
                         <li><input type="email" name="customer_email" placeholder="email" required></li>
                     </ul>
                 </li>
             </ul>
-            <button type="button" class="btn btn-success btn-sm disable send-request" data-open-modal="modal-confirm">Заказать</button>
+            <button type="button" class="btn btn-success btn-sm disable send-request">Заказать</button>
         </div>
     </div>
 </div>

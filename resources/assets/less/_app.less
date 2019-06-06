@@ -206,7 +206,7 @@ footer {
       }
       &:last-child {
         span {
-          .fontSettings(@footerFont, 18px, bold, 32px, none);
+          .fontSettings(@footerFont, 15px, bold, 32px, none);
           color: @menuItemHoverColor;
         }
       }
@@ -685,12 +685,13 @@ footer {
 }
 .modal-confirm {
   .modal-default-settings;
+  .box-shadow;
   top: 20%;
   left: 30%;
   width:50%;
   .confirm_description__content{
     grid-template-columns: 1fr;
-    grid-template-rows: 0.5fr 1fr 0.2fr;
+    grid-template-rows: 0.5fr 1fr 0.5fr;
     justify-items: right;
     .content__close-window {
       padding-right: @defaultGutter/4;
@@ -722,6 +723,9 @@ footer {
   outline: 5px solid #555;
   box-shadow: 0 0 4px rgba(10, 10, 10, 0.5);
   border: none!important;
+}
+.error-input-field{
+  color:@error;
 }
 
 @import "_media";

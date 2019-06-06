@@ -3,11 +3,14 @@
  */
 class Order {
     constructor(settings) {
-        this._validateInputCollection$ = $(`${settings.validate.elements.inputs}`, `.${settings.validate.container}`);
-        this._validateSizeOrderContainer$ = $(`${settings.validate.elements.li}`, `.${settings.validate.container}`);
+        this._orderContainerClassName = $(`.${settings.validate.container}`);
+        this._validateInputCollection$ = $(`${settings.validate.elements.inputs}`, this._orderContainerClassName);
+        this._validateSizeOrderContainer$ = $(`${settings.validate.elements.li}`, this._orderContainerClassName);
         //this._ajaxData = settings.ajax;
         this._price$ = settings.t_shirt.price;
         this._sendAjaxBtn$ = settings.order.send;
+        this._errorHint$ = settings.order.errorHint.container;
+        this._errorHintClassName = `${settings.order.errorHint.className}`;
         /*this._orderObj = {
             t_shirt: {
                 name: settings.t_shirt.name,
@@ -42,7 +45,12 @@ class Order {
                 setTimeout(function () {
                     self.isValid();
                     self._orderObj.t_shirt_size = self._getOrderSize().text();
+                    self._hasErrorHint(self._validateSizeOrderContainer$);
                 }, 0);
+            });
+            this._validateInputCollection$.on('focus.Order',function(event){
+               let inputLabel$ = $(event.target).closest(`.${self._errorHint$}`);
+                self._hasErrorHint(inputLabel$);
             });
             this._validateInputCollection$.each((_, item) => {
                 let typeAttr = item.getAttribute('type');
@@ -82,14 +90,13 @@ class Order {
     }
 
     send() {
-        //console.log(this._ajaxSend());
         this._sendAjaxBtn$.on('click.Order-send-ajax', $.proxy(this._ajaxSend, this));
     }
 
     _numberValidate(event) {
         let target$ = $(event.target);
-        if (Order._regexpValidate(target$, /[0-9]*/) !== null)
-            this._inputNumberPrevValue = target$.val();
+        if (Order._regexpValidate(target$, /[1-9]*/) !== null)
+            this._inputNumberPrevValue = Order._regexpValidate(target$, /[1-9]*/)[0];
         target$.val(this._inputNumberPrevValue);
         this._setTotalPrice(this._inputNumberPrevValue);
         this._orderObj.t_shirt_qty = parseInt(this._inputNumberPrevValue);
@@ -151,11 +158,27 @@ class Order {
         if (!this._getOrderSize().length) valid = false;
         valid === true ? this._sendAjaxBtn$.removeClass('disable') : this._sendAjaxBtn$.addClass('disable');
     }
+    _getInvalidCollection(){
+       let invalidFields$ = this._validateInputCollection$.filter((_,item)=>{
+           return  $(item).val() === '' || $(item).val() === '+375';
+        });
+        invalidFields$.each((_,item)=>{
+            $(item).closest(`.${this._errorHint$}`).addClass(this._errorHintClassName);
+        });
+        if (!this._getOrderSize().length) this._validateSizeOrderContainer$.addClass(this._errorHintClassName);
+    }
+    _hasErrorHint(label$){
+        if(label$.hasClass(this._errorHintClassName))
+            label$.removeClass(this._errorHintClassName);
+    }
 
     _ajaxSend(event) {
         this.isValid();
         let target = $(event.target);
-        if (target.hasClass('disable')) return false;
+        if (target.hasClass('disable')) {
+            this._getInvalidCollection();
+            return false;
+        }
         console.dir(JSON.stringify(this._orderObj).length);
         try {
             this._settingAjax(target);

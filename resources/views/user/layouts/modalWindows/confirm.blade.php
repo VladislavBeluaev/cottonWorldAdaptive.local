@@ -10,7 +10,7 @@
             <p>
                 Наш менеджер свяжется с Вами в ближайшее время.
             </p>
-            <button class="btn btn-info btn-sm" data-open-modal="modal-product_order-withoutSetSize">Продолжить покупки</button>
+            {{--<button class="btn btn-info btn-sm" data-open-modal="modal-product_order-withoutSetSize">Продолжить покупки</button>--}}
         </div>
     </div>
 </div>

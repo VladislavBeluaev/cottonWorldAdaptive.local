@@ -44,6 +44,7 @@
                         <div class="cards__item-order" data-modal-open="modal-product_order">
                             <button type="button" class="btn btn-success btn-sm">Оформить заказ</button>
                         </div>
+                        <button class="d-none" data-modal-open="modal-confirm"></button>
                     </div>
                         @endforeach
                 </div>

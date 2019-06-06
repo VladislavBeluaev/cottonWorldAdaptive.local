@@ -123,7 +123,11 @@ import {Order} from './components/classes/Order.class.js';
                         price:$("[data-start-price]")
                     },
                     order:{
-                        send:$('button.send-request')
+                        send:$('button.send-request'),
+                        errorHint:{
+                            container:'valid-hint',
+                            className:'error-input-field'
+                        }
                     }
 
                 })).validate().send();

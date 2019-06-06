@@ -209,8 +209,9 @@ class ModalWindows {
         /*let confirmMW$ = $(`.${$(target).data('open-modal')}`);
         if(!confirmMW$.length) throw new Error('Data open-modal attribute is not set');*/
         this._getCurrentOpenMW().find(`.${this._modalWindowsOptions.closeButton}`).trigger('click.ModalWindow-close');
-        console.log(target);
-        $(target).trigger('click.ModalWindows-open');
+        let triggerBtn$ = $("[data-modal-open='modal-confirm']",this._cardOpenedMW$);
+        if(!triggerBtn$.length) throw new Error('Data open-modal attribute is not set');
+        triggerBtn$.trigger('click.ModalWindows-open');
     }
 
     static _selectedSizeHandler(...args) {

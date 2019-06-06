@@ -201,7 +201,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         price: $("[data-start-price]")
                     },
                     order: {
-                        send: $('button.send-request')
+                        send: $('button.send-request'),
+                        errorHint: {
+                            container: 'valid-hint',
+                            className: 'error-input-field'
+                        }
                     }
 
                 }).validate().send();
@@ -817,8 +821,9 @@ var ModalWindows = function () {
             /*let confirmMW$ = $(`.${$(target).data('open-modal')}`);
             if(!confirmMW$.length) throw new Error('Data open-modal attribute is not set');*/
             this._getCurrentOpenMW().find('.' + this._modalWindowsOptions.closeButton).trigger('click.ModalWindow-close');
-            console.log(target);
-            $(target).trigger('click.ModalWindows-open');
+            var triggerBtn$ = $("[data-modal-open='modal-confirm']", this._cardOpenedMW$);
+            if (!triggerBtn$.length) throw new Error('Data open-modal attribute is not set');
+            triggerBtn$.trigger('click.ModalWindows-open');
         }
     }, {
         key: '_resetClothes_size',
@@ -975,11 +980,14 @@ var Order = function () {
     function Order(settings) {
         _classCallCheck(this, Order);
 
-        this._validateInputCollection$ = $("" + settings.validate.elements.inputs, "." + settings.validate.container);
-        this._validateSizeOrderContainer$ = $("" + settings.validate.elements.li, "." + settings.validate.container);
+        this._orderContainerClassName = $("." + settings.validate.container);
+        this._validateInputCollection$ = $("" + settings.validate.elements.inputs, this._orderContainerClassName);
+        this._validateSizeOrderContainer$ = $("" + settings.validate.elements.li, this._orderContainerClassName);
         //this._ajaxData = settings.ajax;
         this._price$ = settings.t_shirt.price;
         this._sendAjaxBtn$ = settings.order.send;
+        this._errorHint$ = settings.order.errorHint.container;
+        this._errorHintClassName = "" + settings.order.errorHint.className;
         /*this._orderObj = {
             t_shirt: {
                 name: settings.t_shirt.name,
@@ -1018,7 +1026,12 @@ var Order = function () {
                     setTimeout(function () {
                         self.isValid();
                         self._orderObj.t_shirt_size = self._getOrderSize().text();
+                        self._hasErrorHint(self._validateSizeOrderContainer$);
                     }, 0);
+                });
+                this._validateInputCollection$.on('focus.Order', function (event) {
+                    var inputLabel$ = $(event.target).closest("." + self._errorHint$);
+                    self._hasErrorHint(inputLabel$);
                 });
                 this._validateInputCollection$.each(function (_, item) {
                     var typeAttr = item.getAttribute('type');
@@ -1057,14 +1070,13 @@ var Order = function () {
     }, {
         key: "send",
         value: function send() {
-            //console.log(this._ajaxSend());
             this._sendAjaxBtn$.on('click.Order-send-ajax', $.proxy(this._ajaxSend, this));
         }
     }, {
         key: "_numberValidate",
         value: function _numberValidate(event) {
             var target$ = $(event.target);
-            if (Order._regexpValidate(target$, /[0-9]*/) !== null) this._inputNumberPrevValue = target$.val();
+            if (Order._regexpValidate(target$, /[1-9]*/) !== null) this._inputNumberPrevValue = Order._regexpValidate(target$, /[1-9]*/)[0];
             target$.val(this._inputNumberPrevValue);
             this._setTotalPrice(this._inputNumberPrevValue);
             this._orderObj.t_shirt_qty = parseInt(this._inputNumberPrevValue);
@@ -1131,11 +1143,32 @@ var Order = function () {
             valid === true ? this._sendAjaxBtn$.removeClass('disable') : this._sendAjaxBtn$.addClass('disable');
         }
     }, {
+        key: "_getInvalidCollection",
+        value: function _getInvalidCollection() {
+            var _this3 = this;
+
+            var invalidFields$ = this._validateInputCollection$.filter(function (_, item) {
+                return $(item).val() === '' || $(item).val() === '+375';
+            });
+            invalidFields$.each(function (_, item) {
+                $(item).closest("." + _this3._errorHint$).addClass(_this3._errorHintClassName);
+            });
+            if (!this._getOrderSize().length) this._validateSizeOrderContainer$.addClass(this._errorHintClassName);
+        }
+    }, {
+        key: "_hasErrorHint",
+        value: function _hasErrorHint(label$) {
+            if (label$.hasClass(this._errorHintClassName)) label$.removeClass(this._errorHintClassName);
+        }
+    }, {
         key: "_ajaxSend",
         value: function _ajaxSend(event) {
             this.isValid();
             var target = $(event.target);
-            if (target.hasClass('disable')) return false;
+            if (target.hasClass('disable')) {
+                this._getInvalidCollection();
+                return false;
+            }
             console.dir(JSON.stringify(this._orderObj).length);
             try {
                 this._settingAjax(target);
