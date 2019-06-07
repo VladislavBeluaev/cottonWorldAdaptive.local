@@ -213,7 +213,7 @@ class Order {
 
             },
             error: function (data, textStatus, errorThrown) {
-                console.log(errorThrown);
+                console.log(data.responseJSON.message);
 
             },
         });

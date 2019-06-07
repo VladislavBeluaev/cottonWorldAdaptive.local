@@ -1200,7 +1200,7 @@ var Order = function () {
                     }
                 },
                 error: function error(data, textStatus, errorThrown) {
-                    console.log(errorThrown);
+                    console.log(data.responseJSON.message);
                 }
             });
         }

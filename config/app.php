@@ -177,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\ModelServiceProvider::class,
+        App\Providers\MailServiceProvider::class,
         App\Providers\AjaxServiceProvider::class,
 
     ],
