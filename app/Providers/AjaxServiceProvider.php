@@ -39,13 +39,13 @@ class AjaxServiceProvider extends ServiceProvider
         $this->app->when(AjaxController::class)
             ->needs(Model::class)
             ->give(function () {
-                $this->giveImplementation(Order::class, "Unknown address sending ajax request");
+                return $this->giveImplementation(Order::class, "Unknown address sending ajax request");
             });
-        $this->app->when(AjaxController::class)
+        /*$this->app->when(AjaxController::class)
             ->needs(Mailable::class)
             ->give(function () {
                 $this->giveImplementation(SendMail::class, "Unknown address sending ajax request",Order::class);
-            });
+            });*/
     }
 
     protected function giveImplementation(string $implementation, string $errMsg, $implData = null)

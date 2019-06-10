@@ -3,12 +3,12 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Model;
 
-class SendMail extends Mailable
+class OrderEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -24,7 +24,11 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+       return  $this->from(env('MAIL_USERNAME'),env('APP_NAME'))
+            ->subject("Поступил новый заказ")
+            ->markdown('user.email.order.orderHTML')
+            ->text('user.email.order.orderPlain')
+            ->with([ 'order' => $this->model]);
     }
-    public $model;
+    protected $model;
 }
