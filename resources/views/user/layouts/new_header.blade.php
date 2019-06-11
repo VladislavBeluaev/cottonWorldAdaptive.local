@@ -62,7 +62,7 @@
                 </div>
                 <div class="content__item">
                     <p>
-                        <a href="{{route('user.woman_t_shirts')}}">
+                        <a href="{{route('user.children_t_shirts')}}">
                             <img src="{{asset('images/catalog/child.jpg')}}" alt="child-cart">
                             <img src="{{asset('images/catalog/child_hover.jpg')}}" alt="child-cart" class="d-none">
                             <span>Детские майки</span>

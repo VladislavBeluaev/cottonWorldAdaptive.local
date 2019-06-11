@@ -25,8 +25,10 @@
                             <p><img src="{{asset($img)}}" alt="">
                             </p>
                         </div>
-                        <div class="cards__item-name">
-                            <p>@t_shirtName($t_shirt['name'],$color)</p>
+                        <div class="cards__item-name grid">
+                            {{--<p>@t_shirtName($t_shirt['name'],$color)</p>--}}
+                            <p>{{$t_shirt['name']}}</p>
+                            <p>({{$color}})</p>
                         </div>
                         <div class="cards__item-price">
                             <p>{{$t_shirt['price']}}</p>

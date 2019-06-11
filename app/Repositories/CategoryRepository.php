@@ -27,6 +27,8 @@ class CategoryRepository implements Repository
         }])->first();
         $images = $t_shirt->images()->orderBy('color_id')->get();
         $colors = $t_shirt->colors;
+        //dd($colors);
+        //dd($images);
         $t_shirtArr = ['relation'=>[]];
         foreach (array_filter(Schema::getColumnListing($eloquentRelation),function($modelColumn){
             return in_array($modelColumn,['name','description','material','composition','price','density']);

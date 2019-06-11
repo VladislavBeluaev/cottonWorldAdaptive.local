@@ -44,7 +44,9 @@ class AppServiceProvider extends ServiceProvider
         });
         Blade::directive('t_shirtName', function ($expression) {
             list($t_shirtName, $color) = explode(',', $expression);
-            $callString = "sprintf('%s(%s)', $t_shirtName, $color)";
+            /*$callString = "sprintf('%s(%s)', $t_shirtName, $color)";*/
+            $fullName = str_replace(" "," $color ",$t_shirtName);
+            $callString = "call_user_func('t_shirtNameWithColor',$t_shirtName, $color)";
             return "<?php echo $callString ?>";
         });
     }

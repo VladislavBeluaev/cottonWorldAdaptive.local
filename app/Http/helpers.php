@@ -19,3 +19,8 @@ if(!function_exists("getBladePath")){
         return $pathInfo;
     }
 }
+if(!function_exists("t_shirtNameWithColor")){
+    function t_shirtNameWithColor($name,$color){
+        return str_replace(" "," $color ",$name);
+    }
+}

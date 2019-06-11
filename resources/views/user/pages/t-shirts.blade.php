@@ -1,5 +1,5 @@
 @extends('user.layouts.app_user')
-@section('pageTitle', 'Мужские футболки оптом от производителя')
+@section('pageTitle',"'$page->getTitle()'")
 @section('content')
     <section class="t_shirts" role="main">
         <div class="container">
@@ -7,12 +7,12 @@
                 <div class="breadcrumbs__content">
                     <p><a href="{{route('user.index')}}">Главная</a></p>
                     <p><span class="fas fa-angle-right"></span></p>
-                    <p><a href="@routeTo("t_shirts")"></a>Мужские футболки</p>
+                    <p><a href="@routeTo("t_shirts")"></a>{{$page->getBreadCrumb()}}</p>
                 </div>
             </nav>
             <div class="product_article__content">
                 <div class="content__header">
-                    <h1>мужские футболки</h1>
+                    <h1>{{$page->getMainHeader()}}</h1>
                 </div>
                 @include('user.layouts.modalWindows.clothes_table_size')
                 @include('user.layouts.modalWindows.product_description')

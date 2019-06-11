@@ -722,7 +722,10 @@ footer .footer__content p:last-child span {
   height: auto;
 }
 .t_shirts .product_article__content .content__cards .cards__item .cards__item-name {
-  padding-left: 24px;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(1fr);
+  justify-items: center;
+  /*padding-left: @defaultGutter;*/
 }
 .t_shirts .product_article__content .content__cards .cards__item .cards__item-name p {
   font-family: 'Montserrat', sans-serif;

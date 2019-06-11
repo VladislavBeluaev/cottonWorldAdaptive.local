@@ -326,7 +326,10 @@ footer {
           }
         }
         .cards__item-name {
-          padding-left: @defaultGutter;
+          grid-template-columns: 1fr;
+          grid-template-rows: repeat(1fr);
+          justify-items: center;
+          /*padding-left: @defaultGutter;*/
           p {
             .fontSettings(@productsCardFont, 20px, normal, 32px, none);
           }

@@ -23,7 +23,6 @@ class AjaxController extends Controller
         //$result = false;
         if($result){
             $lastInsertId = DB::getPdo()->lastInsertId();
-            //dd(env('MAIL_ADMIN'));
             Mail::to(env('MAIL_ADMIN'))->send(new OrderEmail($this->model->findOrFail($lastInsertId)));
             echo $result;
             die();

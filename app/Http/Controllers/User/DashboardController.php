@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Interfaces\Repository;
 use App\Http\Controllers\Controller;
+use App\PageBuilder;
 use App\T_shirt;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -13,10 +14,12 @@ use Illuminate\Support\Facades\Schema;
 
 class DashboardController extends Controller
 {
-    function __construct(Repository $repository)
+    function __construct(Repository $repository,PageBuilder $builder)
     {
         $this->repository = $repository;
-        $this->bladePathDir = sprintf("user.%s", getRoutePrefix());
+        $this->bladePath = config('constants.options.user_blade_pages');
+        $this->builder = $builder;
+        /*sprintf("user.%s", getRoutePrefix());*/
     }
 
     function index()
@@ -36,6 +39,7 @@ values($k,$v,now(),now());\r\n",FILE_APPEND);
         }*/
         $callProcedureStr = sprintf("call %s", Config::get('constants.options.procedures.cardSlider'));
         return view('user.main_dashboard', ['t_shirts' => DB::select($callProcedureStr)]);
+
     }
 
     function contacts()
@@ -45,14 +49,16 @@ values($k,$v,now(),now());\r\n",FILE_APPEND);
 
     function allTShirts()
     {
-        //dd($this->repository->all());
-        return view($this->bladePathDir . ".t-shirts", ["t_shirt" => $this->repository->all()]);
+        $blade = sprintf('%s.t-shirts',$this->bladePath);
+        $page = $this->builder->setTitle()->setMainHeader()->setBreadCrumb()->make();
+        //dd($page->getTitle());
+        return view($blade, ["t_shirt" => $this->repository->all(),"page"=>$page]);
     }
 
     function getTShirt(Model $model)
     {
         dd($this->repository->find($model));
-        return view($this->bladePathDir . ".product_article", ["t_shirt" => $this->repository->find($model)]);
+        return view($this->bladePath . ".product_article", ["t_shirt" => $this->repository->find($model)]);
     }
 
     function setOrder(Request $request)
@@ -65,5 +71,6 @@ values($k,$v,now(),now());\r\n",FILE_APPEND);
     }
 
     protected $repository;
-    protected $bladePathDir;
+    protected $bladePath;
+    protected $builder;
 }

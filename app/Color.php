@@ -13,6 +13,6 @@ class Color extends Model
 
     public function getRusNameAttribute($value)
     {
-        return str_replace("ый","ая",$value);
+        return str_replace(["ый","ий"],["ая","яя"],$value);
     }
 }
