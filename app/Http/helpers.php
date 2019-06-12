@@ -24,3 +24,8 @@ if(!function_exists("t_shirtNameWithColor")){
         return str_replace(" "," $color ",$name);
     }
 }
+if(!function_exists("mb_ucfirst")){
+    function mb_ucfirst($value){
+        return mb_strtoupper(mb_substr($value, 0, 1)) . mb_substr($value, 1);
+    }
+}

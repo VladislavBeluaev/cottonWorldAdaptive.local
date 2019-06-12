@@ -13,13 +13,13 @@ class PageBuilder
 {
     public function setTitle()
     {
-        $this->title = ucfirst(config("constants.options.page_titles.".getRoutePrefix()));
+        $this->title = mb_ucfirst(config("constants.options.page_titles.".getRoutePrefix()));
         return $this;
     }
 
     public function setMainHeader()
     {
-        $this->mainHeader = ucfirst(config("constants.options.header.".getRoutePrefix()));
+        $this->mainHeader = mb_ucfirst(config("constants.options.header.".getRoutePrefix()));
         return $this;
     }
 

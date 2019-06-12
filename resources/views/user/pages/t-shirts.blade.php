@@ -1,5 +1,5 @@
 @extends('user.layouts.app_user')
-@section('pageTitle',"'$page->getTitle()'")
+@section('pageTitle',$page->getTitle())
 @section('content')
     <section class="t_shirts" role="main">
         <div class="container">
@@ -7,7 +7,7 @@
                 <div class="breadcrumbs__content">
                     <p><a href="{{route('user.index')}}">Главная</a></p>
                     <p><span class="fas fa-angle-right"></span></p>
-                    <p><a href="@routeTo("t_shirts")"></a>{{$page->getBreadCrumb()}}</p>
+                    <p><a href="@routeTo("t_shirts")"></a>@genderNameShirts</p>
                 </div>
             </nav>
             <div class="product_article__content">
