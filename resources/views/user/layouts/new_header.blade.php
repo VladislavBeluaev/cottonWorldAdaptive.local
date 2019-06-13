@@ -16,6 +16,23 @@
                         <a href="{{route('user.contacts')}}">контакты</a>
                     </li>
                 </ul>
+                <ul role="menubar" class="mobile-menu">
+                    <li role="menuitem">
+                        <a href="" onclick="return false;"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></a>
+                    </li>
+                    <li role="menuitem">
+                        <a href="#">о нас</a>
+                    </li>
+                    <li role="menuitem">
+                        <a href="#">доставка</a>
+                    </li>
+                    <li role="menuitem">
+                        <a href="#">таблица размеров</a>
+                    </li>
+                    <li role="menuitem">
+                        <a href="{{route('user.contacts')}}">контакты</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -23,7 +40,7 @@
         <div class="container">
             <div class="contacts-bar__content grid">
                 <div class="content__logo">
-                    <p><a href="{{route('user.index')}}"><img src="{{asset('images/logo_etalon.PNG')}}" alt="main_logo" class="w-50"></a></p>
+                    <p><a href="{{route('user.index')}}"><img src="{{asset('images/logo_etalon.PNG')}}" alt="main_logo"></a></p>
                 </div>
                 <div class="content__social grid">
                     <p><a href="#"><span class="fab fa-instagram fa-2x"></span></a></p>

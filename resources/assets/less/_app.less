@@ -74,35 +74,61 @@ ul {
     .menubar-fixed;
     width: 100%;
     background-color: @defaultBgColor;
-    ul[role="menubar"] {
-      .menubar-fixed;
-      align-items: center;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: 1fr;
-
-      li[role="menuitem"]:first-child {
-        > a {
-          .underscore-animate(55%);
+    ul[role="menubar"]{
+      &:first-child{
+        .menubar-fixed;
+        align-items: center;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        li[role="menuitem"]:first-child {
+          text-align: left;
+          > a {
+            .underscore-animate(55%);
+          }
+        }
+        li[role="menuitem"]:nth-child(2) {
+          > a {
+            .underscore-animate(72%);
+          }
+        }
+        li[role="menuitem"]:last-child {
+          justify-self: right;
+        }
+        a {
+          color: @menuItemColor;
+          text-decoration: none;
+          .underscore-animate();
         }
       }
-      li[role="menuitem"]:nth-child(2) {
-        > a {
-          .underscore-animate(72%);
-        }
-      }
-      li[role="menuitem"]:last-child {
-        justify-self: right;
-      }
-      a {
-        color: @menuItemColor;
-        text-decoration: none;
-        .underscore-animate();
-      }
-
       /*a:hover{
         color:@menuItemHoverColor;
         border-bottom: 2px solid @menuItemHoverColor;
       }*/
+    }
+    .mobile-menu{
+      display:none;
+      padding-top: 1.5vh;
+      width: 100%;
+      li{
+        text-align: center;
+        padding: 0!important;
+        color:@menuItemColor;
+        &:nth-child(2){
+          margin-top:@defaultGutter*3/4;
+        }
+        &:last-child{
+          margin-bottom:@defaultGutter*3/4;
+        }
+        &:hover{
+          color:@menuItemHoverColor;
+        }
+      }
+      i{
+        color:@menuItemColor;
+        &:hover{
+          color:@menuItemHoverColor;
+        }
+      }
     }
   }
   .banner__contacts-bar {
@@ -114,6 +140,9 @@ ul {
       .content__logo {
         p {
           text-align: right;
+          img{
+            width:@defaultImgWidth;
+          }
         }
       }
       .content__social {
@@ -730,5 +759,4 @@ footer {
 .error-input-field{
   color:@error;
 }
-
 @import "_media";
