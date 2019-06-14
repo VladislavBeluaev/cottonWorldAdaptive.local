@@ -73,6 +73,7 @@ ul {
   > nav {
     .menubar-fixed;
     width: 100%;
+    z-index:@defaultZIndex*2;
     background-color: @defaultBgColor;
     ul[role="menubar"]{
       &:first-child{
@@ -105,31 +106,37 @@ ul {
         border-bottom: 2px solid @menuItemHoverColor;
       }*/
     }
-    .mobile-menu{
+    .mobile-menu-container{
       display:none;
       padding-top: 1.5vh;
       width: 100%;
-      li{
-        text-align: center;
-        padding: 0!important;
+      p{
         color:@menuItemColor;
-        &:nth-child(2){
-          margin-top:@defaultGutter*3/4;
-        }
-        &:last-child{
-          margin-bottom:@defaultGutter*3/4;
-        }
+        text-align: right;
         &:hover{
+          cursor: pointer;
           color:@menuItemHoverColor;
         }
       }
-      i{
-        color:@menuItemColor;
-        &:hover{
-          color:@menuItemHoverColor;
+      .mobile-menu{
+        li{
+          text-align: center;
+          padding: 0!important;
+          color:@menuItemColor;
+          &:first-child{
+            text-align: left;
+          }
+          a{
+            color:@breadcrumbsActiveItemColor;
+            &:hover{
+              color:@menuItemHoverColor;
+            }
+          }
+
         }
       }
     }
+
   }
   .banner__contacts-bar {
     background: url(/images/main_background.png) no-repeat 50% 0;
@@ -202,6 +209,9 @@ ul {
           span {
             display: block;
             .defaultFont;
+            &.mobile-content__item-span{
+              display: none;
+            }
           }
           a:hover {
             span {
@@ -309,6 +319,7 @@ footer {
       a {
         color: inherit;
         .underscore-two-direction-animate(#4f4f4f, #4f4f4f);
+        z-index: @defaultZIndex;
       }
       &:nth-child(2) {
         margin-left: @defaultGutter/6;
