@@ -69,6 +69,9 @@ values($k,$v,now(),now());\r\n",FILE_APPEND);
         echo array_flatten($ajaxData[4]);*/
         //echo $request->post();/*dd();*/
     }
+    function cssGrid(){
+        return view($this->bladePath . ".css_grid");
+    }
 
     protected $repository;
     protected $bladePath;
