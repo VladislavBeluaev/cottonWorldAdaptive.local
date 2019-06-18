@@ -2,3 +2,107 @@
 @import "_mixins.less";
 @import "_functions.less";
 @import "_mobile_media.less";
+
+.adaptive_menu-bg {
+  background-color: @defaultBgColor;
+  position: fixed;
+  width: 100%;
+  ul[role=menubar] {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    justify-items: center;
+    align-items: center;
+    height: @defaultHeight/6;
+    /*padding-left: @defaultGutter*5.5;
+    padding-right: @defaultGutter*5.5;*/
+    a {
+      color: @menuItemColor;
+      text-decoration: none;
+      .underscore-animate();
+    }
+    /*li{
+      //justify-self:center;
+      &:nth-child(2){
+        justify-self: flex-start;
+      }
+      &:nth-child(3){
+          justify-self: flex-end;
+      }
+      &:last-child{
+        justify-self: flex-end;
+      }
+    }*/
+  }
+}
+
+.banner__contacts-bg {
+  background: url(/images/main_background.png) no-repeat 50% 0;
+  height: @defaultHeight;
+  padding-top: @defaultHeight/6;
+  .contacts-wrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    padding-top: @defaultGutter;
+    .contacts__logo {
+      img {
+        width: @defaultImgWidth;
+        height: auto;
+      }
+    }
+    .contacts__social {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr;
+      justify-items: center;
+      a{
+        color:@contactsBarColor;
+        font-weight: normal;
+        &:hover{
+          color: @menuItemHoverColor;
+        }
+      }
+    }
+    .contacts__contact {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(3, 1fr);
+      align-items: flex-start;
+      justify-items: flex-end;
+      
+      a, span {
+        .lhCrop(1.65);
+        .fontSettings(@defaultFontFamily; 24px; bold; @defaultFontLineHeight; none);
+        color: @contactsBarColor
+      }
+      p:nth-child(2), p:last-child {
+        //align-self: center;
+        span, a {
+          font-size: @defaultFontSize;
+        }
+      }
+      a:hover {
+        color: @menuItemHoverColor;
+      }
+    }
+  }
+}
+
+.nav-bar {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  justify-items: center;
+  background-color: #f2f2f2;
+  .box-shadow;
+  .borderSettings(2px solid transparent; .4em);
+  width:70%;
+  margin: auto;
+  padding-top: @defaultGutter;
+  padding-bottom: @defaultGutter;
+  .nav-bar__item {
+
+    p {
+      text-align: center;
+      span {
+        display: block;
+      }
+    }
+  }
+}
