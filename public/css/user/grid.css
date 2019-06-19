@@ -61,21 +61,6 @@
   -webkit-box-shadow: 1px 3px 4px rgba(117, 117, 117, 0.22);
   box-shadow: 1px 3px 4px rgba(117, 117, 117, 0.22);
 }
-/* Extra Small Devices, Phones */
-/**/
-/* Custom, iPhone Retina */
-/**/
-/*==========  Mobile First  ==========*/
-/* Custom, iPhone Retina */
-/**/
-/* Extra Small Devices, Phones */
-/**/
-/* Small Devices, Tablets */
-/**/
-/* Medium Devices, Desktops */
-/**/
-/* Large Devices, Wide Screens */
-/**/
 .adaptive_menu-bg {
   background-color: #f2f2f2;
   position: fixed;
@@ -127,13 +112,58 @@
   width: 100%;
   text-shadow: 1px 1px 1px #ebebeb;
 }
+.adaptive_menu-bg .mobile-menu {
+  display: none;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  padding-top: 1.5vh;
+}
+.adaptive_menu-bg .mobile-menu p {
+  justify-self: flex-end;
+}
+.adaptive_menu-bg .mobile-menu p:hover {
+  cursor: pointer;
+  color: #39B54A;
+}
+.adaptive_menu-bg .mobile-menu .container-fluid {
+  padding-left: 0!important;
+}
+.adaptive_menu-bg .mobile-menu > ul {
+  padding-left: 24px;
+  position: absolute;
+  height: 0;
+  overflow: hidden;
+  width: 100%;
+  top: 55.2px;
+  /*grid-template-columns:1fr;
+      grid-template-rows: repeat(4, 1fr);
+      li{
+        width: inherit;
+      }
+      justify-self:  flex-start;*/
+}
+.adaptive_menu-bg .mobile-menu > ul li {
+  padding: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.adaptive_menu-bg .mobile-menu > ul li:hover {
+  -webkit-box-shadow: -1px 2px 9px 0px rgba(0, 0, 0, 0.66);
+  box-shadow: -1px 2px 9px 0px rgba(0, 0, 0, 0.66);
+}
+.adaptive_menu-bg .mobile-menu > ul li a:hover {
+  color: #999;
+}
+.adaptive_menu-bg .mobile-menu > ul li a:after {
+  background-color: transparent;
+}
 .banner__contacts-bg {
   background: url(/images/main_background.png) no-repeat 50% 0;
   height: 30vh;
   padding-top: 5vh;
 }
 .banner__contacts-bg .contacts-wrapper {
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr;
   padding-top: 24px;
 }
@@ -155,7 +185,7 @@
 }
 .banner__contacts-bg .contacts-wrapper .contacts__contact {
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: 1fr 0.5fr 1fr;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
@@ -187,6 +217,9 @@
 .banner__contacts-bg .contacts-wrapper .contacts__contact a:hover {
   color: #39B54A;
 }
+/*#test{
+  .lhBottomCrop(1.65);
+}*/
 .nav-bar {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr;
@@ -206,4 +239,28 @@
 }
 .nav-bar .nav-bar__item p span {
   display: block;
+  font-family: "PT Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.65;
+  text-transform: uppercase;
+  color: #000;
 }
+.nav-bar .nav-bar__item p a:hover span {
+  color: #39B54A;
+}
+/* Extra Small Devices, Phones */
+/**/
+/* Custom, iPhone Retina */
+/**/
+/*==========  Mobile First  ==========*/
+/* Custom, iPhone Retina */
+/**/
+/* Extra Small Devices, Phones */
+/**/
+/* Small Devices, Tablets */
+/**/
+/* Medium Devices, Desktops */
+/**/
+/* Large Devices, Wide Screens */
+/**/

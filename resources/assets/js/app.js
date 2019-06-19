@@ -1,4 +1,4 @@
-import {Menu} from './components/classes/Menu.class.js';
+import {HamburgerMenu} from './components/classes/HamburgerMenu.class.js';
 import {Slider} from './components/classes/Slider.class.js';
 import {Gallery} from './components/classes/Gallery.class.js';
 import {YandexMap} from './components/classes/YandexMap.class.js';
@@ -7,7 +7,21 @@ import {Order} from './components/classes/Order.class.js';
 (function ($, undefined) {
     $(function () {
         let pathInfo = window.location.pathname.substr(1);
-        (new Menu(
+        (new HamburgerMenu({
+            mobile:{
+                container:"mobile-menu",
+                content:{
+                    container:"ul[role=menubar]",
+                    animateHeight:"230px",
+                    'open-menu':'fa-bars',
+                    'close-menu':'fa-times'
+                },
+                btn:"mobile-menu__toggle"
+            }
+        }).run());
+
+
+        /*(new Menu(
             {
                 resizeControl: {
                     "menuBarFixed__container": "menubar-fixed ul",
@@ -21,7 +35,7 @@ import {Order} from './components/classes/Order.class.js';
 
 
             }
-        )).run();
+        )).run();*/
         (new Gallery(
             {
                 "galleryContainer": "article__container__image",

@@ -78,7 +78,7 @@ module.exports = __webpack_require__(9);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_classes_Menu_class_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_classes_HamburgerMenu_class_js__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_classes_Slider_class_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_classes_Gallery_class_js__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_classes_YandexMap_class_js__ = __webpack_require__(5);
@@ -93,18 +93,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 (function ($, undefined) {
     $(function () {
         var pathInfo = window.location.pathname.substr(1);
-        new __WEBPACK_IMPORTED_MODULE_0__components_classes_Menu_class_js__["a" /* Menu */]({
-            resizeControl: {
-                "menuBarFixed__container": "menubar-fixed ul",
-                "menubarContacts__container": "menubar-contacts__container",
-                "menuBarDefaultContainer": "container"
-            },
-            mouseOverOutControl: {
-                "menubarCatalog__container": "menubar-catalog__wrapper",
-                "menubarCatalog_item": "menubar-catalog_item a"
+        new __WEBPACK_IMPORTED_MODULE_0__components_classes_HamburgerMenu_class_js__["a" /* HamburgerMenu */]({
+            mobile: {
+                container: "mobile-menu",
+                content: {
+                    container: "ul[role=menubar]",
+                    animateHeight: "230px",
+                    'open-menu': 'fa-bars',
+                    'close-menu': 'fa-times'
+                },
+                btn: "mobile-menu__toggle"
             }
-
         }).run();
+
+        /*(new Menu(
+            {
+                resizeControl: {
+                    "menuBarFixed__container": "menubar-fixed ul",
+                    "menubarContacts__container": "menubar-contacts__container",
+                    "menuBarDefaultContainer": "container",
+                },
+                mouseOverOutControl: {
+                    "menubarCatalog__container": "menubar-catalog__wrapper",
+                    "menubarCatalog_item": "menubar-catalog_item a",
+                }
+                }
+        )).run();*/
         new __WEBPACK_IMPORTED_MODULE_2__components_classes_Gallery_class_js__["a" /* Gallery */]({
             "galleryContainer": "article__container__image",
             "thumbnailContainer": "gallery-image-wrapper",
@@ -220,85 +234,65 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Menu; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HamburgerMenu; });
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * Created by isida on 07.05.2019.
+ * Created by isida on 19.06.2019.
  */
 
-var Menu = function () {
-    function Menu(menuComponents) {
-        _classCallCheck(this, Menu);
+var HamburgerMenu = function () {
+    function HamburgerMenu(options) {
+        _classCallCheck(this, HamburgerMenu);
 
-        this._menuBarFixed__container$ = $('.' + menuComponents.resizeControl.menuBarFixed__container);
-        this._menuBarDefaultContainer$ = $('.' + menuComponents.resizeControl.menuBarDefaultContainer);
-        this._menubarContacts__container$ = $('.' + menuComponents.resizeControl.menubarContacts__container);
-        this._menubarCatalog__container = '.' + menuComponents.mouseOverOutControl.menubarCatalog__container;
-        this._menubarCatalog_item = '.' + menuComponents.mouseOverOutControl.menubarCatalog_item;
-        this._imgOpts = menuComponents.mouseOverOutControl.imgOpts;
-        this._currentOverElem = null;
-        this._widthResizeHandler();
+        this._container = '.' + options.mobile.container;
+        this._content = options.mobile.content;
+        this._toggleMenuBtn = '.' + options.mobile.btn;
     }
 
-    _createClass(Menu, [{
+    _createClass(HamburgerMenu, [{
         key: 'run',
         value: function run() {
-            $(window).on('resize.Menu', $.proxy(this._widthResizeHandler, this));
-            $(this._menubarCatalog__container).on({
-                'mouseover.Menu': $.proxy(this._overMenubarCatalogHandler, this),
-                'mouseout.Menu': $.proxy(this._outMenubarCatalogHandler, this)
+            $(this._container).on('click.HamburgerMenu', this._toggleMenuBtn, $.proxy(this._toggleMenu, this));
+        }
+    }, {
+        key: '_toggleMenu',
+        value: function _toggleMenu() {
+            this._openMenu.call(this, event);
+            this._closeMenu.call(this, event);
+        }
+    }, {
+        key: '_openMenu',
+        value: function _openMenu(event) {
+            var target$ = $(event.target);
+            var self = this;
+            $(this._content.container).animate({
+                height: self._content.animateHeight
+            }, 300, function () {
+                $(this).data('menu-open', true);
+                target$.replaceClass(self._content['open-menu'], self._content['close-menu']);
             });
         }
     }, {
-        key: '_widthResizeHandler',
-        value: function _widthResizeHandler() {
-            var currentMenuBarContainerWidth = this._menuBarDefaultContainer$.width();
-            this._menuBarFixed__container$.css('width', currentMenuBarContainerWidth + 'px');
-            this._menuBarFixed__container$.add(this._menubarContacts__container$).css('width', currentMenuBarContainerWidth + 'px');
-        }
-    }, {
-        key: '_overMenubarCatalogHandler',
-        value: function _overMenubarCatalogHandler(event) {
-            if (this._currentOverElem !== null) return false;
-            var target = event.target.closest(this._menubarCatalog_item);
-            if (!target) return false;
-            Menu._getHoverImg($(target)).removeClass('d-none');
-            Menu._getOutImg($(target)).addClass('d-none');
-            this._currentOverElem = target;
-        }
-    }, {
-        key: '_outMenubarCatalogHandler',
-        value: function _outMenubarCatalogHandler(event) {
-            var target = event.relatedTarget;
-            if (!target) return false;
-            if (this._currentOverElem === null) return false;
-            while (target !== document.body) {
-                if (target === this._currentOverElem) {
-                    return false;
-                }
-                target = target.parentNode;
-            }
-            Menu._getHoverImg($(this._currentOverElem)).addClass('d-none');
-            Menu._getOutImg($(this._currentOverElem)).removeClass('d-none');
-            this._currentOverElem = null;
-        }
-    }], [{
-        key: '_getHoverImg',
-        value: function _getHoverImg(target$) {
-            return target$.find('img').last();
-        }
-    }, {
-        key: '_getOutImg',
-        value: function _getOutImg(target$) {
-            //console.log(target$.find('img').first());
-            return target$.find('img').first();
+        key: '_closeMenu',
+        value: function _closeMenu(event) {
+            var target$ = $(event.target);
+            var menuContainer = $(this._content.container);
+            var self = this;
+            if (menuContainer.data('menu-open') === undefined) return -1;
+            $(this._content.container).animate({
+                height: 0
+            }, 300, function () {
+                $(this).removeData('menu-open');
+                $(this).removeAttr('height');
+                target$.replaceClass(self._content['close-menu'], self._content['open-menu']);
+            });
         }
     }]);
 
-    return Menu;
+    return HamburgerMenu;
 }();
 
 

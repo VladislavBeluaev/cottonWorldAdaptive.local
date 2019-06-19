@@ -2,27 +2,52 @@
     <nav>
         <div class="adaptive_menu-bg">
             <div class="container">
-                <ul role="menubar" class="grid">
-                    <li role="menuitem">
-                        <a href="#">о нас</a>
-                    </li>
-                    <li role="menuitem">
-                        <a href="#">доставка</a>
-                    </li>
-                    <li role="menuitem">
-                        <a href="#">таблица размеров</a>
-                    </li>
-                    <li role="menuitem">
-                        <a href="{{route('user.contacts')}}">контакты</a>
-                    </li>
-                </ul>
+                <div class="ws-menu">
+                    <ul role="menubar" class="grid">
+                        <li role="menuitem">
+                            <a href="#">о нас</a>
+                        </li>
+                        <li role="menuitem">
+                            <a href="#">доставка</a>
+                        </li>
+                        <li role="menuitem">
+                            <a href="#">таблица размеров</a>
+                        </li>
+                        <li role="menuitem">
+                            <a href="{{route('user.contacts')}}">контакты</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+            <div class="container-fluid">
+                <div class="mobile-menu">
+                    <p class="mobile-menu__toggle">
+                        <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+                    </p>
+                    <ul role="menubar">
+                        <li role="menuitem">
+                            <a href="#">о нас</a>
+                        </li>
+                        <li role="menuitem">
+                            <a href="#">доставка</a>
+                        </li>
+                        <li role="menuitem">
+                            <a href="#">таблица размеров</a>
+                        </li>
+                        <li role="menuitem">
+                            <a href="{{route('user.contacts')}}">контакты</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            </div>
         <div class="banner__contacts-bg">
             <div class="container">
                 <div class="contacts-wrapper grid">
                     <div class="contacts__logo">
-                        <p><a href="{{route('user.index')}}"><img src="{{asset('images/logo_etalon.PNG')}}" alt="main_logo"></a>
+                        <p><a href="{{route('user.index')}}"><img src="{{asset('images/logo_etalon.PNG')}}"
+                                                                  alt="main_logo"></a>
                     </div>
                     <div class="contacts__social grid">
                         <p><a href="#"><span class="fab fa-instagram fa-2x"></span></a></p>
@@ -36,7 +61,7 @@
                     </div>--}}
                     <div class="contacts__contact grid">
                         <p><a href="tel:+375296038038">+375(29) 6-038-038</a></p>
-                        <p><span>график работы: пн-пт с 9 до 18</span></p>
+                        <p><span id="test">график работы: пн-пт с 9 до 18</span></p>
                         <p><a href="mailto:uzbolka@mail.ru">uzbolka@mail.ru</a></p>
                     </div>
                 </div>

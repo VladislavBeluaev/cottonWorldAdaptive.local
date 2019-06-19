@@ -1,7 +1,6 @@
 @import "_variables.less";
 @import "_mixins.less";
 @import "_functions.less";
-@import "_mobile_media.less";
 
 .adaptive_menu-bg {
   background-color: @defaultBgColor;
@@ -33,6 +32,54 @@
       }
     }*/
   }
+  .mobile-menu{
+    display: none;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    padding-top: 1.5vh;
+    p{
+      justify-self: flex-end;
+      &:hover{
+        cursor: pointer;
+        color:@menuItemHoverColor;
+      }
+    }
+    .container-fluid{
+      padding-left: 0!important;
+    }
+    >ul{
+      padding-left: @defaultGutter;
+      position: absolute;
+      height:0;
+      overflow: hidden;
+      width: 100%;
+      top:@defaultGutter*2.3;
+      li{
+        padding: @defaultGutter/2;
+        cursor: pointer;
+        font-size: 16px;
+        &:hover{
+          .box-shadow();
+        }
+        a {
+          &:hover {
+            color: @menuItemColor;
+          }
+          &:after {
+
+            background-color: transparent;
+          }
+        }
+      }
+
+      /*grid-template-columns:1fr;
+      grid-template-rows: repeat(4, 1fr);
+      li{
+        width: inherit;
+      }
+      justify-self:  flex-start;*/
+    }
+  }
 }
 
 .banner__contacts-bg {
@@ -40,7 +87,7 @@
   height: @defaultHeight;
   padding-top: @defaultHeight/6;
   .contacts-wrapper {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3,1fr);
     grid-template-rows: 1fr;
     padding-top: @defaultGutter;
     .contacts__logo {
@@ -63,17 +110,16 @@
     }
     .contacts__contact {
       grid-template-columns: 1fr;
-      grid-template-rows: repeat(3, 1fr);
+      grid-template-rows: 1fr .5fr 1fr;
       align-items: flex-start;
       justify-items: flex-end;
       
       a, span {
-        .lhCrop(1.65);
+        .lhTopCrop(1.65);
         .fontSettings(@defaultFontFamily; 24px; bold; @defaultFontLineHeight; none);
         color: @contactsBarColor
       }
       p:nth-child(2), p:last-child {
-        //align-self: center;
         span, a {
           font-size: @defaultFontSize;
         }
@@ -84,7 +130,9 @@
     }
   }
 }
-
+/*#test{
+  .lhBottomCrop(1.65);
+}*/
 .nav-bar {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr;
@@ -97,12 +145,18 @@
   padding-top: @defaultGutter;
   padding-bottom: @defaultGutter;
   .nav-bar__item {
-
     p {
       text-align: center;
       span {
         display: block;
+        .defaultFont;
+      }
+      a:hover {
+        span {
+          color: @menuItemHoverColor;
+        }
       }
     }
   }
 }
+@import "_mobile_media.less";
