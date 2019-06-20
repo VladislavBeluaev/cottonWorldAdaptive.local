@@ -1,3 +1,4 @@
+import loadPlugins from './components/plugins/customPlugins.js';
 import {HamburgerMenu} from './components/classes/HamburgerMenu.class.js';
 import {Slider} from './components/classes/Slider.class.js';
 import {Gallery} from './components/classes/Gallery.class.js';
@@ -6,13 +7,14 @@ import {ModalWindows} from './components/classes/ModalWindows.class.js';
 import {Order} from './components/classes/Order.class.js';
 (function ($, undefined) {
     $(function () {
+        loadPlugins();
         let pathInfo = window.location.pathname.substr(1);
         (new HamburgerMenu({
             mobile:{
                 container:"mobile-menu",
                 content:{
                     container:"ul[role=menubar]",
-                    animateHeight:"230px",
+                    animateHeight:"220px",
                     'open-menu':'fa-bars',
                     'close-menu':'fa-times'
                 },

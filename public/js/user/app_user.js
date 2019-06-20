@@ -78,12 +78,14 @@ module.exports = __webpack_require__(9);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_classes_HamburgerMenu_class_js__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_classes_Slider_class_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_classes_Gallery_class_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_classes_YandexMap_class_js__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_classes_ModalWindows_class_js__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_classes_Order_class_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_plugins_customPlugins_js__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_classes_HamburgerMenu_class_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_classes_Slider_class_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_classes_Gallery_class_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_classes_YandexMap_class_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_classes_ModalWindows_class_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_classes_Order_class_js__ = __webpack_require__(7);
+
 
 
 
@@ -92,13 +94,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 (function ($, undefined) {
     $(function () {
+        Object(__WEBPACK_IMPORTED_MODULE_0__components_plugins_customPlugins_js__["a" /* default */])();
         var pathInfo = window.location.pathname.substr(1);
-        new __WEBPACK_IMPORTED_MODULE_0__components_classes_HamburgerMenu_class_js__["a" /* HamburgerMenu */]({
+        new __WEBPACK_IMPORTED_MODULE_1__components_classes_HamburgerMenu_class_js__["a" /* HamburgerMenu */]({
             mobile: {
                 container: "mobile-menu",
                 content: {
                     container: "ul[role=menubar]",
-                    animateHeight: "230px",
+                    animateHeight: "220px",
                     'open-menu': 'fa-bars',
                     'close-menu': 'fa-times'
                 },
@@ -119,7 +122,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
                 }
         )).run();*/
-        new __WEBPACK_IMPORTED_MODULE_2__components_classes_Gallery_class_js__["a" /* Gallery */]({
+        new __WEBPACK_IMPORTED_MODULE_3__components_classes_Gallery_class_js__["a" /* Gallery */]({
             "galleryContainer": "article__container__image",
             "thumbnailContainer": "gallery-image-wrapper",
             "fullSizeContainer": "gallery-image-full_size",
@@ -127,7 +130,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).run();
         switch (pathInfo) {
             case "":
-                new __WEBPACK_IMPORTED_MODULE_1__components_classes_Slider_class_js__["a" /* Slider */]({
+                new __WEBPACK_IMPORTED_MODULE_2__components_classes_Slider_class_js__["a" /* Slider */]({
                     slider: $('.cardsSlider'),
                     duration: 500,
                     countScroll: 1,
@@ -145,11 +148,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }).start();
                 break;
             case "contacts":
-                new __WEBPACK_IMPORTED_MODULE_3__components_classes_YandexMap_class_js__["a" /* YandexMap */]('contacts__map').load();
+                new __WEBPACK_IMPORTED_MODULE_4__components_classes_YandexMap_class_js__["a" /* YandexMap */]('contacts__map').load();
                 break;
         }
         if (pathInfo === 'men/t-shirts' || pathInfo === 'women/t-shirts' || pathInfo === 'children/t-shirts') {
-            new __WEBPACK_IMPORTED_MODULE_4__components_classes_ModalWindows_class_js__["a" /* ModalWindows */]({
+            new __WEBPACK_IMPORTED_MODULE_5__components_classes_ModalWindows_class_js__["a" /* ModalWindows */]({
                 "bodyWrapper": "modal-wrapper",
                 "callingMW": {
                     container: "cards__item",
@@ -203,7 +206,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
 
             }).initWindows().run();
-            new __WEBPACK_IMPORTED_MODULE_5__components_classes_Order_class_js__["a" /* Order */]({
+            new __WEBPACK_IMPORTED_MODULE_6__components_classes_Order_class_js__["a" /* Order */]({
                 validate: {
                     container: 'modal-product_order',
                     elements: {
@@ -242,7 +245,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /**
  * Created by isida on 19.06.2019.
  */
-
 var HamburgerMenu = function () {
     function HamburgerMenu(options) {
         _classCallCheck(this, HamburgerMenu);
@@ -256,6 +258,7 @@ var HamburgerMenu = function () {
         key: 'run',
         value: function run() {
             $(this._container).on('click.HamburgerMenu', this._toggleMenuBtn, $.proxy(this._toggleMenu, this));
+            $(window).on('resize.HamburgerMenu', $.proxy(this._closeMenu, this, $(this._toggleMenuBtn).find('i')));
         }
     }, {
         key: '_toggleMenu',
@@ -277,8 +280,8 @@ var HamburgerMenu = function () {
         }
     }, {
         key: '_closeMenu',
-        value: function _closeMenu(event) {
-            var target$ = $(event.target);
+        value: function _closeMenu() {
+            var target$ = arguments.length === 1 ? $(event.target) : arguments.length <= 0 ? undefined : arguments[0];
             var menuContainer = $(this._content.container);
             var self = this;
             if (menuContainer.data('menu-open') === undefined) return -1;
@@ -286,7 +289,7 @@ var HamburgerMenu = function () {
                 height: 0
             }, 300, function () {
                 $(this).removeData('menu-open');
-                $(this).removeAttr('height');
+                $(this).removeAttr('style');
                 target$.replaceClass(self._content['close-menu'], self._content['open-menu']);
             });
         }
@@ -1222,6 +1225,35 @@ var Order = function () {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by isida on 19.06.2019.
+ */
+
+/* harmony default export */ __webpack_exports__["a"] = (function () {
+    (function ($) {
+
+        $.fn.replaceClass = function (search, replace) {
+
+            // This is the easiest way to have default options.
+            return this.each(function (_, item) {
+                if ($(item).hasClass(search)) {
+                    $(item).removeClass(search).addClass(replace);
+                }
+            });
+        };
+    })(jQuery);
+});
 
 /***/ })
 /******/ ]);

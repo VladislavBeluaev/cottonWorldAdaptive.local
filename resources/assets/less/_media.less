@@ -24,19 +24,55 @@
       }
     }
   }
-
 }
+
 /**/
 /* Small Devices, Tablets */
 @media only screen and (max-width: 767px) {
-  nav{
-    .adaptive_menu-bg{
-      //position: relative;
-      .ws-menu{
+  nav {
+    .adaptive_menu-bg {
+      .ws-menu {
         display: none;
       }
-      .mobile-menu{
+      .mobile-menu {
         display: grid;
+      }
+    }
+    .banner__contacts-bg {
+      .contacts-wrapper {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr .5fr;
+        .contacts__logo{
+          display:grid;
+          align-items: center;
+          p{
+            text-align: center;
+            img{
+              width: 40%;
+            }
+          }
+        }
+        .contacts__social{
+          order: 2;
+          display: flex;
+          margin: 0 auto;
+          p {
+            &:not(:last-child){
+              margin-right: @defaultGutter*1.5;
+            }
+          }
+        }
+        .contacts__contact-wrapper {
+          order: 1;
+          grid-template-columns: 1fr;
+          justify-items: center;
+          .contacts__contact{
+            justify-items: flex-end;
+          }
+        }
+      }
+      .nav-bar{
+        width: 100%;
       }
     }
   }

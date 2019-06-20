@@ -2,6 +2,9 @@
 @import "_mixins.less";
 @import "_functions.less";
 
+.container-fluid{
+  padding-left: 0!important;
+}
 .adaptive_menu-bg {
   background-color: @defaultBgColor;
   position: fixed;
@@ -44,11 +47,10 @@
         color:@menuItemHoverColor;
       }
     }
-    .container-fluid{
-      padding-left: 0!important;
-    }
     >ul{
       padding-left: @defaultGutter;
+      /*padding-top: @defaultGutter/2;
+      padding-bottom: @defaultGutter/2;*/
       position: absolute;
       height:0;
       overflow: hidden;
@@ -58,6 +60,12 @@
         padding: @defaultGutter/2;
         cursor: pointer;
         font-size: 16px;
+        &:first-child{
+          margin-top: @defaultGutter/4;
+        }
+        &:last-child{
+          margin-bottom: @defaultGutter/4;
+        }
         &:hover{
           .box-shadow();
         }
@@ -84,7 +92,6 @@
 
 .banner__contacts-bg {
   background: url(/images/main_background.png) no-repeat 50% 0;
-  height: @defaultHeight;
   padding-top: @defaultHeight/6;
   .contacts-wrapper {
     grid-template-columns: repeat(3,1fr);
