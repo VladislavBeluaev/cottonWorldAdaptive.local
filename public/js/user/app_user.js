@@ -68,8 +68,11 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
-__webpack_require__(8);
-module.exports = __webpack_require__(9);
+__webpack_require__(9);
+__webpack_require__(10);
+__webpack_require__(11);
+__webpack_require__(12);
+module.exports = __webpack_require__(13);
 
 
 /***/ }),
@@ -78,13 +81,13 @@ module.exports = __webpack_require__(9);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_plugins_customPlugins_js__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_classes_HamburgerMenu_class_js__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_classes_Slider_class_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_classes_Gallery_class_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_classes_YandexMap_class_js__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_classes_ModalWindows_class_js__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_classes_Order_class_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_plugins_customPlugins_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_classes_HamburgerMenu_class_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_classes_Slider_class_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_classes_Gallery_class_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_classes_YandexMap_class_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_classes_ModalWindows_class_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_classes_Order_class_js__ = __webpack_require__(8);
 
 
 
@@ -129,8 +132,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             "thumbnail": "gallery-image"
         }).run();
         switch (pathInfo) {
-            case "":
-                new __WEBPACK_IMPORTED_MODULE_2__components_classes_Slider_class_js__["a" /* Slider */]({
+            case "cssGrid":
+                $('.cardsSlider__content').slick({
+                    dots: false,
+                    infinite: true,
+                    speed: 300,
+                    slidesToShow: 4,
+                    slidesToScroll: 1
+                });
+                /*(new Slider({
                     slider: $('.cardsSlider'),
                     duration: 500,
                     countScroll: 1,
@@ -145,7 +155,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             '.card a>img': 'paddingTop'
                         }
                     }
-                }).start();
+                }).start());*/
                 break;
             case "contacts":
                 new __WEBPACK_IMPORTED_MODULE_4__components_classes_YandexMap_class_js__["a" /* YandexMap */]('contacts__map').load();
@@ -237,6 +247,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/**
+ * Created by isida on 19.06.2019.
+ */
+
+/* harmony default export */ __webpack_exports__["a"] = (function () {
+    (function ($) {
+
+        $.fn.replaceClass = function (search, replace) {
+
+            // This is the easiest way to have default options.
+            return this.each(function (_, item) {
+                if ($(item).hasClass(search)) {
+                    $(item).removeClass(search).addClass(replace);
+                }
+            });
+        };
+    })(jQuery);
+});
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HamburgerMenu; });
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -301,11 +335,11 @@ var HamburgerMenu = function () {
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Slider; });
+/* unused harmony export Slider */
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -471,7 +505,7 @@ var Slider = function () {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -542,7 +576,7 @@ var Gallery = function () {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -610,7 +644,7 @@ var YandexMap = function () {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -962,7 +996,7 @@ var ModalWindows = function () {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1215,45 +1249,34 @@ var Order = function () {
 
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
 /* 9 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 10 */
+/***/ (function(module, exports) {
 
-"use strict";
-/**
- * Created by isida on 19.06.2019.
- */
+// removed by extract-text-webpack-plugin
 
-/* harmony default export */ __webpack_exports__["a"] = (function () {
-    (function ($) {
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
 
-        $.fn.replaceClass = function (search, replace) {
+// removed by extract-text-webpack-plugin
 
-            // This is the easiest way to have default options.
-            return this.each(function (_, item) {
-                if ($(item).hasClass(search)) {
-                    $(item).removeClass(search).addClass(replace);
-                }
-            });
-        };
-    })(jQuery);
-});
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

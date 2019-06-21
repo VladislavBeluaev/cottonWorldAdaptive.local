@@ -12,8 +12,13 @@ let mix = require('laravel-mix');
  */
 
 mix.less('resources/assets/less/_app.less', 'public/css/user/app.css').
-less('resources/assets/less/_grid.less','public/css/user/grid.css').
-js('resources/assets/js/app.js','public/js/user/app_user.js').browserSync('cottonworldadaptive.local:90');
+less('resources/assets/less/_header.less','public/css/user/header.css').
+    less('node_modules/slick-carousel/slick/slick.less', 'public/css/slick/slick.css').
+    less('node_modules/slick-carousel/slick/slick-theme.less', 'public/css/slick/slick-theme.css').
+    less('resources/assets/less/_slick-markdown.less', 'public/css/slick/slick-markdown.css').
+js('resources/assets/js/app.js','public/js/user/app_user.js').
+js('node_modules/slick-carousel/slick/slick.js','public/js/slick/slick.js')
+    .browserSync('cottonworldadaptive.local:90');
 
 
 /*mix.less('resources/assets/less/_app.less', 'public/css/user/app.css').

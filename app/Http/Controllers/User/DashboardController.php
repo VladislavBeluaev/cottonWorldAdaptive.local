@@ -70,7 +70,9 @@ values($k,$v,now(),now());\r\n",FILE_APPEND);
         //echo $request->post();/*dd();*/
     }
     function cssGrid(){
-        return view($this->bladePath . ".css_grid");
+        $callProcedureStr = sprintf("call %s", Config::get('constants.options.procedures.cardSlider'));
+        //return view('user.main_dashboard', ['t_shirts' => DB::select($callProcedureStr)]);
+        return view($this->bladePath . ".css_grid",['t_shirts' => DB::select($callProcedureStr)]);
     }
 
     protected $repository;

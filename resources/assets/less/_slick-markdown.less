@@ -1,0 +1,24 @@
+@import "_variables.less";
+@import "_mixins.less";
+@import "_functions.less";
+.slider__wrapper{
+  position: relative;
+  overflow: hidden;
+  .slider{
+    position: relative;
+    display: flex;
+    .slider__card{
+      width:25%;
+      display: inline-block;
+      text-align: center;
+      &:not(:last-child){
+        margin-right: 1%;
+      }
+      img {
+        padding-top: 24px;
+        width: auto;
+        height: 200px;
+      }
+    }
+  }
+}

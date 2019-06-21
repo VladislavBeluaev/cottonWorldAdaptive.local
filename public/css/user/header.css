@@ -156,7 +156,7 @@
 .banner__contacts-bg .contacts-wrapper {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr;
-  padding-top: 24px;
+  padding-top: 36px;
 }
 .banner__contacts-bg .contacts-wrapper .contacts__logo img {
   width: 60%;

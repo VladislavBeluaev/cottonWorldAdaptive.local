@@ -47,8 +47,15 @@ import {Order} from './components/classes/Order.class.js';
             }
         )).run();
         switch (pathInfo) {
-            case "":
-                (new Slider({
+            case "cssGrid":
+                $('.cardsSlider__content').slick({
+                    dots: false,
+                    infinite: true,
+                    speed: 300,
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                });
+                /*(new Slider({
                     slider: $('.cardsSlider'),
                     duration: 500,
                     countScroll: 1,
@@ -63,7 +70,7 @@ import {Order} from './components/classes/Order.class.js';
                             '.card a>img': 'paddingTop'
                         }
                     }
-                }).start());
+                }).start());*/
                 break;
             case "contacts":
                 (new YandexMap('contacts__map')).load();
