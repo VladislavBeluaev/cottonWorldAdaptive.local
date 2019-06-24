@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset('css/slick/slick.css')}}">
     <link rel="stylesheet" href="{{asset('css/slick/slick-theme.css')}}">
     <link rel="stylesheet" href="{{asset('css/slick/slick-markdown.css')}}">
+    <link rel="stylesheet" href="{{asset('css/user/footer.css')}}">
     <script src="{{asset('js/jquery-3.4.0.min.js')}}"></script>
     <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
     <script src="{{asset('js/slick/slick.min.js')}}"></script>

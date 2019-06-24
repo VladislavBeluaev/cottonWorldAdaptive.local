@@ -70,7 +70,8 @@
 __webpack_require__(1);
 __webpack_require__(8);
 __webpack_require__(9);
-module.exports = __webpack_require__(10);
+__webpack_require__(10);
+module.exports = __webpack_require__(11);
 
 
 /***/ }),
@@ -129,7 +130,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             "thumbnail": "gallery-image"
         }).run();
         switch (pathInfo) {
-            case "":
+            case "cssGrid":
                 $('.main_slider').slick({
                     //dots:true,
                     arrows: true,
@@ -1114,6 +1115,12 @@ var Order = function () {
 
 /***/ }),
 /* 10 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

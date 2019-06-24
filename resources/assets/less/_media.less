@@ -82,7 +82,22 @@
       }
     }
   }
+  footer {
+    background: url(/images/main_background_footer.png) no-repeat 25% 0;
+    .footer-wrapper {
+      p{
+        font-size: 16px;
+        &:first-child{
+          span{
+            &:first-child{
+              font-size: 14px;
+            }
+          }
+        }
+      }
 
+    }
+  }
 }
 
 /**/
@@ -105,6 +120,7 @@
     }
 
   }
+
   .container {
     .main_slider {
       .slick-prev {
@@ -112,7 +128,6 @@
         z-index: @defaultZIndex;
       }
     }
-
   }
 }
 
@@ -120,9 +135,41 @@
 
 /* Extra Small Devices, Phones */
 @media only screen and (max-width: 480px) {
+  footer {
+    background: url(/images/main_background_footer.png) no-repeat 20% 0;
+    .footer-wrapper {
+      .container{
+        grid-row-gap: @defaultGutter/4;
+        align-items: center;
+        p {
+          font-size: 12px;
+          &:first-child {
+            span {
+              &:first-child {
+                font-size: 14px;
+              }
+            }
+          }
+          &:last-child{
+            span {
+              display:block;
+              font-size: 14px;
+            }
+            ///padding-left: @defaultGutter*0.6;
+            //justify-self: center;
+          }
+        }
 
+      }
+    }
+  }
 }
-
+@media only screen and (min-width: 361px) and  (max-width: 420px){
+  footer{
+    background: url(/images/main_background_footer.png) no-repeat 15% 0;
+    height: 25vh;
+  }
+}
 /**/
 /* Custom, iPhone Retina */
 @media only screen and (max-width: 320px) {
