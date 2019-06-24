@@ -68,11 +68,9 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
+__webpack_require__(8);
 __webpack_require__(9);
-__webpack_require__(10);
-__webpack_require__(11);
-__webpack_require__(12);
-module.exports = __webpack_require__(13);
+module.exports = __webpack_require__(10);
 
 
 /***/ }),
@@ -83,14 +81,13 @@ module.exports = __webpack_require__(13);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_plugins_customPlugins_js__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_classes_HamburgerMenu_class_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_classes_Slider_class_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_classes_Gallery_class_js__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_classes_YandexMap_class_js__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_classes_ModalWindows_class_js__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_classes_Order_class_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_classes_Gallery_class_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_classes_YandexMap_class_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_classes_ModalWindows_class_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_classes_Order_class_js__ = __webpack_require__(7);
 
 
-
+//import {Slider} from './components/classes/Slider.class.js';
 
 
 
@@ -125,20 +122,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
                 }
         )).run();*/
-        new __WEBPACK_IMPORTED_MODULE_3__components_classes_Gallery_class_js__["a" /* Gallery */]({
+        new __WEBPACK_IMPORTED_MODULE_2__components_classes_Gallery_class_js__["a" /* Gallery */]({
             "galleryContainer": "article__container__image",
             "thumbnailContainer": "gallery-image-wrapper",
             "fullSizeContainer": "gallery-image-full_size",
             "thumbnail": "gallery-image"
         }).run();
         switch (pathInfo) {
-            case "cssGrid":
-                $('.cardsSlider__content').slick({
-                    dots: false,
-                    infinite: true,
-                    speed: 300,
+            case "":
+                $('.main_slider').slick({
+                    //dots:true,
+                    arrows: true,
+                    infinite: false,
                     slidesToShow: 4,
-                    slidesToScroll: 1
+                    slidesToScroll: 1,
+                    responsive: [{
+                        breakpoint: 992,
+                        settings: {
+                            arrows: true,
+                            slidesToShow: 3,
+                            slidesToScroll: 1,
+                            infinite: false
+                        }
+                    }, {
+                        breakpoint: 768,
+                        settings: {
+                            arrows: true,
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                            infinite: false
+                        }
+                    }, {
+                        breakpoint: 600,
+                        settings: {
+                            arrows: true,
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            infinite: false
+                        }
+                    }]
                 });
                 /*(new Slider({
                     slider: $('.cardsSlider'),
@@ -158,11 +180,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }).start());*/
                 break;
             case "contacts":
-                new __WEBPACK_IMPORTED_MODULE_4__components_classes_YandexMap_class_js__["a" /* YandexMap */]('contacts__map').load();
+                new __WEBPACK_IMPORTED_MODULE_3__components_classes_YandexMap_class_js__["a" /* YandexMap */]('contacts__map').load();
                 break;
         }
         if (pathInfo === 'men/t-shirts' || pathInfo === 'women/t-shirts' || pathInfo === 'children/t-shirts') {
-            new __WEBPACK_IMPORTED_MODULE_5__components_classes_ModalWindows_class_js__["a" /* ModalWindows */]({
+            new __WEBPACK_IMPORTED_MODULE_4__components_classes_ModalWindows_class_js__["a" /* ModalWindows */]({
                 "bodyWrapper": "modal-wrapper",
                 "callingMW": {
                     container: "cards__item",
@@ -216,7 +238,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
 
             }).initWindows().run();
-            new __WEBPACK_IMPORTED_MODULE_6__components_classes_Order_class_js__["a" /* Order */]({
+            new __WEBPACK_IMPORTED_MODULE_5__components_classes_Order_class_js__["a" /* Order */]({
                 validate: {
                     container: 'modal-product_order',
                     elements: {
@@ -339,176 +361,6 @@ var HamburgerMenu = function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export Slider */
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * Created by Dragon on 21.12.2018.
- */
-var Slider = function () {
-    function Slider(sliderOptions) {
-        _classCallCheck(this, Slider);
-
-        this._carousel$ = sliderOptions.slider;
-        this._duration = sliderOptions.duration;
-        this._countScroll = sliderOptions.countScroll;
-        this._searchContext = this._getContext(this._carousel$);
-        this._navigateOpts = sliderOptions.navigate;
-        this._controlTopNavigatePosition(this._navigateOpts);
-        this._carouselContent$ = this._carousel$.children().filter(':first-child');
-        this._carouselContent$.data('countScrollCards', 0);
-        this._maxScrollCards = (this._carouselContent$.children().length - 4) / this._countScroll;
-        //this._productsLinkClass = sliderOptions.productCartLinkClass;
-    }
-
-    _createClass(Slider, [{
-        key: 'start',
-        value: function start() {
-            var self = this;
-            this._carousel$.click(function (e) {
-                if ($(':animated').length) {
-                    return false;
-                }
-                self._adaptiveOffset();
-                var target = e.target;
-                var nextClass = self._navigateOpts.buttonNext;
-                var prevClass = self._navigateOpts.buttonPrev;
-                var productsLink$ = $(target).closest('.' + self._navigateOpts.productCartLinkClass);
-                if (productsLink$.length !== 0) window.location.href = productsLink$.attr('href');
-
-                var navLinks = $(target.closest('div')).filter(function (_, elem) {
-                    return elem.classList[0] == nextClass || elem.classList[0] == prevClass;
-                });
-                if (navLinks.length === 0) return false;
-
-                if (false === Slider._notDisabled(navLinks)) return false;
-
-                if (navLinks.hasClass(nextClass)) {
-                    self._slide('left', self._duration);
-                } else if (navLinks.hasClass(prevClass)) {
-                    self._slide('right', self._duration);
-                } else return false;
-            });
-        }
-    }, {
-        key: '_slide',
-        value: function _slide(direction, duration) {
-            var cardWidth = this._cardWidth();
-            var offset = 0;
-            var scrollSlide = this._scrollSlide.bind(this, direction);this._countScroll;
-            if (direction === 'left') offset = this._sliderOffset() - this._countScroll * cardWidth + 'px';
-            if (direction === 'right') offset = this._sliderOffset() + this._countScroll * cardWidth + 'px';
-            this._carouselContent$.animate({
-                "left": offset
-            }, duration, /*"easeOutBounce",*/scrollSlide);
-        }
-    }, {
-        key: '_scrollSlide',
-        value: function _scrollSlide(direction) {
-            var countScrollCards = this._carouselContent$.data('countScrollCards');
-            if (direction === 'left') {
-                this._carouselContent$.data('countScrollCards', ++countScrollCards);
-            }
-            if (direction === 'right') {
-                this._carouselContent$.data('countScrollCards', --countScrollCards);
-            }
-            this._activeButton();
-        }
-    }, {
-        key: '_activeButton',
-        value: function _activeButton() {
-            var next = $('.' + this._navigateOpts.buttonNext, this._searchContext);
-            var prev = $('.' + this._navigateOpts.buttonPrev, this._searchContext);
-            parseInt(this._carouselContent$.data('countScrollCards')) === this._maxScrollCards ? Slider.replaceClass(next, 'active', 'nonActive') : Slider.replaceClass(next, 'nonActive', 'active');
-
-            parseInt(this._carouselContent$.data('countScrollCards')) !== 0 ? Slider.replaceClass(prev, 'nonActive', 'active') : Slider.replaceClass(prev, 'active', 'nonActive');
-        }
-    }, {
-        key: '_adaptiveOffset',
-        value: function _adaptiveOffset() {
-            this._carouselContent$.data('currentWidth', this._cardWidth());
-            $(window).on('resize', this._navigateOpts, $.proxy(this._resizeWindow, this));
-        }
-    }, {
-        key: '_controlTopNavigatePosition',
-        value: function _controlTopNavigatePosition(event) {
-            var opts = event.data === undefined ? event : event.data;
-            var relativeTo = $(opts.relativeTo, this._searchContext);
-            var relativeToHeight = relativeTo.height();
-            var positioningElement = $(opts.positioningElement, this._searchContext);
-            var positioningElementHeight = positioningElement.outerHeight();
-            var offset = 0;
-            if (!$.isEmptyObject(opts.offset)) {
-                var offsetKey = Object.keys(opts.offset)[0];
-                var offsetValue = opts.offset[offsetKey];
-                offset = $(offsetKey, this._searchContext).css(offsetValue);
-            }
-            switch (opts.position) {
-                case "middle":
-                    positioningElement.css('top', relativeToHeight / 2 - positioningElementHeight / 2 + parseInt(offset) + 'px');
-                    break;
-                case "bottom":
-                    positioningElement.css('top', relativeToHeight - positioningElementHeight - parseInt(offset) + 'px');
-                    break;
-            }
-        }
-    }, {
-        key: '_resizeWindow',
-        value: function _resizeWindow(options) {
-            var resizeCardWidth = this._cardWidth();
-            if (this._carouselContent$.data('currentWidth') !== resizeCardWidth) {
-                var countHideSlide = Math.round(this._sliderOffset() / this._carouselContent$.data('currentWidth'));
-                this._carouselContent$.css("left", resizeCardWidth * countHideSlide + 'px');
-                this._carouselContent$.data('currentWidth', resizeCardWidth);
-            }
-            this._controlTopNavigatePosition(options);
-        }
-    }, {
-        key: '_cardWidth',
-        value: function _cardWidth() {
-            return this._carouselContent$.children().filter(':first-child').outerWidth(true);
-        }
-    }, {
-        key: '_sliderOffset',
-        value: function _sliderOffset() {
-            return parseFloat(this._carouselContent$.css('left'));
-        }
-    }, {
-        key: '_getContext',
-        value: function _getContext(element) {
-            var domElement = element[0];
-            while (domElement.parentNode !== document.documentElement) {
-                if (domElement.parentNode === document.body) {
-                    break;
-                }
-                domElement = domElement.parentNode;
-            }
-            return domElement;
-        }
-    }], [{
-        key: '_notDisabled',
-        value: function _notDisabled(button) {
-            return !button.hasClass('nonActive');
-        }
-    }, {
-        key: 'replaceClass',
-        value: function replaceClass(element, search, replace) {
-            element.removeClass(search).addClass(replace);
-        }
-    }]);
-
-    return Slider;
-}();
-
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Gallery; });
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -576,7 +428,7 @@ var Gallery = function () {
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -644,7 +496,7 @@ var YandexMap = function () {
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -996,7 +848,7 @@ var ModalWindows = function () {
 
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1249,6 +1101,12 @@ var Order = function () {
 
 
 /***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
 /* 9 */
 /***/ (function(module, exports) {
 
@@ -1256,24 +1114,6 @@ var Order = function () {
 
 /***/ }),
 /* 10 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 13 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

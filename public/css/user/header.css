@@ -61,6 +61,18 @@
   -webkit-box-shadow: 1px 3px 4px rgba(117, 117, 117, 0.22);
   box-shadow: 1px 3px 4px rgba(117, 117, 117, 0.22);
 }
+.main_slider_card {
+  width: 24%;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  text-align: center;
+  background-color: #fff;
+  background-clip: border-box;
+  word-wrap: break-word;
+}
+.main_slider_card:focus {
+  outline: none;
+}
 .container-fluid {
   padding-left: 0!important;
 }
@@ -77,6 +89,7 @@
       align-self: center;
 }
 .adaptive_menu-bg .container ul[role=menubar] {
+  background-color: transparent;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr;
   justify-items: center;

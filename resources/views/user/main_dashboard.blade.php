@@ -9,49 +9,60 @@
             </div>
             <div class="main_page__slider">
                 <h2>Выбор покупателей</h2>
-                <div class="cardsSlider">
-                    <div class="cardsSlider__content d-flex">
-                        @foreach($t_shirts as $t_shirt)
-                            <div class="card w-25 d-inline-block text-center">
-                                @if($t_shirt->url_prefix==='men')
+                <div class="main_slider">
+                    @foreach($t_shirts as $t_shirt)
+                        <div class="main_slider__card">
+                            <div class="card__body">
+                                <div class="card__body-img">
+                                    @switch($t_shirt->url_prefix)
+                                    @case('men')
                                     <a href="@productLink(route('user.man_t_shirts'),$t_shirt->routeKeyName)"
                                        class="toProductCart">
-                                        @else
-                                            <a href="@productLink(route('user.woman_t_shirts'),$t_shirt->routeKeyName)"
+                                        @break
+                                        @case('women')
+                                        <a href="@productLink(route('user.woman_t_shirts'),$t_shirt->routeKeyName)"
+                                           class="toProductCart">
+                                            @break
+                                            @case('children')
+                                            <a href="@productLink(route('user.children_t_shirts'),$t_shirt->routeKeyName)"
                                                class="toProductCart">
-                                                @endif
-                                                <img class="card-img-top"
-                                                     src="{{asset($t_shirt->img_src)}}"
-                                                     alt="{{$t_shirt->img_alt}}">
+                                                @break
+                                                @endswitch
+                                                <img
+                                                        src="{{asset($t_shirt->img_src)}}"
+                                                        alt="{{$t_shirt->img_alt}}">
                                             </a>
-                                            <div class="card-body">
-                                                <div class="customerChoice__productDescription mt-1 text-center">
-                                                    @if($t_shirt->url_prefix==='men')
-                                                        <a href="@productLink(route('user.man_t_shirts'),$t_shirt->routeKeyName)"
-                                                           class="toProductCart">
-                                                            @else
-                                                                <a href="@productLink(route('user.woman_t_shirts'),$t_shirt->routeKeyName)"
-                                                                   class="toProductCart">
-                                                                    @endif
-                                                                    <span>{{$t_shirt->name}}</span>
-                                                                </a>
-                                                </div>
-                                                <div class="productOfDay__currentPrice d-flex align-items-center justify-content-between">
-                                                    <div><span>6,50 руб.</span></div>
-                                                    {{--<div><span class="fas fa-cart-plus fa-lg"></span></div>--}}
-                                                </div>
-                                            </div>
+                                        </a>
+                                    </a>
+                                </div>
+
+                                <div class="card__body-name">
+                                    @switch($t_shirt->url_prefix)
+                                    @case('men')
+                                    <a href="@productLink(route('user.man_t_shirts'),$t_shirt->routeKeyName)"
+                                       class="toProductCart">
+                                        @break
+                                        @case('women')
+                                        <a href="@productLink(route('user.woman_t_shirts'),$t_shirt->routeKeyName)"
+                                           class="toProductCart">
+                                            @break
+                                            @case('children')
+                                            <a href="@productLink(route('user.children_t_shirts'),$t_shirt->routeKeyName)"
+                                               class="toProductCart">
+                                                @break
+                                                @endswitch
+                                                <span>{{$t_shirt->name}}</span>
+                                            </a>
+                                        </a>
+                                    </a>
+                                </div>
+                                <div class="card__body-price">
+                                    <p><span>@price($t_shirt)</span></p>
+                                </div>
                             </div>
-                        @endforeach
-                    </div>
-                    <div class="next_btn active">
-                        <span class="fas fa-angle-right fa-2x "></span>
-                    </div>
-                    <div class="prev_btn nonActive">
-                        <span class="fas fa-angle-left fa-2x"></span>
-                    </div>
+                        </div>
+                    @endforeach
                 </div>
-            </div>
             </div>
         </div>
     </section>

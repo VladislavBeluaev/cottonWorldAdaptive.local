@@ -1,24 +1,86 @@
 @import "_variables.less";
 @import "_mixins.less";
 @import "_functions.less";
-.slider__wrapper{
-  position: relative;
-  overflow: hidden;
-  .slider{
-    position: relative;
-    display: flex;
-    .slider__card{
-      width:25%;
-      display: inline-block;
-      text-align: center;
-      &:not(:last-child){
-        margin-right: 1%;
+
+.main_slider {
+  .main_slider__card {
+    .main_slider_card;
+    &:not(:last-child){
+      margin-right: @defaultGutter/2;
+    }
+    .card__body{
+      padding-top: @defaultGutter;
+      padding-bottom: @defaultGutter;
+      outline: none;
+      .card__body-img {
+        text-align: center;
+        img {
+          .size(auto, 200px);
+        }
       }
-      img {
-        padding-top: 24px;
-        width: auto;
-        height: 200px;
+      .card__body-name{
+        margin-top: @defaultGutter/3;
+        padding-left: @defaultGutter;
+        padding-right: @defaultGutter;
+        .fontSettings(@customerSelectionFont, 14px, 600,normal,none);
+        a{
+          text-transform: uppercase;
+          color:@defaultFontColor;
+        }
+      }
+      .card__body-price{
+        margin-top: @defaultGutter/3;
+        span{
+          color:@cardsBackgroundColor;
+          .fontSettings(@customerSelectionFont, 20px, 600,normal,none);
+          background-color: @cardsPriceBackgroundColor;
+          padding: @defaultGutter/6 @defaultGutter*3/4;
+        }
+
       }
     }
+
+
+  }
+
+}
+.slick-slide img{
+  display: inline;
+}
+.slick-prev {
+  border-top-left-radius:50%;
+  border-bottom-left-radius:50%;
+  background:@slickBg;
+  width: @defaultGutter*1.5;
+  height: @defaultGutter*1.5;
+  padding-left: @defaultGutter/4;
+  top:calc(50% - 18px);
+  left: -36px;
+  &:before {
+    .fontSettings(@fontAwesome,30px,700,normal,none);
+    content: "\f104";
+  }
+  &:hover,&:focus{
+    background: @slickBg;
   }
 }
+
+.slick-next {
+  border-top-right-radius:50%;
+  border-bottom-right-radius:50%;
+  background:@slickBg;
+  width: @defaultGutter*1.5;
+  height: @defaultGutter*1.5;
+  top:calc(50% - 18px);
+  &:before {
+    .fontSettings(@fontAwesome,30px,700,normal,none);
+    content: "\f105";
+  }
+  &:hover,&:focus{
+    background:@slickBg;
+  }
+}
+.slick-prev:before, .slick-next:before {
+  color: @breadcrumbsActiveItemColor;
+}
+@import "_media.less";

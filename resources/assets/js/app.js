@@ -1,6 +1,6 @@
 import loadPlugins from './components/plugins/customPlugins.js';
 import {HamburgerMenu} from './components/classes/HamburgerMenu.class.js';
-import {Slider} from './components/classes/Slider.class.js';
+//import {Slider} from './components/classes/Slider.class.js';
 import {Gallery} from './components/classes/Gallery.class.js';
 import {YandexMap} from './components/classes/YandexMap.class.js';
 import {ModalWindows} from './components/classes/ModalWindows.class.js';
@@ -47,13 +47,42 @@ import {Order} from './components/classes/Order.class.js';
             }
         )).run();
         switch (pathInfo) {
-            case "cssGrid":
-                $('.cardsSlider__content').slick({
-                    dots: false,
-                    infinite: true,
-                    speed: 300,
+            case "":
+                $('.main_slider').slick({
+                    //dots:true,
+                    arrows: true,
+                    infinite: false,
                     slidesToShow: 4,
                     slidesToScroll: 1,
+                    responsive:[
+                        {
+                            breakpoint: 992,
+                            settings: {
+                                arrows: true,
+                                slidesToShow: 3,
+                                slidesToScroll: 1,
+                                infinite: false,
+                            }
+                        },
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                arrows: true,
+                                slidesToShow: 2,
+                                slidesToScroll: 1,
+                                infinite: false,
+                            }
+                        },
+                        {
+                            breakpoint: 600,
+                            settings: {
+                                arrows: true,
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                                infinite: false,
+                            }
+                        }
+                    ]
                 });
                 /*(new Slider({
                     slider: $('.cardsSlider'),

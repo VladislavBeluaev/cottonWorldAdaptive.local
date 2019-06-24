@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Providers;
-
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -9,9 +8,10 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
+     * @param $app
      * @return void
      */
+
     public function boot()
     {
         Blade::directive('productLink', function ($expression) {
@@ -47,6 +47,10 @@ class AppServiceProvider extends ServiceProvider
             /*$callString = "sprintf('%s(%s)', $t_shirtName, $color)";*/
             $fullName = str_replace(" "," $color ",$t_shirtName);
             $callString = "call_user_func('t_shirtNameWithColor',$t_shirtName, $color)";
+            return "<?php echo $callString ?>";
+        });
+        Blade::directive('price', function ($t_shirt) {
+            $callString = "(App\T_shirt::find(($t_shirt)->id))->price";
             return "<?php echo $callString ?>";
         });
     }

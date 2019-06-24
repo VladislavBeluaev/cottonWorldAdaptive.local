@@ -24,6 +24,12 @@
       }
     }
   }
+
+  .main_slider {
+    .slick-next {
+      right: -24px;
+    }
+  }
 }
 
 /**/
@@ -81,51 +87,87 @@
 
 /**/
 
+/* Slick carousel mobile version*/
+@media only screen and (max-width: 599px) {
+  .main_page {
+    .main_page__slider {
+      h2 {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .container {
+    .main_slider {
+      .slick-next {
+        right: 13px;
+      }
+    }
+
+  }
+  .container {
+    .main_slider {
+      .slick-prev {
+        left: 1px;
+        z-index: @defaultZIndex;
+      }
+    }
+
+  }
+}
+
+/**/
+
 /* Extra Small Devices, Phones */
 @media only screen and (max-width: 480px) {
 
 }
 
 /**/
-
 /* Custom, iPhone Retina */
 @media only screen and (max-width: 320px) {
 
 }
 
 /**/
-
 /*==========  Mobile First  ==========*/
-
 /* Custom, iPhone Retina */
 @media only screen and (min-width: 320px) {
-
 
 }
 
 /**/
-
 /* Extra Small Devices, Phones */
 @media only screen and (min-width: 480px) {
 
 }
 
 /**/
-
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
 
 }
 
 /**/
+/* Iphone X Landscape orientation */
+@media only screen and (min-width: 800px) and (max-width: 1000px) {
+  .banner__contacts-bg {
+    > .container {
+      > .contacts-wrapper {
+        padding-top: @defaultGutter*2;
+      }
+    }
+  }
 
+}
+
+/**/
 /* Medium Devices, Desktops */
 @media only screen and (min-width: 992px) {
 
 }
 
 /**/
-
 /* Large Devices, Wide Screens */
 @media only screen and (min-width: 1200px) {
 

@@ -39,6 +39,12 @@ div, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, ul, p {
 
 a {
   text-decoration: none !important;
+  outline: none;
+}
+img{
+  &:focus{
+    outline: none;
+  }
 }
 
 input {
@@ -67,33 +73,6 @@ ul {
 }
 @import "_header.less";
 
-footer {
-  height: @defaultHeight*0.9;
-  margin-top: -@defaultGutter*1.5;
-  .box-shadow;
-  background: url(/images/main_background_footer.png) no-repeat 50% 0;
-  background-size: cover;
-  .footer__content {
-    padding-top: @defaultGutter*8;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(2, 1fr);
-    align-items: center;
-    p {
-      text-align: center;
-      &:first-child {
-        .fontSettings(@footerFont, 20px, bold, 32px, none);
-        color: @contactsBarColor;
-      }
-      &:last-child {
-        span {
-          .fontSettings(@footerFont, 15px, bold, 32px, none);
-          color: @menuItemHoverColor;
-        }
-      }
-    }
-  }
-}
-
 .main_page {
   margin-top: @defaultGutter;
   .main_page__banner {
@@ -109,6 +88,7 @@ footer {
       margin-bottom: @defaultGutter/3;
       .fontSettings(@customerSelectionFont, 26px, 600, @defaultFontLineHeight, none);
     }
+    @import "_slick-markdown.less";
   }
 }
 
@@ -146,7 +126,34 @@ footer {
     //.borderSettings(2px solid transparent; .4em);
   }
 }
-
+footer {
+  /*position: relative;
+  z-index:-2;*/
+  height: @defaultHeight*0.9;
+  margin-top: -@defaultGutter*1.5;
+  .box-shadow;
+  background: url(/images/main_background_footer.png) no-repeat 50% 0;
+  background-size: cover;
+  .footer__content {
+    padding-top: @defaultGutter*8;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    align-items: center;
+    p {
+      text-align: center;
+      &:first-child {
+        .fontSettings(@footerFont, 20px, bold, 32px, none);
+        color: @contactsBarColor;
+      }
+      &:last-child {
+        span {
+          .fontSettings(@footerFont, 15px, bold, 32px, none);
+          color: @menuItemHoverColor;
+        }
+      }
+    }
+  }
+}
 .breadcrumbs {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr;

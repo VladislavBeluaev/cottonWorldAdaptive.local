@@ -2,8 +2,9 @@
     "/js/user/app_user.js": "/js/user/app_user.js",
     "/css/user/app.css": "/css/user/app.css",
     "/css/user/header.css": "/css/user/header.css",
+    "/css/slick/slick-markdown.css": "/css/slick/slick-markdown.css",
+    "/js/slick/slick.min.js": "/js/slick/slick.min.js",
     "/css/slick/slick.css": "/css/slick/slick.css",
     "/css/slick/slick-theme.css": "/css/slick/slick-theme.css",
-    "/css/slick/slick-markdown.css": "/css/slick/slick-markdown.css",
-    "/js/slick/slick.js": "/js/slick/slick.js"
+    "/css/slick/ajax-loader.gif": "/css/slick/ajax-loader.gif"
 }

@@ -10,9 +10,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('css/user/app.css')}}">
-    <link rel="stylesheet" href="{{asset('css/user/header.css')}}">
+    <link rel="stylesheet" {{--href="{{asset('css/user/header.css')}}">--}}
+    <link rel="stylesheet" href="{{asset('css/slick/slick.css')}}">
+    <link rel="stylesheet" href="{{asset('css/slick/slick-theme.css')}}">
     <script src="{{asset('js/jquery-3.4.0.min.js')}}"></script>
     <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+    <script src="{{asset('js/slick/slick.min.js')}}"></script>
     <script src="{{asset('js/user/app_user.js')}}" type="module"></script>
 </head>
 <body>
