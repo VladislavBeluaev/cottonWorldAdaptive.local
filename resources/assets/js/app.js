@@ -47,7 +47,7 @@ import {Order} from './components/classes/Order.class.js';
             }
         )).run();
         switch (pathInfo) {
-            case "cssGrid":
+            case "":
                 $('.main_slider').slick({
                     //dots:true,
                     arrows: true,

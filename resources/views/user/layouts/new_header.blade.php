@@ -50,10 +50,10 @@
                                                                   alt="main_logo"></a>
                     </div>
                     <div class="contacts__social grid">
-                        <p><a href="#"><span class="fab fa-instagram fa-2x"></span></a></p>
-                        <p><a href="#"><span class="fab fa-facebook fa-2x"></span></a></p>
-                        <p><a href="#"><span class="fab fa-viber fa-2x"></span></a></p>
-                        <p><a href="#"><span class="fab fa-vk fa-2x"></span></a></p>
+                        <p><a href="https://www.instagram.com/frankprint/"><span class="fab fa-instagram fa-2x"></span></a></p>
+                        <p><a href="https://www.facebook.com/frankprintby/"><span class="fab fa-facebook fa-2x"></span></a></p>
+                        <p><a href="https://www.youtube.com/channel/UCcK4oMIcUjByx_YWi0cAhqA"><span class="fab fa-youtube fa-2x"></span></a></p>
+                        <p><a href="https://vk.com/frankprint"><span class="fab fa-vk fa-2x"></span></a></p>
                     </div>
                     <div class="contacts__contact-wrapper grid">
                         <div class="contacts__contact grid">

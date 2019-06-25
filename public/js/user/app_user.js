@@ -130,7 +130,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             "thumbnail": "gallery-image"
         }).run();
         switch (pathInfo) {
-            case "cssGrid":
+            case "":
                 $('.main_slider').slick({
                     //dots:true,
                     arrows: true,
