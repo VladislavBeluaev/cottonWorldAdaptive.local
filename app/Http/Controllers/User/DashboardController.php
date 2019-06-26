@@ -8,6 +8,7 @@ use App\PageBuilder;
 use App\T_shirt;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -52,6 +53,7 @@ values($k,$v,now(),now());\r\n",FILE_APPEND);
         $blade = sprintf('%s.t-shirts',$this->bladePath);
         $page = $this->builder->setTitle()->setMainHeader()->setBreadCrumb()->make();
         //dd($page->getTitle());
+        Artisan::call('view:clear');
         return view($blade, ["t_shirt" => $this->repository->all(),"page"=>$page]);
     }
 

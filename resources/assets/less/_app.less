@@ -131,6 +131,7 @@ ul {
 .breadcrumbs {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr;
+  position: relative;
   .breadcrumbs__content {
     .flex(flex-start, center);
     //margin-right:@defaultGutter;
@@ -155,7 +156,7 @@ ul {
 }
 
 .t_shirts {
-  margin-top: @defaultGutter*5;
+  margin-top: @defaultGutter*2;
   .product_article__content {
     margin-top: @defaultGutter;
     .content__header {
@@ -234,7 +235,7 @@ ul {
           margin-bottom: @defaultGutter/2;
           padding-left: @defaultGutter;
           button {
-            .button(50%, @buttonCheckoutColor);
+            .button(auto, @buttonCheckoutColor);
             .button-hover(@buttonCheckoutColor, @buttonCheckoutColorGradientColor);
           }
         }
