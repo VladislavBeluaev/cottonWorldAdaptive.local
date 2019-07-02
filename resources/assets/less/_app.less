@@ -369,11 +369,12 @@ ul {
   left: 20%;
   .product_description__content {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 10fr 1fr;
+    grid-template-rows: 1fr 10fr .5fr;
     justify-items: right;
     .content__close-window {
       padding-right: @defaultGutter/4;
-      padding-top: @defaultGutter/8;
+      align-self: center;
+      //padding-top: @defaultGutter/8;
       span:hover {
         color: @menuItemHoverColor;
         cursor: pointer;
@@ -385,6 +386,7 @@ ul {
       padding-right: @defaultGutter*2;
       h2 {
         .fontSettings(@defaultFontFamily, 24px, bold, 32px, uppercase);
+        .fluid-type(320px,1200px,18px,24px);
         margin-bottom: @defaultGutter;
       }
       ul {
@@ -398,8 +400,10 @@ ul {
           }
           span {
             .fontSettings(@footerFont, 20px, bold, 32px, none);
+            .fluid-type(320px,1200px,18px,20px);
             &:first-child {
               .fontSettings(@productsCardFont, 18px, bold, 32px, none);
+              .fluid-type(320px,1200px,16px,18px);
             }
             &:last-child {
               text-align: right;
@@ -413,7 +417,8 @@ ul {
       div {
         margin-bottom: @defaultGutter;
         p {
-          .fontSettings(@productsCardFont, 18px, bold, 32px, none);
+          .fontSettings(@productsCardFont, 16px, bold, 32px, none);
+          .fluid-type(320px,1200px,14px,16px);
           text-align: justify;
         }
       }
@@ -434,8 +439,9 @@ ul {
     grid-template-rows: 0.5fr 10fr 0.5fr;
     justify-items: right;
     .content__close-window {
+      align-self: center;
       padding-right: @defaultGutter/4;
-      padding-top: @defaultGutter/8;
+      //padding-top: @defaultGutter/8;
       span:hover {
         color: @menuItemHoverColor;
         cursor: pointer;
@@ -560,8 +566,9 @@ ul {
     grid-template-rows: 0.5fr 1fr 0.5fr;
     justify-items: right;
     .content__close-window {
+      align-self:center;
       padding-right: @defaultGutter/4;
-      padding-top: @defaultGutter/8;
+      //padding-top: @defaultGutter/8;
       span:hover {
         color: @menuItemHoverColor;
         cursor: pointer;

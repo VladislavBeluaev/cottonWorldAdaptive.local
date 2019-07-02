@@ -1085,12 +1085,13 @@ footer .footer-wrapper .container p:first-child span:first-child {
 }
 .modal-product_description .product_description__content {
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 10fr 1fr;
+  grid-template-rows: 1fr 10fr 0.5fr;
   justify-items: right;
 }
 .modal-product_description .product_description__content .content__close-window {
   padding-right: 6px;
-  padding-top: 3px;
+  -ms-flex-item-align: center;
+      align-self: center;
 }
 .modal-product_description .product_description__content .content__close-window span:hover {
   color: #39B54A;
@@ -1107,7 +1108,18 @@ footer .footer-wrapper .container p:first-child span:first-child {
   font-weight: 600;
   line-height: 32px;
   text-transform: uppercase;
+  font-size: 18px;
   margin-bottom: 24px;
+}
+@media screen and (min-width: 320px) {
+  .modal-product_description .product_description__content .content__description h2 {
+    font-size: calc(18px + strip-unit(6px) * ((100vw - 320px) / 1200px - 320px));
+  }
+}
+@media screen and (min-width: 1200px) {
+  .modal-product_description .product_description__content .content__description h2 {
+    font-size: 24px;
+  }
 }
 .modal-product_description .product_description__content .content__description ul {
   background-color: #fff;
@@ -1126,6 +1138,17 @@ footer .footer-wrapper .container p:first-child span:first-child {
   font-weight: 600;
   line-height: 32px;
   text-transform: none;
+  font-size: 18px;
+}
+@media screen and (min-width: 320px) {
+  .modal-product_description .product_description__content .content__description ul li span {
+    font-size: calc(18px + strip-unit(2px) * ((100vw - 320px) / 1200px - 320px));
+  }
+}
+@media screen and (min-width: 1200px) {
+  .modal-product_description .product_description__content .content__description ul li span {
+    font-size: 20px;
+  }
 }
 .modal-product_description .product_description__content .content__description ul li span:first-child {
   font-family: 'Montserrat', sans-serif;
@@ -1133,6 +1156,17 @@ footer .footer-wrapper .container p:first-child span:first-child {
   font-weight: 600;
   line-height: 32px;
   text-transform: none;
+  font-size: 16px;
+}
+@media screen and (min-width: 320px) {
+  .modal-product_description .product_description__content .content__description ul li span:first-child {
+    font-size: calc(16px + strip-unit(2px) * ((100vw - 320px) / 1200px - 320px));
+  }
+}
+@media screen and (min-width: 1200px) {
+  .modal-product_description .product_description__content .content__description ul li span:first-child {
+    font-size: 18px;
+  }
 }
 .modal-product_description .product_description__content .content__description ul li span:last-child {
   text-align: right;
@@ -1145,11 +1179,22 @@ footer .footer-wrapper .container p:first-child span:first-child {
 }
 .modal-product_description .product_description__content .content__description div p {
   font-family: 'Montserrat', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   line-height: 32px;
   text-transform: none;
+  font-size: 14px;
   text-align: justify;
+}
+@media screen and (min-width: 320px) {
+  .modal-product_description .product_description__content .content__description div p {
+    font-size: calc(14px + strip-unit(2px) * ((100vw - 320px) / 1200px - 320px));
+  }
+}
+@media screen and (min-width: 1200px) {
+  .modal-product_description .product_description__content .content__description div p {
+    font-size: 16px;
+  }
 }
 .modal-product_description .product_description__content .content__description button {
   width: auto;
@@ -1187,8 +1232,9 @@ footer .footer-wrapper .container p:first-child span:first-child {
   justify-items: right;
 }
 .modal-product_order .product_order__content .content__close-window {
+  -ms-flex-item-align: center;
+      align-self: center;
   padding-right: 6px;
-  padding-top: 3px;
 }
 .modal-product_order .product_order__content .content__close-window span:hover {
   color: #39B54A;
@@ -1420,8 +1466,9 @@ footer .footer-wrapper .container p:first-child span:first-child {
   justify-items: right;
 }
 .modal-confirm .confirm_description__content .content__close-window {
+  -ms-flex-item-align: center;
+      align-self: center;
   padding-right: 6px;
-  padding-top: 3px;
 }
 .modal-confirm .confirm_description__content .content__close-window span:hover {
   color: #39B54A;
@@ -1474,6 +1521,11 @@ footer .footer-wrapper .container p:first-child span:first-child {
 }
 /*==========  Desktop First  ==========*/
 /* Large Devices, Wide Screens */
+@media only screen and (max-width: 1199px) {
+  .modal-product_description {
+    width: 70%;
+  }
+}
 /**/
 /* Medium Devices, Desktops */
 @media only screen and (max-width: 991px) {
@@ -1497,14 +1549,25 @@ footer .footer-wrapper .container p:first-child span:first-child {
   .t_shirts .product_article__content .content__cards .cards__item {
     margin-top: 0;
   }
-  .product_description__content .content__description > h2 {
-    font-size: calc(20px - 1%) !important;
-  }
-  .product_description__content .content__description ul li span {
-    font-size: calc(20px - 1%) !important;
-  }
-  .product_description__content .content__description ul li span:first-child {
-    font-size: calc(18px - 1%) !important;
+  /*.product_description__content {
+    .content__description {
+      !*> h2 {
+        font-size: calc(20px - 1%) !important;
+      }*!
+      ul {
+        li {
+          span {
+            font-size: calc(20px - 1%) !important;
+            &:first-child{
+              font-size: calc(18px - 1%) !important;
+            }
+          }
+        }
+      }
+    }
+  }*/
+  .modal-product_description {
+    width: 80%;
   }
 }
 /**/
@@ -1605,6 +1668,9 @@ footer .footer-wrapper .container p:first-child span:first-child {
     min-width: 70%;
     /*margin-top: 0;*/
   }
+  .modal-product_description {
+    width: 90%;
+  }
 }
 /**/
 /* Slick carousel mobile version*/
@@ -1686,6 +1752,26 @@ footer .footer-wrapper .container p:first-child span:first-child {
         -ms-flex-align: start;
             align-items: flex-start;
   }
+  .modal-product_description .product_description__content .content__close-window {
+    padding-right: 12px;
+  }
+  .modal-product_description .product_description__content .content__description h2 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  .modal-product_description .product_description__content .content__description div p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+    text-transform: none;
+  }
+  .modal-product_description .product_description__content .content__description ul li span {
+    font-size: 14px;
+  }
+  .modal-product_description .product_description__content .content__description ul li span:first-child {
+    font-size: 12px;
+  }
 }
 /**/
 /* Custom, iPhone Retina */
@@ -1707,4 +1793,19 @@ footer .footer-wrapper .container p:first-child span:first-child {
 /* Medium Devices, Desktops */
 /**/
 /* Large Devices, Wide Screens */
+@media only screen and (min-width: 1200px) {
+  .modal-product_description {
+    width: 70%;
+  }
+}
+@media only screen and (min-width: 1400px) {
+  .modal-product_description {
+    width: 60%;
+  }
+}
+@media only screen and (min-width: 1500px) {
+  .modal-product_description {
+    width: 50%;
+  }
+}
 /**/
