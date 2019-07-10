@@ -207,23 +207,6 @@
   .t_shirts .product_article__content .content__cards .cards__item {
     margin-top: 0;
   }
-  /*.product_description__content {
-    .content__description {
-      !*> h2 {
-        font-size: calc(20px - 1%) !important;
-      }*!
-      ul {
-        li {
-          span {
-            font-size: calc(20px - 1%) !important;
-            &:first-child{
-              font-size: calc(18px - 1%) !important;
-            }
-          }
-        }
-      }
-    }
-  }*/
   .modal-product_description {
     width: 80%;
   }
@@ -403,6 +386,8 @@
     width: 65%;
   }
   .product_article__content .modal-clothes_size .clothes-size__content .content__order {
+    padding-top: 6px;
+    padding-bottom: 6px;
     padding-left: 8px;
   }
   .product_article__content .modal-clothes_size .clothes-size__content .content__order .order__checkout button {

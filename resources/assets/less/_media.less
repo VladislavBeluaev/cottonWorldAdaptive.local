@@ -48,24 +48,6 @@
       }
     }
   }
-
-  /*.product_description__content {
-    .content__description {
-      !*> h2 {
-        font-size: calc(20px - 1%) !important;
-      }*!
-      ul {
-        li {
-          span {
-            font-size: calc(20px - 1%) !important;
-            &:first-child{
-              font-size: calc(18px - 1%) !important;
-            }
-          }
-        }
-      }
-    }
-  }*/
   .modal-product_description {
     width: 80%;
   }
@@ -197,6 +179,7 @@
 }
 
 /**/
+
 /* Slick carousel mobile version*/
 @media only screen and (max-width: 599px) {
   .main_page {
@@ -295,6 +278,8 @@
           }
         }
         .content__order {
+          padding-top: @defaultGutter/4;
+          padding-bottom: @defaultGutter/4;
           padding-left: @defaultGutter/3;
           .order__checkout button {
             font-size: @defaultFontSize;

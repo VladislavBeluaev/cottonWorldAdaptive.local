@@ -789,33 +789,32 @@ var ModalWindows = function () {
                 width: $(window).width(),
                 height: $(window).height()
             };
-            //console.log(modalWindow$.hasClass('modal-clothes_size'));
             if (modalWindow$.hasClass('modal-clothes_size') === true) {
-                console.log(mwSize.height);
-                console.log(windowSize.height);
                 modalWindow$.css({
-                    top: windowSize.height / 2 - mwSize.height / 2 + 'px',
-                    //top: `${(windowSize.height - mwSize.height/2)}px`,
+                    top: (windowSize.height + 60 - mwSize.height) / 2 + 'px',
                     left: windowSize.width / 2 - mwSize.width / 2 + 'px'
-                    //left: `${(windowSize.width - mwSize.width/2)}px`,
                 });
                 if (windowSize.height <= 359) {
                     modalWindow$.css({
-                        top: '65px',
-                        left: (windowSize.width - mwSize.width) / 2 + 'px'
+                        //top: '65px',
                     });
                 }
                 if (windowSize.height >= 360 && windowSize.height <= 768) {
                     modalWindow$.css({
-                        top: '80px',
-                        left: (windowSize.width - mwSize.width) / 2 + 'px'
+                        //top: '80px',
                     });
                 }
-
+                if (windowSize.height === 375) {
+                    modalWindow$.css({
+                        //top: '70px',
+                    });
+                    modalWindow$.find('img').css('width', '60%');
+                }
                 return modalWindow$;
             }
+            console.log(windowSize.height - mwSize.height);
             modalWindow$.css({
-                top: (windowSize.height - mwSize.height) / 2 + 'px',
+                top: (windowSize.height + 60 - mwSize.height) / 2 + 'px',
                 left: (windowSize.width - mwSize.width) / 2 + 'px'
             });
             return modalWindow$;
