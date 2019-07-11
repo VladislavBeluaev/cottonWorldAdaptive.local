@@ -40,7 +40,8 @@
                 <li class="valid-hint"><span>Введите ваш контактный телефон</span>
                     <ul>
                         <li>
-                            <input type="tel" name="customer_phone" placeholder="телефон" value="+375" required></li>
+                            <input type="tel" name="customer_phone" placeholder="телефон" value="+375" required>
+                        </li>
                     </ul>
                 </li>
                 <li class="valid-hint"><span>Введите ваш email</span>

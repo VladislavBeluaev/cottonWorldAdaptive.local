@@ -48,6 +48,7 @@
       }
     }
   }
+
   .modal-product_description {
     width: 80%;
   }
@@ -214,7 +215,7 @@
 /* Landscape orientation modal-product_description modal window */
 @media only screen and (min-width: 568px) and (max-width: 900px) and (min-height: 320px) and (max-height: 480px) {
   .modal-product_description {
-    top: calc(50vh - 130px) !important;
+    //top: calc(50vh - 130px) !important;
     width: 70%;
     .product_description__content {
       grid-template-rows: 1fr 9fr;
@@ -291,9 +292,10 @@
 
   }
 }
+
 @media (min-height: 320px) and (max-height: 400px) {
   .modal-product_description {
-    top: calc(50vh - 112px) !important;
+    //top: calc(50vh - 112px) !important;
     .product_description__content {
       grid-template-rows: 1fr 8fr;
       .content__description {
@@ -329,7 +331,7 @@
 
 @media (min-height: 320px) and (max-height: 359px) {
   .modal-product_description {
-    top: calc(50vh - 97px) !important;
+    //top: calc(50vh - 97px) !important;
     .product_description__content {
       grid-template-rows: 1fr 6fr;
       border-top-width: 0;
@@ -365,36 +367,6 @@
 
 /* Extra Small Devices, Phones */
 @media only screen and (max-width: 480px) {
-  /*
-  footer {
-    background: url(/images/main_background_footer.png) no-repeat 20% 0;
-    .footer-wrapper {
-      .container{
-        grid-row-gap: @defaultGutter/4;
-        align-items: center;
-        p {
-          font-size: 12px;
-          &:first-child {
-            span {
-              &:first-child {
-                font-size: 14px;
-              }
-            }
-          }
-          &:last-child{
-            span {
-              display:block;
-              font-size: 14px;
-            }
-            ///padding-left: @defaultGutter*0.6;
-            //justify-self: center;
-          }
-        }
-
-      }
-    }
-  }
-  */
   .t_shirts {
     margin-top: @defaultGutter;
     .breadcrumbs {
@@ -492,9 +464,164 @@
     }
 
   }
+
+  .modal-product_order {
+    width: 90%;
+    max-width: 90%;
+    overflow-x: hidden;
+    .product_order__content {
+      grid-template-rows: 0.5fr 10fr 0.2fr;
+      .content__close-window {
+        width: 68%;
+        p {
+          text-align: center;
+        }
+      }
+      .content__description {
+        padding-right: @defaultGutter/3;
+        padding-left: @defaultGutter/3;
+        h2 {
+          font-size: 20px;
+          margin-bottom: @defaultGutter/2;
+        }
+        .order-ajax-send {
+          margin-bottom: @defaultGutter/2;
+          li {
+            &:first-child, &:nth-child(2) {
+              grid-template-columns: .5fr 1fr;
+              justify-items: left;
+              span:first-child {
+                font-size: 16px;
+              }
+              span:last-child {
+                font-size: 18px;
+              }
+            }
+            &.description__order-size {
+              span {
+                font-size: 16px;
+              }
+              ul {
+                grid-template-columns: repeat(5, minmax(70px, 70px));
+                column-gap: @defaultGutter/3;
+                grid-template-rows: repeat(2, 1fr);
+                grid-row-gap: @defaultGutter/4;
+                margin-bottom: @defaultGutter/2;
+                li {
+                  font-size: 16px;
+                }
+              }
+            }
+            &.description__order-qty {
+              span {
+                font-size: 16px;
+              }
+              ul {
+                margin-bottom: @defaultGutter/2;
+                input[name="t_shirt_qty"] {
+                  width: 50px;
+                  height: 40px;
+                }
+              }
+            }
+            &.description__order-price {
+              span {
+                font-size: 16px;
+              }
+              ul {
+                margin-bottom: @defaultGutter/2;
+                li {
+                  font-size: 20px;
+                }
+              }
+            }
+            &.valid-hint {
+              span {
+                font-size: 16px;
+              }
+              ul {
+                margin-bottom: @defaultGutter/2;
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
 }
 
 /**/
+
+/*modal product-order */
+@media only screen and (max-width: 411px) {
+  .modal-product_order {
+    height: 85vh;
+    min-height: 85vh;
+    overflow: scroll;
+    .product_order__content {
+      .content__close-window {
+        width: 87%;
+      }
+      .content__description {
+        h2 {
+          font-size: 18px;
+        }
+        .order-ajax-send {
+          li {
+            &:first-child, &:nth-child(2) {
+              grid-template-columns: .4fr 1fr;
+              span:first-child {
+                font-size: @defaultFontSize;
+              }
+              span:last-child {
+                font-size: 16px;
+              }
+            }
+            &.description__order-size {
+              span {
+                font-size: @defaultFontSize;
+              }
+              ul {
+                grid-template-columns: repeat(5, minmax(60px, 60px));
+                column-gap: @defaultGutter/2;
+                li {
+                  font-size: @defaultFontSize;
+                  line-height: @defaultGutter;
+                }
+              }
+            }
+            &.description__order-qty {
+              span {
+                font-size: @defaultFontSize;
+              }
+            }
+            &.description__order-price {
+              span {
+                font-size: @defaultFontSize;
+              }
+              ul {
+                li {
+                  font-size: 16px;
+                }
+              }
+            }
+            &.valid-hint {
+              span {
+                font-size: @defaultFontSize;
+              }
+              input[name="customer_phone"] {
+                font-size: 18px;
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
+
 /* Custom, iPhone Retina */
 @media only screen and (max-width: 375px) {
   .modal-product_description {
