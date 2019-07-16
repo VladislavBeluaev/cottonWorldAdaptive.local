@@ -1357,6 +1357,13 @@ footer .footer-wrapper .container p:first-child span:first-child {
   font-weight: bold;
   font-family: "PT Sans", sans-serif;
 }
+.modal-product_order .product_order__content .content__description ul li.description__order-qty ul li:last-child {
+  display: none;
+}
+.modal-product_order .product_order__content .content__description ul li.description__order-qty ul li:last-child img {
+  width: 40px;
+  height: auto;
+}
 .modal-product_order .product_order__content .content__description ul li.description__order-price span {
   font-family: 'Montserrat', sans-serif;
   font-size: 20px;
@@ -1950,7 +1957,6 @@ footer .footer-wrapper .container p:first-child span:first-child {
   .modal-product_order {
     height: 85vh;
     min-height: 85vh;
-    overflow: scroll;
   }
   .modal-product_order .product_order__content .content__close-window {
     width: 87%;
@@ -1986,6 +1992,22 @@ footer .footer-wrapper .container p:first-child span:first-child {
   .modal-product_order .product_order__content .content__description .order-ajax-send li.description__order-qty span {
     font-size: 14px;
   }
+  .modal-product_order .product_order__content .content__description .order-ajax-send li.description__order-qty ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .modal-product_order .product_order__content .content__description .order-ajax-send li.description__order-qty ul li:first-child {
+    margin-bottom: 0;
+  }
+  .modal-product_order .product_order__content .content__description .order-ajax-send li.description__order-qty ul li:last-child {
+    position: relative;
+    top: 50px;
+    display: block;
+  }
   .modal-product_order .product_order__content .content__description .order-ajax-send li.description__order-price span {
     font-size: 14px;
   }
@@ -1997,6 +2019,12 @@ footer .footer-wrapper .container p:first-child span:first-child {
   }
   .modal-product_order .product_order__content .content__description .order-ajax-send li.valid-hint input[name="customer_phone"] {
     font-size: 18px;
+  }
+}
+@media only screen and (max-width: 411px) and (min-height: 823px) {
+  .modal-product_order {
+    height: 75vh;
+    min-height: 75vh;
   }
 }
 /* Custom, iPhone Retina */

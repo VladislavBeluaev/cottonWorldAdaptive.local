@@ -1,6 +1,7 @@
 /**
  * Created by Dragon on 19.05.2019.
  */
+import ScrollHint from './ScrollHint.class.js';
 class ModalWindows {
     constructor(settings) {
         this._bodyWrapper = settings.bodyWrapper;
@@ -94,9 +95,19 @@ class ModalWindows {
         this._toggleBodyWrapper.call(this);
         if (openMW$.hasClass('d-none') === false)
             throw new Error(`Modal window is already open. Check that windows closing works properly.`);
-        openMW$.removeClass('d-none').fadeOut(0, function () {
-
+        openMW$.removeClass('d-none').fadeOut(0,function () {
             ModalWindows._centerMW($(this)).fadeIn("normal");
+            setTimeout(function(){
+                ScrollHint.show({
+                    hintElem:'#scroll-down-hint',
+                    cssProps:{
+                        'fadeinTime':'normal',
+                        'hintOffset':'0px',
+                        'hideHintClass':'invisible'
+                    }
+                });
+            },0);
+
         });
     }
 

@@ -25,6 +25,7 @@
                 <li class="description__order-qty valid-hint"><span>Укажите количество</span>
                     <ul>
                         <li><input type="number" name="t_shirt_qty" placeholder="1"></li>
+                        <li id="scroll-down-hint"><img src="{{asset('images/scroll-down.png')}}" alt="scroll-down"></li>
                     </ul>
                 </li>
                 <li class="description__order-price"><span>Итоговая цена</span>

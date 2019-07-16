@@ -5,6 +5,7 @@ import {Gallery} from './components/classes/Gallery.class.js';
 import {YandexMap} from './components/classes/YandexMap.class.js';
 import {ModalWindows} from './components/classes/ModalWindows.class.js';
 import {Order} from './components/classes/Order.class.js';
+import {ScrollHint} from './components/classes/ScrollHint.class.js';
 (function ($, undefined) {
     $(function () {
         loadPlugins();
@@ -184,6 +185,12 @@ import {Order} from './components/classes/Order.class.js';
                 }
 
             })).validate().send();
+            /*(new ScrollHint({
+                hintElem:'#scroll-down-hint',
+                hintDisplayProps:{
+                    'maxWinSize':'411',
+                }
+            })).run();*/
         }
     });
 })(jQuery);

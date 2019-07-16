@@ -558,7 +558,6 @@
   .modal-product_order {
     height: 85vh;
     min-height: 85vh;
-    overflow: scroll;
     .product_order__content {
       .content__close-window {
         width: 87%;
@@ -592,8 +591,26 @@
               }
             }
             &.description__order-qty {
+
               span {
                 font-size: @defaultFontSize;
+              }
+              ul{
+                display: grid;
+                grid-template-columns:repeat(2, 1fr);
+                grid-template-rows:1fr;
+                align-items: center;
+                //justify-items:between;
+                li{
+                  &:first-child{
+                    margin-bottom: 0;
+                  }
+                  &:last-child{
+                    position: relative;
+                    top:50px;
+                    display: block;
+                  }
+                }
               }
             }
             &.description__order-price {
@@ -621,7 +638,12 @@
     }
   }
 }
-
+@media only screen and (max-width: 411px) and (min-height: 823px){
+  .modal-product_order {
+    height: 75vh;
+    min-height: 75vh;
+  }
+}
 /* Custom, iPhone Retina */
 @media only screen and (max-width: 375px) {
   .modal-product_description {

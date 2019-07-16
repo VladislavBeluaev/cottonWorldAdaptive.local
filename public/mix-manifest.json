@@ -7,7 +7,5 @@
     "/js/slick/slick.min.js": "/js/slick/slick.min.js",
     "/css/slick/slick.css": "/css/slick/slick.css",
     "/css/slick/slick-theme.css": "/css/slick/slick-theme.css",
-    "/css/slick/ajax-loader.gif": "/css/slick/ajax-loader.gif",
-    "/js/scroll-hint/scroll-hint.min.js": "/js/scroll-hint/scroll-hint.min.js",
-    "/css/scroll-hint/scroll-hint.css": "/css/scroll-hint/scroll-hint.css"
+    "/css/slick/ajax-loader.gif": "/css/slick/ajax-loader.gif"
 }

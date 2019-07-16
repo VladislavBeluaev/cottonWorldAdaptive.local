@@ -60,35 +60,76 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-__webpack_require__(1);
-__webpack_require__(8);
-__webpack_require__(9);
-__webpack_require__(10);
-module.exports = __webpack_require__(11);
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Created by isida on 16.07.2019.
+ */
+var ScrollHint = function () {
+    function ScrollHint() {
+        _classCallCheck(this, ScrollHint);
+    }
+
+    _createClass(ScrollHint, null, [{
+        key: 'show',
+        value: function show(hintSettings) {
+            var hint$ = $(hintSettings.hintElem);
+            var cssProps = hintSettings.cssProps;
+            if (hint$.hasClass(cssProps.hideHintClass) === true) hint$.removeClass(cssProps.hideHintClass);
+            hint$.animate({
+                top: '' + cssProps.hintOffset
+            }, 1000, function () {
+                console.log(hintSettings);
+                $(this).fadeOut(cssProps.fadeinTime, function () {
+                    $(this).removeAttr('style').addClass(cssProps.hideHintClass);
+                });
+            });
+        }
+    }]);
+
+    return ScrollHint;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (ScrollHint);
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(2);
+__webpack_require__(9);
+__webpack_require__(10);
+__webpack_require__(11);
+module.exports = __webpack_require__(12);
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_plugins_customPlugins_js__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_classes_HamburgerMenu_class_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_classes_Gallery_class_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_classes_YandexMap_class_js__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_classes_ModalWindows_class_js__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_classes_Order_class_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_plugins_customPlugins_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_classes_HamburgerMenu_class_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_classes_Gallery_class_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_classes_YandexMap_class_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_classes_ModalWindows_class_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_classes_Order_class_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_classes_ScrollHint_class_js__ = __webpack_require__(0);
 
 
 //import {Slider} from './components/classes/Slider.class.js';
+
 
 
 
@@ -261,12 +302,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
 
             }).validate().send();
+            /*(new ScrollHint({
+                hintElem:'#scroll-down-hint',
+                hintDisplayProps:{
+                    'maxWinSize':'411',
+                }
+            })).run();*/
         }
     });
 })(jQuery);
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -290,7 +337,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -358,7 +405,7 @@ var HamburgerMenu = function () {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -429,7 +476,7 @@ var Gallery = function () {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -497,11 +544,12 @@ var YandexMap = function () {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalWindows; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ScrollHint_class_js__ = __webpack_require__(0);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -509,6 +557,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /**
  * Created by Dragon on 19.05.2019.
  */
+
+
 var ModalWindows = function () {
     function ModalWindows(settings) {
         _classCallCheck(this, ModalWindows);
@@ -609,8 +659,17 @@ var ModalWindows = function () {
             this._toggleBodyWrapper.call(this);
             if (openMW$.hasClass('d-none') === false) throw new Error('Modal window is already open. Check that windows closing works properly.');
             openMW$.removeClass('d-none').fadeOut(0, function () {
-
                 ModalWindows._centerMW($(this)).fadeIn("normal");
+                setTimeout(function () {
+                    __WEBPACK_IMPORTED_MODULE_0__ScrollHint_class_js__["a" /* default */].show({
+                        hintElem: '#scroll-down-hint',
+                        cssProps: {
+                            'fadeinTime': 'normal',
+                            'hintOffset': '0px',
+                            'hideHintClass': 'invisible'
+                        }
+                    });
+                }, 0);
             });
         }
     }, {
@@ -849,7 +908,7 @@ var ModalWindows = function () {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1102,12 +1161,6 @@ var Order = function () {
 
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
 /* 9 */
 /***/ (function(module, exports) {
 
@@ -1121,6 +1174,12 @@ var Order = function () {
 
 /***/ }),
 /* 11 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
