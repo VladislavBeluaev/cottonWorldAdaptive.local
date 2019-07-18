@@ -554,7 +554,7 @@
 /**/
 
 /*modal product-order */
-@media only screen and (max-width: 411px) {
+@media only screen and (max-width: 414px) {
   .modal-product_order {
     height: 85vh;
     min-height: 85vh;
@@ -595,19 +595,19 @@
               span {
                 font-size: @defaultFontSize;
               }
-              ul{
+              ul {
                 display: grid;
-                grid-template-columns:repeat(2, 1fr);
-                grid-template-rows:1fr;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: 1fr;
                 align-items: center;
                 //justify-items:between;
-                li{
-                  &:first-child{
+                li {
+                  &:first-child {
                     margin-bottom: 0;
                   }
-                  &:last-child{
+                  &:last-child {
                     position: relative;
-                    top:50px;
+                    top: 50px;
                     display: block;
                   }
                 }
@@ -638,12 +638,14 @@
     }
   }
 }
-@media only screen and (max-width: 411px) and (min-height: 823px){
+
+@media only screen and (max-width: 411px) and (min-height: 823px) {
   .modal-product_order {
     height: 75vh;
     min-height: 75vh;
   }
 }
+
 /* Custom, iPhone Retina */
 @media only screen and (max-width: 375px) {
   .modal-product_description {
@@ -662,6 +664,40 @@
         button {
           font-size: @defaultFontSize;
           line-height: normal;
+        }
+      }
+    }
+  }
+
+  .modal-product_order {
+    height: 80vh;
+    min-height: 80vh;
+    .product_order__content {
+      .content__close-window {
+        width: 98%;
+      }
+    }
+    .product_order__content {
+      .content__description {
+        .order-ajax-send {
+          li {
+            &:first-child, &:nth-child(2) {
+              span:last-child {
+                font-size: 15px;
+              }
+            }
+            &.description__order-size {
+              ul {
+                grid-template-columns: repeat(4, minmax(70px, 70px));
+              }
+            }
+            &.description__order-qty{
+              ul{
+                grid-template-columns: .8fr 1fr;
+              }
+
+            }
+          }
         }
       }
     }
