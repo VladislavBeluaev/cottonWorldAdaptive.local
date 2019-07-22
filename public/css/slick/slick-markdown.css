@@ -711,9 +711,29 @@
   }
 }
 /**/
+@media only screen and (max-width: 360px) {
+  .modal-product_order .product_order__content .content__close-window {
+    width: 102%;
+  }
+  .modal-product_order .product_order__content .content__description .order-ajax-send li:first-child,
+  .modal-product_order .product_order__content .content__description .order-ajax-send li:nth-child(2) {
+    grid-template-columns: 0.34fr 1fr;
+  }
+  .modal-product_order .product_order__content .content__description .order-ajax-send li.description__order-size ul {
+    grid-template-columns: repeat(4, minmax(65px, 65px));
+    -webkit-column-gap: 12px;
+       -moz-column-gap: 12px;
+            column-gap: 12px;
+  }
+  .modal-product_order .product_order__content .content__description .order-ajax-send li.description__order-qty ul {
+    grid-template-columns: 0.75fr 1fr;
+  }
+}
 @media only screen and (max-width: 320px) {
   .modal-product_description {
-    top: 63px !important;
+    height: 82vh;
+    max-height: 82vh;
+    overflow-x: scroll;
   }
   .modal-product_description .product_description__content {
     grid-template-rows: 1fr 10fr;
@@ -722,7 +742,9 @@
     font-size: 12px;
   }
   .modal-clothes_size {
-    top: 70px !important;
+    height: 82vh;
+    max-height: 82vh;
+    overflow-x: scroll;
   }
   .modal-clothes_size .clothes-size__content {
     overflow: hidden;
@@ -730,6 +752,22 @@
   }
   .modal-clothes_size .clothes-size__content .content__close-window p {
     padding-right: 6px;
+  }
+  .modal-product_order .product_order__content .content__close-window {
+    width: 113%;
+  }
+  .modal-product_order .product_order__content .content__description .order-ajax-send li:first-child,
+  .modal-product_order .product_order__content .content__description .order-ajax-send li:nth-child(2) {
+    grid-template-columns: 0.27fr 1fr;
+  }
+  .modal-product_order .product_order__content .content__description .order-ajax-send li.description__order-size ul {
+    grid-template-columns: repeat(4, minmax(63px, 63px));
+    -webkit-column-gap: 6px;
+       -moz-column-gap: 6px;
+            column-gap: 6px;
+  }
+  .modal-product_order .product_order__content .content__description .order-ajax-send li.description__order-qty ul {
+    grid-template-columns: 0.62fr 1fr;
   }
 }
 /*==========  Mobile First  ==========*/
