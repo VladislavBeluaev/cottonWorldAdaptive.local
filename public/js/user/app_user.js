@@ -109,8 +109,7 @@ var ScrollHint = function () {
 __webpack_require__(2);
 __webpack_require__(9);
 __webpack_require__(10);
-__webpack_require__(11);
-module.exports = __webpack_require__(12);
+module.exports = __webpack_require__(11);
 
 
 /***/ }),
@@ -1174,12 +1173,6 @@ var Order = function () {
 
 /***/ }),
 /* 11 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 12 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
